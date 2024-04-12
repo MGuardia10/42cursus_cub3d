@@ -2,6 +2,7 @@
 *.d
 
 # Object files
+objs
 *.o
 *.ko
 *.obj
@@ -35,6 +36,7 @@
 *.i*86
 *.x86_64
 *.hex
+cub3D
 
 # Debug files
 *.dSYM/
@@ -50,3 +52,6 @@ modules.order
 Module.symvers
 Mkfile.old
 dkms.conf
+
+# Others
+.DS_Store
