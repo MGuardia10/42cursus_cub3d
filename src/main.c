@@ -6,7 +6,7 @@
 /*   By: mguardia <mguardia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/12 09:53:37 by mguardia          #+#    #+#             */
-/*   Updated: 2024/04/12 11:46:26 by mguardia         ###   ########.fr       */
+/*   Updated: 2024/04/15 09:49:20 by mguardia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,13 +14,8 @@
 
 int	main(int argc, char **argv)
 {
-	t_cub3d	cub3d;
+	t_game	game;
 
-	if (args_parsing(argc, argv))
-		return (EXIT_FAILURE);
-	if (init_cub3d(&cub3d, argv[1]))
-		return (EXIT_FAILURE);
-	// mlx stuff
+	init_game(&game, argc, argv);
 	return (EXIT_SUCCESS);
-	
 }
