@@ -32,7 +32,11 @@ VPATH		=	src:src/parsing
 SRC			=	main.c
 
 # PARSING
-PARSING		=	args_parsing.c
+PARSING		=	init_game.c \
+				errors.c \
+				colors.c \
+				textures.c \
+				utils.c
 
 # OBJECTS
 OBJ_DIR		=	objs/

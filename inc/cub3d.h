@@ -6,7 +6,7 @@
 /*   By: mguardia <mguardia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/12 09:54:08 by mguardia          #+#    #+#             */
-/*   Updated: 2024/04/12 13:20:33 by mguardia         ###   ########.fr       */
+/*   Updated: 2024/04/15 09:49:42 by mguardia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,20 +25,23 @@ typedef struct s_color			t_color;
 typedef struct s_texture		t_texture;
 typedef struct s_map			t_map;
 typedef struct s_player			t_player;
-typedef struct s_cub3d			t_cub3d;
+typedef struct s_game			t_game;
+typedef struct s_mlx			t_mlx;
 
-typedef enum e_orientation		t_orientation;
+typedef enum e_valid_chars		t_valid_chars;
 
 /******************************************************************************
 *	Enums
 ******************************************************************************/
 
-enum	e_orientation
+enum	e_valid_chars
 {
-	NORTH,
-	SOUTH,
-	WEST,
-	EAST
+	EMPTY = '0',
+	WALL = '1',
+	NORTH = 'N',
+	SOUTH = 'S',
+	WEST = 'W',
+	EAST = 'E'
 };
 
 /******************************************************************************
@@ -72,28 +75,21 @@ struct s_map
 	/* floor and ceiling colors */
 	t_color			floor;
 	t_color			ceiling;
-	
+
 	/* map array */
 	char			**map_cpy;
 };
 
 struct s_player
 {
-	t_orientation	orientation;
+	t_valid_chars	orientation;
 	int				x;
 	int				y;
 };
 
-struct	s_cub3d
+struct s_mlx
 {
-	/* MAP */
-	t_map			map;
-
-	/* PLAYER */
-	t_player		player;
-
-	/* MLX */
-	void			*mlx;
+	void			*mlx_ptr;
 	void			*mlx_win;
 	void			*img;
 	char			*addr;
@@ -102,11 +98,30 @@ struct	s_cub3d
 	int				endian;
 };
 
+struct	s_game
+{
+	/* MAP */
+	t_map			map;
+
+	/* PLAYER */
+	t_player		player;
+
+	/* MLX */
+	t_mlx			mlx;
+};
+
 /******************************************************************************
 *	FUNCTION PROTOTYPES
 ******************************************************************************/
 
 /* PARSING */
-int	args_parsing(int argc, char **argv);
+int		init_game(t_game *game, int argc, char **argv);
+void	manage_textures(t_game *game, char **line);
+void	manage_colors(t_game *game, char **line);
+void	error(char *error, bool flag, char *pstr);
+void	item_error(char *item, char *error);
+bool	is_empty(char *str);
+bool	is_texture(char *str);
+bool	is_color(char *str);
 
 #endif
