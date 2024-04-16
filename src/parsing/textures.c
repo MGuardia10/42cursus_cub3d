@@ -6,7 +6,7 @@
 /*   By: mguardia <mguardia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/14 19:06:08 by mguardia          #+#    #+#             */
-/*   Updated: 2024/04/15 09:56:10 by mguardia         ###   ########.fr       */
+/*   Updated: 2024/04/15 19:21:38 by mguardia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,7 @@ void	manage_textures(t_game *game, char **line)
 		item_error(line[0], TOO_MUCH_PATH);
 	verify_path(line[1]);
 	(void)game;
+	printf("texture %s == [%s]\n", line[0], line[1]);
 	// ingresar path en struct
 	// algo de mlx creo
 	// revisar que no haya texturas repetidas
