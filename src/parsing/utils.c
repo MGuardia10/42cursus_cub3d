@@ -6,12 +6,21 @@
 /*   By: mguardia <mguardia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/14 19:58:25 by mguardia          #+#    #+#             */
-/*   Updated: 2024/04/15 09:51:48 by mguardia         ###   ########.fr       */
+/*   Updated: 2024/04/16 10:13:10 by mguardia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../inc/cub3d.h"
 
+/**
+ * The function checks if a given string consists only of whitespace characters.
+ * 
+ * @param str The parameter `str` represents a string.
+ * 
+ * @return a boolean value. If the input string `str` is empty or contains only
+ * whitespace characters, the function will return true. Otherwise, it will 
+ * return false.
+ */
 bool	is_empty(char *str)
 {
 	int	i;
@@ -26,6 +35,16 @@ bool	is_empty(char *str)
 	return (true);
 }
 
+/**
+ * The function `is_texture` checks if a given string matches specific texture
+ * key names.
+ * 
+ * @param str The string that needs to be compared with texture identifiers 
+ * "NO", "SO", "WE", or "EA".
+ * 
+ * @return A boolean value based on whether the `str` matches any of the texture
+ * key names "NO", "SO", "WE", or "EA".
+ */
 bool	is_texture(char *str)
 {
 	return (!ft_strcmp(str, "NO")
@@ -34,6 +53,14 @@ bool	is_texture(char *str)
 		|| !ft_strcmp(str, "EA"));
 }
 
+/**
+ * The function checks if the input string is equal to "F" or "C".
+ * 
+ * @param str The string to be compared.
+ * 
+ * @return a boolean value, which is determined by whether the input string is
+ * equal to "F" or "C".
+ */
 bool	is_color(char *str)
 {
 	return (!ft_strcmp(str, "F") || !ft_strcmp(str, "C"));
