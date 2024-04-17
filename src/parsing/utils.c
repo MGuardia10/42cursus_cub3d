@@ -6,7 +6,7 @@
 /*   By: mguardia <mguardia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/14 19:58:25 by mguardia          #+#    #+#             */
-/*   Updated: 2024/04/16 10:13:10 by mguardia         ###   ########.fr       */
+/*   Updated: 2024/04/17 11:28:52 by mguardia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,4 +64,18 @@ bool	is_texture(char *str)
 bool	is_color(char *str)
 {
 	return (!ft_strcmp(str, "F") || !ft_strcmp(str, "C"));
+}
+
+/**
+ * The function `get_color` takes a `t_color` struct as input and returns a
+ * combined RGB color value.
+ * 
+ * @param item represents a color with red, green, and blue components.
+ * 
+ * @return a single integer value that represents the RGB color components of
+ * the input `t_color` item.
+ */
+int	get_color(t_color item)
+{
+	return ((item.r << 16) | (item.g << 8) | item.b);
 }

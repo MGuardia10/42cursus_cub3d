@@ -6,7 +6,7 @@
 /*   By: mguardia <mguardia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/14 19:06:08 by mguardia          #+#    #+#             */
-/*   Updated: 2024/04/15 19:21:38 by mguardia         ###   ########.fr       */
+/*   Updated: 2024/04/17 11:27:46 by mguardia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,20 @@ static void	verify_path(char *path)
 		item_error(path, WRONG_EXT_XPM);
 	if (!ft_is_readable(path))
 		error(NULL, true, path);
+	// verificar ejecucion ??
+}
+
+void	get_texture(char **texture_item, char **line)
+{
+	if (!texture_item[0])
+	{
+		texture_item[0] = ft_strdup(line[1]);
+		if (!texture_item[0])
+			error(NULL, true, "malloc");
+	}
+	else
+		item_error(line[0], TEXTURE_TWICE);
+	// hacer movidas de mlx si es que hay que hacer algo
 }
 
 void	manage_textures(t_game *game, char **line)
@@ -29,8 +43,13 @@ void	manage_textures(t_game *game, char **line)
 		item_error(line[0], TOO_MUCH_PATH);
 	verify_path(line[1]);
 	(void)game;
-	printf("texture %s == [%s]\n", line[0], line[1]);
-	// ingresar path en struct
+	if (!ft_strcmp(line[0], "NO"))
+		get_texture(&game->map.textures.north, line);
+	else if (!ft_strcmp(line[0], "SO"))
+		get_texture(&game->map.textures.south, line);
+	else if (!ft_strcmp(line[0], "WE"))
+		get_texture(&game->map.textures.west, line);
+	else if (!ft_strcmp(line[0], "EA"))
+		get_texture(&game->map.textures.east, line);
 	// algo de mlx creo
-	// revisar que no haya texturas repetidas
 }

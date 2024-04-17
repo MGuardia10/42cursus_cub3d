@@ -6,7 +6,7 @@
 /*   By: mguardia <mguardia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/12 11:45:16 by mguardia          #+#    #+#             */
-/*   Updated: 2024/04/16 10:16:43 by mguardia         ###   ########.fr       */
+/*   Updated: 2024/04/17 11:29:37 by mguardia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@
  * @param argv The `argv` parameter is a pointer to an array of strings, where
  * each string represents a command-line argument passed to the program.
  */
-static void	verify_args(int argc, char **argv)
+static void	verify_args(t_game *game, int argc, char **argv)
 {
 	if (argc != 2)
 		error(WRONG_N_ARGS, false, NULL);
@@ -30,6 +30,9 @@ static void	verify_args(int argc, char **argv)
 		error(WRONG_EXT_CUB, false, NULL);
 	if (!ft_is_readable(argv[1]))
 		error(NULL, true, argv[1]);
+	game->map.file = ft_strdup(argv[1]);
+	if (!game->map.file)
+		error(NULL, true, "malloc");
 }
 
 /**
@@ -70,17 +73,15 @@ static char	*get_file(char *path)
 	return (file);
 }
 
-static void	file_items_parsing(t_game *game, char **arr)
+static void	file_items_parsing(t_game *game, char **arr, int *i)
 {
-	int		i;
 	char	**split_line;
 
-	i = 0;
-	while (i < 6)
+	while (*i < 6)
 	{
-		if (!arr[i])
+		if (!arr[*i])
 			error(INV_FILE, false, NULL);
-		split_line = ft_split(arr[i], ' ');
+		split_line = ft_split(arr[*i], ' ');
 		if (!split_line)
 			error(NULL, true, "malloc");
 		if (is_texture(split_line[0]))
@@ -90,20 +91,34 @@ static void	file_items_parsing(t_game *game, char **arr)
 		else
 			item_error(split_line[0], INV_TYPE_ID);
 		ft_free_matrix((void **)split_line);
-		i++;
+		(*i)++;
 	}
+	if (game->map.floor.rgb == game->map.ceiling.rgb)
+		item_error(NULL, SAME_COLORS);
 }
 
-// static void	file_map_parsing(t_game *game, char **arr)
-// {
-// }
+static void	file_map_parsing(t_game *game, char **arr, int *i)
+{
+	// verificar mapa:
+	//	- como gestionar linea de solo espacios
+	//	- verificar limites del mapa
+	//	- verificar caracteres invalidos: set de caracteres: "01NOEW "
+	//  - verificar que el player se pueda mover ???
+	//  - parsear player cuando se encuentre N, O, E, W.
+	
+	
+	// copiar el mapa en struct
+	cpy_map(&game->map, arr, *i);
+}
 
-int	init_game(t_game *game, int argc, char **argv)
+void	init_game(t_game *game, int argc, char **argv)
 {
 	char	*file_str;
 	char	**file_arr;
+	int		i;
 
-	verify_args(argc, argv);
+	ft_memset(game, 0, sizeof(t_game));
+	verify_args(game, argc, argv);
 	file_str = get_file(argv[1]);
 	if (!file_str || is_empty(file_str))
 		error(EMPTY_FILE, false, NULL);
@@ -113,12 +128,8 @@ int	init_game(t_game *game, int argc, char **argv)
 		(error(NULL, true, "malloc"));
 	if (!file_arr[0])
 		error(EMPTY_FILE, false, NULL);
-	ft_memset(game, 0, sizeof(t_game));
-	file_items_parsing(game, file_arr);
-	// file_map_parsing(game, file_arr);
-
-	printf("F colors --> [%d] [%d] [%d]\n", game->map.floor.r, game->map.floor.g, game->map.floor.b);
-	printf("C colors --> [%d] [%d] [%d]\n", game->map.ceiling.r, game->map.ceiling.g, game->map.ceiling.b);
-	
-	return (0);
+	i = 0;
+	file_items_parsing(game, file_arr, &i);
+	file_map_parsing(game, file_arr, &i);
+	ft_free_matrix((void **)file_arr);
 }
