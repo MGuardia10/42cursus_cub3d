@@ -6,7 +6,7 @@
 /*   By: mguardia <mguardia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/14 17:11:05 by mguardia          #+#    #+#             */
-/*   Updated: 2024/04/16 09:51:36 by mguardia         ###   ########.fr       */
+/*   Updated: 2024/04/16 17:39:47 by mguardia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,5 +30,7 @@
 # define MAX_NUM_COLOR	"invalid number, insert only values from 0 to 255\n"
 # define FLOOR_TWICE	"floor item appears more than once\n"
 # define CEILING_TWICE	"ceiling item appears more than once\n"
+# define TEXTURE_TWICE	"texture item appears more than once\n"
+# define SAME_COLORS	"floor and ceiling colors cannot be the same\n"
 
 #endif

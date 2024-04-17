@@ -6,7 +6,7 @@
 /*   By: mguardia <mguardia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/12 09:54:08 by mguardia          #+#    #+#             */
-/*   Updated: 2024/04/15 09:49:42 by mguardia         ###   ########.fr       */
+/*   Updated: 2024/04/17 11:24:57 by mguardia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -115,13 +115,15 @@ struct	s_game
 ******************************************************************************/
 
 /* PARSING */
-int		init_game(t_game *game, int argc, char **argv);
+void	init_game(t_game *game, int argc, char **argv);
 void	manage_textures(t_game *game, char **line);
 void	manage_colors(t_game *game, char **line);
+void	cpy_map(t_map *map, char **arr, int i);
 void	error(char *error, bool flag, char *pstr);
 void	item_error(char *item, char *error);
 bool	is_empty(char *str);
 bool	is_texture(char *str);
 bool	is_color(char *str);
+int		get_color(t_color item);
 
 #endif
