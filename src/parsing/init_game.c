@@ -6,7 +6,7 @@
 /*   By: mguardia <mguardia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/12 11:45:16 by mguardia          #+#    #+#             */
-/*   Updated: 2024/04/17 11:29:37 by mguardia         ###   ########.fr       */
+/*   Updated: 2024/04/26 17:07:16 by mguardia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,7 +84,9 @@ static void	file_items_parsing(t_game *game, char **arr, int *i)
 		split_line = ft_split(arr[*i], ' ');
 		if (!split_line)
 			error(NULL, true, "malloc");
-		if (is_texture(split_line[0]))
+		if (!split_line[0])
+			item_error(NULL, EMPTY_ITEM);
+		else if (is_texture(split_line[0]))
 			manage_textures(game, split_line);
 		else if (is_color(split_line[0]))
 			manage_colors(game, split_line);
@@ -100,13 +102,28 @@ static void	file_items_parsing(t_game *game, char **arr, int *i)
 static void	file_map_parsing(t_game *game, char **arr, int *i)
 {
 	// verificar mapa:
-	//	- como gestionar linea de solo espacios
-	//	- verificar limites del mapa
-	//	- verificar caracteres invalidos: set de caracteres: "01NOEW "
+	//	- como gestionar linea de solo espacios OK
+	//	- verificar limites del mapa 
+	//	- verificar caracteres invalidos: set de caracteres: "01NOEW " OK
 	//  - verificar que el player se pueda mover ???
-	//  - parsear player cuando se encuentre N, O, E, W.
-	
-	
+	//  - parsear player cuando se encuentre N, O, E, W. OK
+	int	j;
+	int	n_player;
+
+	j = *i - 1;
+	n_player = 0;
+	while (arr[++j])
+	{
+		
+		if (is_empty(arr[j]))
+			(ft_free_matrix((void **)arr), item_error(NULL, EMPTY_MAP));
+		if (has_invalid_chars(arr[j]))
+			(ft_free_matrix((void **)arr), item_error(NULL, INV_CHAR_MAP));
+		n_player = find_player(&game->player, arr[j], j - *i);
+		if (n_player > 1)
+			(ft_free_matrix((void **)arr), item_error(NULL, PLAYER_MAP));
+
+	}
 	// copiar el mapa en struct
 	cpy_map(&game->map, arr, *i);
 }
