@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mguardia <mguardia@student.42.fr>          +#+  +:+       +#+        */
+/*   By: raalonso <raalonso@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/12 09:54:08 by mguardia          #+#    #+#             */
-/*   Updated: 2024/04/26 16:24:55 by mguardia         ###   ########.fr       */
+/*   Updated: 2024/07/06 19:27:39 by raalonso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,19 +14,27 @@
 # define CUB3D_H
 
 # include "../libft/inc/libft.h"
+#include "../mlx/include/MLX42/MLX42.h"
 # include <math.h>
 # include <errno.h>
+
+/******************************************************************************
+*	Defines
+******************************************************************************/
+
+#define SHEIGHT 1000
+#define SWIDTH 500
 
 /******************************************************************************
 *	Typedefs
 ******************************************************************************/
 
+typedef struct s_ray			t_ray;
 typedef struct s_color			t_color;
 typedef struct s_texture		t_texture;
 typedef struct s_map			t_map;
 typedef struct s_player			t_player;
 typedef struct s_game			t_game;
-typedef struct s_mlx			t_mlx;
 
 typedef enum e_valid_chars		t_valid_chars;
 
@@ -47,6 +55,12 @@ enum	e_valid_chars
 /******************************************************************************
 *	Structs
 ******************************************************************************/
+
+struct s_ray
+{
+	double	angle;
+	double	distance;
+};
 
 struct s_color
 {
@@ -87,17 +101,6 @@ struct s_player
 	int				y;
 };
 
-struct s_mlx
-{
-	void			*mlx_ptr;
-	void			*mlx_win;
-	void			*img;
-	char			*addr;
-	int				bits_per_pixel;
-	int				line_length;
-	int				endian;
-};
-
 struct	s_game
 {
 	/* MAP */
@@ -107,7 +110,10 @@ struct	s_game
 	t_player		player;
 
 	/* MLX */
-	t_mlx			mlx;
+	mlx_t			*mlx;
+	
+	/* RAYCASTING */
+	t_ray			ray;
 };
 
 /******************************************************************************
@@ -118,8 +124,6 @@ struct	s_game
 void	init_game(t_game *game, int argc, char **argv);
 void	manage_textures(t_game *game, char **line);
 void	manage_colors(t_game *game, char **line);
-bool	has_invalid_chars(char *str);
-int		find_player(t_player *player, char *str, int j);
 void	cpy_map(t_map *map, char **arr, int i);
 void	error(char *error, bool flag, char *pstr);
 void	item_error(char *item, char *error);

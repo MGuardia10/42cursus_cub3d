@@ -4,7 +4,8 @@
 
 NAME		=	cub3D
 CC			=	gcc
-CFLAGS		=	-Wall -Wextra -Werror -g3
+CFLAGS		=	-Wall -Wextra #-Werror -g3
+MLXFLAGS	=	$(MLX) -lglfw -L ~/.brew/Cellar/glfw/3.4/lib
 INCLUDES	=	-I libft/inc -I inc
 RM			=	rm -rf
 
@@ -24,6 +25,9 @@ CLEAR	=		\033[0m
 
 # LIBFT
 LIBFT		=	libft/libft.a
+
+# MLX
+MLX			=	mlx/build/libmlx42.a
 
 # VPATH
 VPATH		=	src:src/parsing
@@ -55,7 +59,7 @@ $(NAME): $(OBJ_FILES)
 	@make -sC libft
 	@echo "$(GREEN)[libft --> OK]$(CLEAR)"
 	@echo "$(BLUE)Compiling cub3D program.$(CLEAR)"
-	$(CC) $(OBJ_FILES) $(LIBFT) -o $(NAME)
+	$(CC) $(OBJ_FILES) $(LIBFT) $(MLXFLAGS) -o $(NAME)
 	@echo "$(GREEN)[cub3D --> OK]\n$(CLEAR)$(GREEN)Success!$(CLEAR)"
 
 $(OBJ_DIR)%.o: %.c

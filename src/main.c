@@ -6,7 +6,7 @@
 /*   By: raalonso <raalonso@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/12 09:53:37 by mguardia          #+#    #+#             */
-/*   Updated: 2024/07/06 19:22:56 by raalonso         ###   ########.fr       */
+/*   Updated: 2024/07/06 19:30:13 by raalonso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,11 +38,23 @@ void	print_parsing(t_game *game)
 		printf("%s\n", game->map.map_cpy[i++]);
 }
 
+void	init_window(t_game *game)
+{
+	//int32_t	sheight;
+	//int32_t swidth;
+
+	//mlx_get_monitor_size(0, &swidth, &sheight);
+	game->mlx = mlx_init(SHEIGHT, SWIDTH, "cub3d", false);
+	get_playerpos(game);
+	castrays(game);
+}
+
 int	main(int argc, char **argv)
 {
 	t_game	game;
-
+	
 	init_game(&game, argc, argv);
 	print_parsing(&game);
-	return (EXIT_SUCCESS);
+	init_window(&game);
+	mlx_loop(game.mlx);
 }
