@@ -6,7 +6,7 @@
 /*   By: raalonso <raalonso@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/12 09:54:08 by mguardia          #+#    #+#             */
-/*   Updated: 2024/07/06 19:27:39 by raalonso         ###   ########.fr       */
+/*   Updated: 2024/07/07 19:55:54 by raalonso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,8 +22,10 @@
 *	Defines
 ******************************************************************************/
 
-#define SHEIGHT 1000
-#define SWIDTH 500
+# define SHEIGHT 1000
+# define SWIDTH 500
+# define TILESIZE 30
+# define FOV 60
 
 /******************************************************************************
 *	Typedefs
@@ -37,6 +39,7 @@ typedef struct s_player			t_player;
 typedef struct s_game			t_game;
 
 typedef enum e_valid_chars		t_valid_chars;
+typedef enum e_orientation		t_orientation;
 
 /******************************************************************************
 *	Enums
@@ -50,6 +53,12 @@ enum	e_valid_chars
 	SOUTH = 'S',
 	WEST = 'W',
 	EAST = 'E'
+};
+
+enum	e_orientation
+{
+	HORIZONTAL,
+	VERTICAL
 };
 
 /******************************************************************************
@@ -97,8 +106,10 @@ struct s_map
 struct s_player
 {
 	t_valid_chars	orientation;
-	int				x;
-	int				y;
+	double			angle;
+	double			rd_fov; // en radianes
+	double				x;
+	double				y;
 };
 
 struct	s_game
@@ -124,6 +135,8 @@ struct	s_game
 void	init_game(t_game *game, int argc, char **argv);
 void	manage_textures(t_game *game, char **line);
 void	manage_colors(t_game *game, char **line);
+bool	has_invalid_chars(char *str);
+int		find_player(t_player *player, char *str, int j);
 void	cpy_map(t_map *map, char **arr, int i);
 void	error(char *error, bool flag, char *pstr);
 void	item_error(char *item, char *error);
@@ -131,5 +144,8 @@ bool	is_empty(char *str);
 bool	is_texture(char *str);
 bool	is_color(char *str);
 int		get_color(t_color item);
+
+
+void	castrays(t_game *game);
 
 #endif

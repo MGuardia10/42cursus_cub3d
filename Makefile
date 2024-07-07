@@ -30,7 +30,8 @@ LIBFT		=	libft/libft.a
 MLX			=	mlx/build/libmlx42.a
 
 # VPATH
-VPATH		=	src:src/parsing
+VPATH		=	src:src/parsing \
+				src:src/raycasting
 
 # SOURCE
 SRC			=	main.c
@@ -43,10 +44,14 @@ PARSING		=	init_game.c \
 				map.c \
 				utils.c
 
+# RAYCASTING
+RAYCASTING 	=	castrays.c
+
 # OBJECTS
 OBJ_DIR		=	objs/
 OBJ_FILES	=	$(SRC:%.c=$(OBJ_DIR)%.o) \
-				$(PARSING:%.c=$(OBJ_DIR)%.o)
+				$(PARSING:%.c=$(OBJ_DIR)%.o) \
+				$(RAYCASTING:%.c=$(OBJ_DIR)%.o)
 
 ################################################################################
 # MAKEFILE RULES

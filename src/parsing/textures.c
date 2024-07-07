@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   textures.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mguardia <mguardia@student.42.fr>          +#+  +:+       +#+        */
+/*   By: raalonso <raalonso@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/14 19:06:08 by mguardia          #+#    #+#             */
-/*   Updated: 2024/04/17 11:27:46 by mguardia         ###   ########.fr       */
+/*   Updated: 2024/07/07 02:57:16 by raalonso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 
 static void	verify_path(char *path)
 {
-	if (!ft_is_format(path, ".xpm"))
+	if (!ft_is_format(path, ".xpm42"))
 		item_error(path, WRONG_EXT_XPM);
 	if (!ft_is_readable(path))
 		error(NULL, true, path);

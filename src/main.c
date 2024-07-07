@@ -6,7 +6,7 @@
 /*   By: raalonso <raalonso@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/12 09:53:37 by mguardia          #+#    #+#             */
-/*   Updated: 2024/07/06 19:30:13 by raalonso         ###   ########.fr       */
+/*   Updated: 2024/07/07 02:28:28 by raalonso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,27 @@ void	print_parsing(t_game *game)
 		printf("%s\n", game->map.map_cpy[i++]);
 }
 
+void	print_map(t_game *game)
+{
+	int	i;
+	int	j;
+
+	i = 0;
+	mlx_image_t *img = mlx_new_image(game->mlx, TILESIZE, TILESIZE);
+	ft_memset(img->pixels, 255, img->width * img->height * sizeof(int32_t));
+	while (game->map.map_cpy[i])
+	{
+		j = 0;
+		while (game->map.map_cpy[i][j])
+		{
+			if (game->map.map_cpy[i][j] == '1')
+				mlx_image_to_window(game->mlx, img, j * TILESIZE, i * TILESIZE);
+			j++;
+		}
+		i++;
+	}
+}
+
 void	init_window(t_game *game)
 {
 	//int32_t	sheight;
@@ -45,7 +66,7 @@ void	init_window(t_game *game)
 
 	//mlx_get_monitor_size(0, &swidth, &sheight);
 	game->mlx = mlx_init(SHEIGHT, SWIDTH, "cub3d", false);
-	get_playerpos(game);
+	print_map(game);
 	castrays(game);
 }
 
