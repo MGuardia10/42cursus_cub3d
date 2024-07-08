@@ -6,7 +6,7 @@
 /*   By: mguardia <mguardia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/12 11:45:16 by mguardia          #+#    #+#             */
-/*   Updated: 2024/04/26 17:07:16 by mguardia         ###   ########.fr       */
+/*   Updated: 2024/07/08 19:08:20 by mguardia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,6 +70,7 @@ static char	*get_file(char *path)
 			(free(str), free(aux), error(NULL, true, "malloc"));
 		(free(aux), free(str));
 	}
+	close(fd);
 	return (file);
 }
 
@@ -105,7 +106,7 @@ static void	file_map_parsing(t_game *game, char **arr, int *i)
 	//	- como gestionar linea de solo espacios OK
 	//	- verificar limites del mapa 
 	//	- verificar caracteres invalidos: set de caracteres: "01NOEW " OK
-	//  - verificar que el player se pueda mover ???
+	//  - verificar que el player se pueda mover - NO HAY QUE HACERLO
 	//  - parsear player cuando se encuentre N, O, E, W. OK
 	int	j;
 	int	n_player;
@@ -120,12 +121,12 @@ static void	file_map_parsing(t_game *game, char **arr, int *i)
 		if (has_invalid_chars(arr[j]))
 			(ft_free_matrix((void **)arr), item_error(NULL, INV_CHAR_MAP));
 		n_player = find_player(&game->player, arr[j], j - *i);
-		if (n_player > 1)
-			(ft_free_matrix((void **)arr), item_error(NULL, PLAYER_MAP));
-
 	}
-	// copiar el mapa en struct
+	if (n_player != 1)
+		(ft_free_matrix((void **)arr), item_error(NULL, PLAYER_MAP));
 	cpy_map(&game->map, arr, *i);
+	if (!valid_map_limits(game->map.map_cpy))
+		(ft_free_matrix((void **)arr), error(INV_MAP_LIMITS, false, NULL));
 }
 
 void	init_game(t_game *game, int argc, char **argv)
