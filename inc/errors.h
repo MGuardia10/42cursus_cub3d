@@ -6,7 +6,7 @@
 /*   By: mguardia <mguardia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/14 17:11:05 by mguardia          #+#    #+#             */
-/*   Updated: 2024/04/26 17:11:57 by mguardia         ###   ########.fr       */
+/*   Updated: 2024/07/08 19:05:50 by mguardia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,7 @@
 # define EMPTY_MAP		"There is an empty line with spaces on map\n"
 # define EMPTY_ITEM		"There is an empty line with spaces before map\n"
 # define INV_CHAR_MAP	"Map has invalid chars. Only \"01NSWE \" are valid\n"
-# define PLAYER_MAP		"More than one player found.\n"
+# define PLAYER_MAP		"Cannot parse player position.\n"
+# define INV_MAP_LIMITS	"Map is not well closed/surrounded by walls\n"
 
 #endif
