@@ -1,9 +1,10 @@
 NO ./textures/greystone.xpm
 SO ./textures/mossy.xpm
-WE ./textures/eagle.xpm
 EA ./textures/wood.xpm
-F 255,255,250
+WE ./textures/eagle.xpm
 C 255,255,255
+F 255,255,250
+
         1111111111111111111111111
         1000000000110000000000001
         1011000001110000000000001
