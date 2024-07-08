@@ -6,7 +6,7 @@
 /*   By: raalonso <raalonso@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/12 09:54:08 by mguardia          #+#    #+#             */
-/*   Updated: 2024/07/07 19:55:54 by raalonso         ###   ########.fr       */
+/*   Updated: 2024/07/08 20:35:30 by raalonso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,10 +22,11 @@
 *	Defines
 ******************************************************************************/
 
-# define SHEIGHT 1000
-# define SWIDTH 500
+# define SHEIGHT 500
+# define SWIDTH 1000
 # define TILESIZE 30
 # define FOV 60
+# define ROTSPEED 20
 
 /******************************************************************************
 *	Typedefs
@@ -69,6 +70,7 @@ struct s_ray
 {
 	double	angle;
 	double	distance;
+	int		type;
 };
 
 struct s_color
@@ -110,6 +112,9 @@ struct s_player
 	double			rd_fov; // en radianes
 	double				x;
 	double				y;
+	int					ws; // para mover jugador
+	int					ad; // para mover jugador
+	int					rotate; // rotar jugador
 };
 
 struct	s_game
@@ -122,6 +127,7 @@ struct	s_game
 
 	/* MLX */
 	mlx_t			*mlx;
+	mlx_image_t		*pixel;
 	
 	/* RAYCASTING */
 	t_ray			ray;
@@ -145,7 +151,17 @@ bool	is_texture(char *str);
 bool	is_color(char *str);
 int		get_color(t_color item);
 
-
+/* RAYCASTING */
 void	castrays(t_game *game);
+double	get_v_inter(t_game *game);
+double	get_h_inter(t_game *game);
+int		check_inter(t_game *game, double *step, double *inter, t_orientation o);
+bool	check_hit(t_game *game, double x, double y);
+void	render_line(t_game *game, int ray);
+void	put_line(int t_pixel, int b_pixel, int ray, t_game *game);
+
+/* MOVEMENT */
+void	keypress(mlx_key_data_t keydata, void *gameptr);
+void	player_controller(t_game *game);
 
 #endif

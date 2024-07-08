@@ -31,7 +31,8 @@ MLX			=	mlx/build/libmlx42.a
 
 # VPATH
 VPATH		=	src:src/parsing \
-				src:src/raycasting
+				src:src/raycasting \
+				src:src/movement
 
 # SOURCE
 SRC			=	main.c
@@ -45,13 +46,16 @@ PARSING		=	init_game.c \
 				utils.c
 
 # RAYCASTING
-RAYCASTING 	=	castrays.c
+RAYCASTING 	=	castrays.c \
+				render.c \
+				p_movement.c
 
 # OBJECTS
 OBJ_DIR		=	objs/
 OBJ_FILES	=	$(SRC:%.c=$(OBJ_DIR)%.o) \
 				$(PARSING:%.c=$(OBJ_DIR)%.o) \
-				$(RAYCASTING:%.c=$(OBJ_DIR)%.o)
+				$(RAYCASTING:%.c=$(OBJ_DIR)%.o) \
+				$(MOVEMENT:%.c=$(OBJ_DIR)%.o)
 
 ################################################################################
 # MAKEFILE RULES
