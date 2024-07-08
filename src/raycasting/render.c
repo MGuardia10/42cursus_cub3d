@@ -6,7 +6,7 @@
 /*   By: raalonso <raalonso@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/08 19:00:48 by raalonso          #+#    #+#             */
-/*   Updated: 2024/07/08 20:30:43 by raalonso         ###   ########.fr       */
+/*   Updated: 2024/07/08 21:36:56 by raalonso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,6 +59,7 @@ void	render_line(t_game *game, int ray)
 	double	top_p;
 	double	bottom_p;
 
+	game->ray.distance *= cos(angle_reset(game->ray.angle - game->player.angle));
 	line_l = (TILESIZE / game->ray.distance) * ((SWIDTH / 2)
 			/ tan(game->player.rd_fov / 2));
 	bottom_p = (SHEIGHT / 2) + (line_l / 2);

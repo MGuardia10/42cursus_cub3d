@@ -6,7 +6,7 @@
 /*   By: raalonso <raalonso@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/12 09:53:37 by mguardia          #+#    #+#             */
-/*   Updated: 2024/07/08 20:06:00 by raalonso         ###   ########.fr       */
+/*   Updated: 2024/07/08 20:51:27 by raalonso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,7 +75,6 @@ void	init_window(t_game *game)
 	game->player.angle = M_PI;
 	game->player.ws = 0;
 	game->player.ad = 0;
-	print_map(game);
 }
 
 void	game_loop(void *gameptr)
@@ -94,6 +93,7 @@ int	main(int argc, char **argv)
 	init_game(&game, argc, argv);
 	print_parsing(&game);
 	init_window(&game);
+	print_map(&game);
 	mlx_loop_hook(game.mlx, &game_loop, &game);
 	mlx_key_hook(game.mlx, &keypress, &game);
 	mlx_loop(game.mlx);

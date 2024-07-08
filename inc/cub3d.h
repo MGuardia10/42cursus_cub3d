@@ -6,7 +6,7 @@
 /*   By: raalonso <raalonso@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/12 09:54:08 by mguardia          #+#    #+#             */
-/*   Updated: 2024/07/08 20:35:30 by raalonso         ###   ########.fr       */
+/*   Updated: 2024/07/08 21:37:58 by raalonso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,11 +22,12 @@
 *	Defines
 ******************************************************************************/
 
-# define SHEIGHT 500
-# define SWIDTH 1000
-# define TILESIZE 30
+# define SHEIGHT 800
+# define SWIDTH 1200
+# define TILESIZE 40
 # define FOV 60
-# define ROTSPEED 20
+# define ROTSPEED 10
+# define MOVESPEED 1
 
 /******************************************************************************
 *	Typedefs
@@ -162,6 +163,8 @@ void	put_line(int t_pixel, int b_pixel, int ray, t_game *game);
 
 /* MOVEMENT */
 void	keypress(mlx_key_data_t keydata, void *gameptr);
+void	keyrelease(mlx_key_data_t keydata, t_game *game);
 void	player_controller(t_game *game);
+double	angle_reset(double angle);
 
 #endif
