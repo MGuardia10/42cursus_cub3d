@@ -6,7 +6,7 @@
 /*   By: mguardia <mguardia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/17 09:29:22 by mguardia          #+#    #+#             */
-/*   Updated: 2024/07/09 15:29:34 by mguardia         ###   ########.fr       */
+/*   Updated: 2024/07/09 17:46:54 by mguardia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,7 +98,7 @@ char	**cpy_map(char **arr, int i)
 
 	cpy = ft_calloc(ft_arrsize((void **)arr + i) + 1, sizeof(char *));
 	if (!cpy)
-		error(NULL, true, "malloc");
+		return NULL;
 	j = 0;
 	while (arr[i])
 	{
@@ -106,7 +106,7 @@ char	**cpy_map(char **arr, int i)
 		if (!cpy[j])
 		{
 			ft_free_matrix((void **)cpy);
-			error(NULL, true, "malloc");
+			return NULL;
 		}
 		j++;
 		i++;
@@ -122,7 +122,7 @@ char	**cpy_map(char **arr, int i)
  * @return a boolean value - `true` if the map limits are valid, and `false` if
  * they are invalid.
  */
-bool	valid_map_limits(t_map *map)
+bool	valid_map_limits(t_game *game, t_map *map)
 {
 	char	**map_cpy;
 	int		x;
@@ -131,7 +131,7 @@ bool	valid_map_limits(t_map *map)
 
 	map_cpy = cpy_map(map->map_cpy, 0);
 	if (!map_cpy)
-		error(NULL, true, "malloc");
+		error(game, NULL, true, "malloc");
 	err = false;
 	while (!err && empty_found(map_cpy, &x, &y))
 		err = flood_fill(map_cpy, x, y);

@@ -6,7 +6,7 @@
 /*   By: mguardia <mguardia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/12 09:54:08 by mguardia          #+#    #+#             */
-/*   Updated: 2024/07/09 15:24:32 by mguardia         ###   ########.fr       */
+/*   Updated: 2024/07/09 17:45:52 by mguardia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -121,14 +121,16 @@ void	manage_colors(t_game *game, char **line);
 bool	has_invalid_chars(char *str);
 int		find_player(t_player *player, char *str, int j);
 char	**cpy_map(char **arr, int i);
-bool	valid_map_limits(t_map *map);
+bool	valid_map_limits(t_game *game, t_map *map);
 bool	empty_found(char **map, int *x, int *y);
 int		flood_fill(char **map, int x, int y);
-void	error(char *error, bool flag, char *pstr);
-void	item_error(char *item, char *error);
+void	error(t_game *game, char *error, bool flag, char *pstr);
+void	item_error(t_game *game, char *item, char *error);
 bool	is_empty(char *str);
 bool	is_texture(char *str);
 bool	is_color(char *str);
 int		get_color(t_color item);
+
+void	clean_game(t_game *game);
 
 #endif

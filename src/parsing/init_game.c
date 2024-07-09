@@ -6,7 +6,7 @@
 /*   By: mguardia <mguardia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/12 11:45:16 by mguardia          #+#    #+#             */
-/*   Updated: 2024/07/09 16:32:25 by mguardia         ###   ########.fr       */
+/*   Updated: 2024/07/09 17:44:48 by mguardia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,14 +25,14 @@
 static void	verify_args(t_game *game, int argc, char **argv)
 {
 	if (argc != 2)
-		error(WRONG_N_ARGS, false, NULL);
+		error(game, WRONG_N_ARGS, false, NULL);
 	if (!ft_is_format(argv[1], ".cub"))
-		error(WRONG_EXT_CUB, false, NULL);
+		error(game, WRONG_EXT_CUB, false, NULL);
 	if (!ft_is_readable(argv[1]))
-		error(NULL, true, argv[1]);
+		error(game, NULL, true, argv[1]);
 	game->map->file = ft_strdup(argv[1]);
 	if (!game->map->file)
-		error(NULL, true, "malloc");
+		error(game, NULL, true, "malloc");
 }
 
 /**
@@ -45,7 +45,7 @@ static void	verify_args(t_game *game, int argc, char **argv)
  * @return The function `get_file` is returning a string, which represents the
  * contents of a file read from the specified path.
  */
-static char	*get_file(char *path)
+static char	*get_file(t_game *game, char *path)
 {
 	int		fd;
 	char	*file;
@@ -64,13 +64,12 @@ static char	*get_file(char *path)
 		else
 			aux = ft_strdup("");
 		if (!aux)
-			(free(str), error(NULL, true, "malloc"));
-		if (file)
-			free(file);
+			(free(str), error(game, NULL, true, "malloc"));
+		free(file);
 		file = ft_strjoin(aux, str);
 		(free(aux), free(str));
 		if (!file)
-			error(NULL, true, "malloc");
+			error(game, NULL, true, "malloc");
 	}
 	return (close(fd), file);
 }
@@ -92,23 +91,23 @@ static void	file_items_parsing(t_game *game, char **arr, int *i)
 	while (*i < 6)
 	{
 		if (!arr[*i])
-			error(INV_FILE, false, NULL);
+			error(game, INV_FILE, false, NULL);
 		split_line = ft_split(arr[*i], ' ');
 		if (!split_line)
-			error(NULL, true, "malloc");
+			error(game, NULL, true, "malloc");
 		if (!split_line[0])
-			item_error(NULL, EMPTY_ITEM);
+			item_error(game, NULL, EMPTY_ITEM);
 		else if (is_texture(split_line[0]))
 			manage_textures(game, split_line);
 		else if (is_color(split_line[0]))
 			manage_colors(game, split_line);
 		else
-			item_error(split_line[0], INV_TYPE_ID);
+			item_error(game, split_line[0], INV_TYPE_ID);
 		ft_free_matrix((void **)split_line);
 		(*i)++;
 	}
 	if (game->map->floor.rgb == game->map->ceiling.rgb)
-		item_error(NULL, SAME_COLORS);
+		item_error(game, NULL, SAME_COLORS);
 }
 
 /**
@@ -131,16 +130,16 @@ static void	file_map_parsing(t_game *game, char **arr, int *i)
 	while (arr[++j])
 	{
 		if (is_empty(arr[j]))
-			(ft_free_matrix((void **)arr), item_error(NULL, EMPTY_MAP));
+			(ft_free_matrix((void **)arr), item_error(game, NULL, EMPTY_MAP));
 		if (has_invalid_chars(arr[j]))
-			(ft_free_matrix((void **)arr), item_error(NULL, INV_CHAR_MAP));
+			(ft_free_matrix((void **)arr), item_error(game, NULL, INV_CHAR_MAP));
 		n_player = find_player(&game->player, arr[j], j - *i);
 	}
 	if (n_player != 1)
-		(ft_free_matrix((void **)arr), item_error(NULL, PLAYER_MAP));
+		(ft_free_matrix((void **)arr), item_error(game, NULL, PLAYER_MAP));
 	game->map->map_cpy = cpy_map(arr, *i);
-	if (!valid_map_limits(game->map))
-		(ft_free_matrix((void **)arr), error(INV_MAP_LIMITS, false, NULL));
+	if (!valid_map_limits(game, game->map))
+		(ft_free_matrix((void **)arr), error(game, INV_MAP_LIMITS, false, NULL));
 }
 
 /**
@@ -162,17 +161,17 @@ void	init_game(t_game *game, int argc, char **argv)
 	ft_memset(game, 0, sizeof(t_game));
 	game->map = (t_map *)ft_calloc(1, sizeof(t_map));
 	if (!game->map)
-		error(NULL, true, "malloc");
+		error(game, NULL, true, "malloc");
 	verify_args(game, argc, argv);
-	file_str = get_file(argv[1]);
+	file_str = get_file(game, argv[1]);
 	if (!file_str || is_empty(file_str))
-		error(EMPTY_FILE, false, NULL);
+		error(game, EMPTY_FILE, false, NULL);
 	file_arr = ft_split(file_str, '\n');
 	free(file_str);
 	if (!file_arr)
-		(error(NULL, true, "malloc"));
+		(error(game, NULL, true, "malloc"));
 	if (!file_arr[0])
-		error(EMPTY_FILE, false, NULL);
+		error(game, EMPTY_FILE, false, NULL);
 	i = 0;
 	file_items_parsing(game, file_arr, &i);
 	file_map_parsing(game, file_arr, &i);

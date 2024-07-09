@@ -6,7 +6,7 @@
 /*   By: mguardia <mguardia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/14 17:31:07 by mguardia          #+#    #+#             */
-/*   Updated: 2024/04/17 11:41:02 by mguardia         ###   ########.fr       */
+/*   Updated: 2024/07/09 17:31:48 by mguardia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@
  * @param item a string that represents the item or object related to the error.
  * @param error a string that represents the error message to be displayed.
  */
-void	item_error(char *item, char *error)
+void	item_error(t_game *game, char *item, char *error)
 {
 	ft_putstr_fd(HRED"Error: ", STDERR_FILENO);
 	if (item)
@@ -29,6 +29,7 @@ void	item_error(char *item, char *error)
 		ft_putstr_fd(": ", STDERR_FILENO);
 	}
 	ft_putstr_fd(error, STDERR_FILENO);
+	clean_game(game);
 	exit(EXIT_FAILURE);
 }
 
@@ -42,12 +43,13 @@ void	item_error(char *item, char *error)
  * @param pstr a string that is used as a parameter for `perror` when flag is
  * true.
  */
-void	error(char *error, bool flag, char *pstr)
+void	error(t_game *game, char *error, bool flag, char *pstr)
 {
 	ft_putstr_fd(HRED"Error: ", STDERR_FILENO);
 	if (error)
 		ft_putstr_fd(error, STDERR_FILENO);
 	if (flag == true)
 		perror(pstr);
+	clean_game(game);
 	exit(EXIT_FAILURE);
 }

@@ -6,7 +6,7 @@
 /*   By: mguardia <mguardia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/15 09:10:42 by mguardia          #+#    #+#             */
-/*   Updated: 2024/07/09 14:08:17 by mguardia         ###   ########.fr       */
+/*   Updated: 2024/07/09 17:42:30 by mguardia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@
  * @return The function `ft_atoi_mod` is returning an integer value, which is
  * the result of converting the input string `str` to an integer.
  */
-static int	ft_atoi_mod(char *str, char *color)
+static int	ft_atoi_mod(t_game *game, char *str, char *color)
 {
 	long long	result;
 	int			i;
@@ -36,7 +36,7 @@ static int	ft_atoi_mod(char *str, char *color)
 		if (str[i] == '+')
 			i++;
 		else if (str[i] == '-')
-			(free(str), item_error(color, NEGATIVE_COLOR));
+			(free(str), item_error(game, color, NEGATIVE_COLOR));
 	}
 	while (ft_isdigit(str[i]))
 	{
@@ -44,9 +44,9 @@ static int	ft_atoi_mod(char *str, char *color)
 		i++;
 	}
 	if (str[i])
-		(free(str), item_error(color, INV_CHAR_COLOR));
+		(free(str), item_error(game, color, INV_CHAR_COLOR));
 	if (result < 0 || result > 255)
-		(free(str), item_error(color, MAX_NUM_COLOR));
+		(free(str), item_error(game, color, MAX_NUM_COLOR));
 	return (result);
 }
 
@@ -62,7 +62,7 @@ static int	ft_atoi_mod(char *str, char *color)
  * @return An integer pointer to an array of three integers representing the RGB
  * values of the input color.
  */
-static int	*verify_color(char *color)
+static int	*verify_color(t_game *game, char *color)
 {
 	char	**split_color;
 	int		i;
@@ -71,20 +71,20 @@ static int	*verify_color(char *color)
 
 	split_color = ft_split(color, ',');
 	if (!split_color)
-		error(NULL, true, "malloc");
+		error(game, NULL, true, "malloc");
 	if (ft_arrsize((void **)split_color) != 3)
-		item_error(color, INV_COLOR);
+		item_error(game, color, INV_COLOR);
 	color_arr = ft_calloc(3, sizeof(int));
 	if (!color_arr)
-		error(NULL, true, "malloc");
+		error(game, NULL, true, "malloc");
 	i = -1;
 	while (++i < 3)
 	{
 		// no hace falta el trim, revisar xd
 		color_trim = ft_strtrim(split_color[i], " ");
 		if (!color_trim)
-			error(NULL, true, "malloc");
-		color_arr[i] = ft_atoi_mod(color_trim, color);
+			error(game, NULL, true, "malloc");
+		color_arr[i] = ft_atoi_mod(game, color_trim, color);
 		free(color_trim);
 	}
 	ft_free_matrix((void **)split_color);
@@ -99,14 +99,14 @@ static int	*verify_color(char *color)
  * @param color_arr The `color_arr` parameter is an integer array that contains
  * the RGB values for the floor color.
  */
-static void	manage_floor(t_map *map, int *color_arr)
+static void	manage_floor(t_game *game, t_map *map, int *color_arr)
 {
 	static int	flag;
 
 	if (flag == 1)
 	{
 		free(color_arr);
-		item_error("F", FLOOR_TWICE);
+		item_error(game, "F", FLOOR_TWICE);
 	}
 	map->floor.r = color_arr[0];
 	map->floor.g = color_arr[1];
@@ -123,14 +123,14 @@ static void	manage_floor(t_map *map, int *color_arr)
  * @param color_arr The `color_arr` parameter is an integer array that contains
  * the RGB values for the ceiling color.
  */
-static void	manage_ceiling(t_map *map, int *color_arr)
+static void	manage_ceiling(t_game *game, t_map *map, int *color_arr)
 {
 	static int	flag;
 
 	if (flag == 1)
 	{
 		free(color_arr);
-		item_error("C", CEILING_TWICE);
+		item_error(game, "C", CEILING_TWICE);
 	}
 	map->ceiling.r = color_arr[0];
 	map->ceiling.g = color_arr[1];
@@ -154,13 +154,13 @@ void	manage_colors(t_game *game, char **line)
 	int	*color_arr;
 
 	if (ft_arrsize((void **)line) < 2)
-		item_error(line[0], MISSING_COLOR);
+		item_error(game, line[0], MISSING_COLOR);
 	else if (ft_arrsize((void **)line) > 2)
-		item_error(line[0], TOO_MUCH_COLOR);
-	color_arr = verify_color(line[1]);
+		item_error(game, line[0], TOO_MUCH_COLOR);
+	color_arr = verify_color(game, line[1]);
 	if (!ft_strcmp(line[0], "F"))
-		manage_floor(game->map, color_arr);
+		manage_floor(game, game->map, color_arr);
 	else if (!ft_strcmp(line[0], "C"))
-		manage_ceiling(game->map, color_arr);
+		manage_ceiling(game, game->map, color_arr);
 	free(color_arr);
 }
