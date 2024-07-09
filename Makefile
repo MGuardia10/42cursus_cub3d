@@ -37,6 +37,7 @@ PARSING		=	init_game.c \
 				colors.c \
 				textures.c \
 				map.c \
+				limits.c \
 				utils.c
 
 # OBJECTS
