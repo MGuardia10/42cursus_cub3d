@@ -6,7 +6,7 @@
 /*   By: mguardia <mguardia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/12 11:45:16 by mguardia          #+#    #+#             */
-/*   Updated: 2024/07/09 14:17:20 by mguardia         ###   ########.fr       */
+/*   Updated: 2024/07/09 16:32:25 by mguardia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,13 +65,14 @@ static char	*get_file(char *path)
 			aux = ft_strdup("");
 		if (!aux)
 			(free(str), error(NULL, true, "malloc"));
+		if (file)
+			free(file);
 		file = ft_strjoin(aux, str);
-		if (!file)
-			(free(str), free(aux), error(NULL, true, "malloc"));
 		(free(aux), free(str));
+		if (!file)
+			error(NULL, true, "malloc");
 	}
-	close(fd);
-	return (file);
+	return (close(fd), file);
 }
 
 /**

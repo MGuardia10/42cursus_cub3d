@@ -6,7 +6,7 @@
 /*   By: mguardia <mguardia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/12 09:53:37 by mguardia          #+#    #+#             */
-/*   Updated: 2024/07/09 14:06:49 by mguardia         ###   ########.fr       */
+/*   Updated: 2024/07/09 16:01:05 by mguardia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,11 +38,40 @@ void	print_parsing(t_game *game)
 		printf("%s\n", game->map->map_cpy[i++]);
 }
 
+void	free_textures(t_texture *textures)
+{
+	if (textures->north)
+		free(textures->north);
+	if (textures->south)
+		free(textures->south);
+	if (textures->west)
+		free(textures->west);
+	if (textures->east)
+		free(textures->east);
+}
+
+void	clean_game(t_game *game)
+{
+	if (!game)
+		return ;
+	if (game->map)
+	{
+		if (game->map->file)
+			free(game->map->file);
+		if (game->map->map_cpy)
+			ft_free_matrix((void **)game->map->map_cpy);
+		free_textures(&game->map->textures);
+		free(game->map);
+	}
+	free(game);
+}
+
 int	main(int argc, char **argv)
 {
 	t_game	game;
 
 	init_game(&game, argc, argv);
 	print_parsing(&game);
+	clean_game(&game);
 	return (EXIT_SUCCESS);
 }
