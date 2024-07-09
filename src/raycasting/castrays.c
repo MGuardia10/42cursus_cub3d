@@ -6,11 +6,26 @@
 /*   By: raalonso <raalonso@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/06 19:26:04 by raalonso          #+#    #+#             */
-/*   Updated: 2024/07/08 19:05:56 by raalonso         ###   ########.fr       */
+/*   Updated: 2024/07/09 17:12:48 by raalonso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/cub3d.h"
+
+int unit_circle(float angle, char c) // check the unit circle
+{
+	if (c == 'x')
+	{
+		if (angle > 0 && angle < M_PI)
+		return (1);
+	}
+	else if (c == 'y')
+	{
+		if (angle > (M_PI / 2) && angle < (3 * M_PI) / 2)
+		return (1);
+	}
+	return (0);
+}
 
 bool	check_hit(t_game *game, double x, double y)
 {
@@ -21,7 +36,7 @@ bool	check_hit(t_game *game, double x, double y)
 		return (true);
 	x_m = floor(x / TILESIZE);
 	y_m = floor(y / TILESIZE);
-	if ((y_m >= 14 || x_m >= 28))
+	if ((y_m >= 14 || x_m >= 35))
 		return (true);
 	if (game->map.map_cpy[y_m][x_m] == '1')
 		return (true);
@@ -113,6 +128,7 @@ void	castrays(t_game *game)
 	game->ray.angle = game->player.angle - (game->player.rd_fov / 2);
 	while (ray < SWIDTH)
 	{
+		game->ray.angle = angle_reset(game->ray.angle);
 		h_inter = get_h_inter(game);
 		v_inter = get_v_inter(game);
 		if (v_inter <= h_inter)

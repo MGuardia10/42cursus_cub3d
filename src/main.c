@@ -6,7 +6,7 @@
 /*   By: raalonso <raalonso@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/12 09:53:37 by mguardia          #+#    #+#             */
-/*   Updated: 2024/07/08 20:51:27 by raalonso         ###   ########.fr       */
+/*   Updated: 2024/07/09 17:23:18 by raalonso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,28 +64,6 @@ void	print_map(t_game *game)
 	}
 }
 
-void	init_window(t_game *game)
-{
-	game->mlx = mlx_init(SWIDTH, SHEIGHT, "cub3d", false);
-	game->pixel = mlx_new_image(game->mlx, SWIDTH, SHEIGHT);
-	mlx_image_to_window(game->mlx, game->pixel, 0, 0);
-	game->player.x = game->player.x * TILESIZE + TILESIZE / 2;
-	game->player.y = game->player.y * TILESIZE + TILESIZE / 2;
-	game->player.rd_fov = (FOV * M_PI) / 180;
-	game->player.angle = M_PI;
-	game->player.ws = 0;
-	game->player.ad = 0;
-}
-
-void	game_loop(void *gameptr)
-{
-	t_game	*game;
-
-	game = (t_game *)gameptr;
-	castrays(game);
-	player_controller(game);
-}
-
 int	main(int argc, char **argv)
 {
 	t_game	game;
@@ -93,8 +71,4 @@ int	main(int argc, char **argv)
 	init_game(&game, argc, argv);
 	print_parsing(&game);
 	init_window(&game);
-	print_map(&game);
-	mlx_loop_hook(game.mlx, &game_loop, &game);
-	mlx_key_hook(game.mlx, &keypress, &game);
-	mlx_loop(game.mlx);
 }

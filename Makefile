@@ -5,7 +5,8 @@
 NAME		=	cub3D
 CC			=	gcc
 CFLAGS		=	-Wall -Wextra #-Werror -g3
-MLXFLAGS	=	$(MLX) -lglfw -L ~/.brew/Cellar/glfw/3.4/lib
+#MLXFLAGS	=	$(MLX) -Iinclude -ldl -lglfw -pthread -lm # LINUX
+MLXFLAGS	=	$(MLX) -lglfw -L ~/.brew/Cellar/glfw/3.4/lib # MACOS
 INCLUDES	=	-I libft/inc -I inc
 RM			=	rm -rf
 
@@ -48,7 +49,8 @@ PARSING		=	init_game.c \
 # RAYCASTING
 RAYCASTING 	=	castrays.c \
 				render.c \
-				p_movement.c
+				p_movement.c \
+				init.c
 
 # OBJECTS
 OBJ_DIR		=	objs/

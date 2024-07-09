@@ -6,7 +6,7 @@
 /*   By: raalonso <raalonso@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/12 09:54:08 by mguardia          #+#    #+#             */
-/*   Updated: 2024/07/08 21:37:58 by raalonso         ###   ########.fr       */
+/*   Updated: 2024/07/09 17:23:33 by raalonso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -153,6 +153,7 @@ bool	is_color(char *str);
 int		get_color(t_color item);
 
 /* RAYCASTING */
+void	init_window(t_game *game);
 void	castrays(t_game *game);
 double	get_v_inter(t_game *game);
 double	get_h_inter(t_game *game);
