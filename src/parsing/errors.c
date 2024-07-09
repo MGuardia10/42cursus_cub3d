@@ -6,7 +6,7 @@
 /*   By: mguardia <mguardia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/14 17:31:07 by mguardia          #+#    #+#             */
-/*   Updated: 2024/07/09 17:31:48 by mguardia         ###   ########.fr       */
+/*   Updated: 2024/07/09 19:07:34 by mguardia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,7 @@ void	item_error(t_game *game, char *item, char *error)
 	{
 		ft_putstr_fd(item, STDERR_FILENO);
 		ft_putstr_fd(": ", STDERR_FILENO);
+		ft_free_matrix((void **)&item);
 	}
 	ft_putstr_fd(error, STDERR_FILENO);
 	clean_game(game);

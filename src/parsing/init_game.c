@@ -6,7 +6,7 @@
 /*   By: mguardia <mguardia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/12 11:45:16 by mguardia          #+#    #+#             */
-/*   Updated: 2024/07/09 17:44:48 by mguardia         ###   ########.fr       */
+/*   Updated: 2024/07/09 19:13:10 by mguardia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,23 +91,26 @@ static void	file_items_parsing(t_game *game, char **arr, int *i)
 	while (*i < 6)
 	{
 		if (!arr[*i])
-			error(game, INV_FILE, false, NULL);
-		split_line = ft_split(arr[*i], ' ');
+			(ft_free_matrix((void **)arr), error(game, INV_FILE, false, NULL));
+		split_line = ft_split(arr[*i], ' '); // liberar
 		if (!split_line)
-			error(game, NULL, true, "malloc");
+			(ft_free_matrix((void **)arr), error(game, NULL, true, "malloc"));
 		if (!split_line[0])
-			item_error(game, NULL, EMPTY_ITEM);
+			(ft_free_matrix((void **)arr), item_error(game, NULL, EMPTY_ITEM));
 		else if (is_texture(split_line[0]))
-			manage_textures(game, split_line);
+			manage_textures(game, split_line); // pasar arr para liberar si fallo
 		else if (is_color(split_line[0]))
-			manage_colors(game, split_line);
+			manage_colors(game, split_line); // pasar arr para liberar si fallo
 		else
+		{
+			ft_free_matrix((void **)arr); 
 			item_error(game, split_line[0], INV_TYPE_ID);
+		}
 		ft_free_matrix((void **)split_line);
 		(*i)++;
 	}
 	if (game->map->floor.rgb == game->map->ceiling.rgb)
-		item_error(game, NULL, SAME_COLORS);
+		(ft_free_matrix((void **)arr), item_error(game, NULL, SAME_COLORS));
 }
 
 /**
@@ -166,7 +169,7 @@ void	init_game(t_game *game, int argc, char **argv)
 	file_str = get_file(game, argv[1]);
 	if (!file_str || is_empty(file_str))
 		error(game, EMPTY_FILE, false, NULL);
-	file_arr = ft_split(file_str, '\n');
+	file_arr = ft_split(file_str, '\n'); // liberar mas abajo si error
 	free(file_str);
 	if (!file_arr)
 		(error(game, NULL, true, "malloc"));
