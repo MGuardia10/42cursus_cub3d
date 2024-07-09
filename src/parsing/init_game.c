@@ -6,7 +6,7 @@
 /*   By: mguardia <mguardia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/12 11:45:16 by mguardia          #+#    #+#             */
-/*   Updated: 2024/07/09 10:41:03 by mguardia         ###   ########.fr       */
+/*   Updated: 2024/07/09 14:17:20 by mguardia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,8 +30,8 @@ static void	verify_args(t_game *game, int argc, char **argv)
 		error(WRONG_EXT_CUB, false, NULL);
 	if (!ft_is_readable(argv[1]))
 		error(NULL, true, argv[1]);
-	game->map.file = ft_strdup(argv[1]);
-	if (!game->map.file)
+	game->map->file = ft_strdup(argv[1]);
+	if (!game->map->file)
 		error(NULL, true, "malloc");
 }
 
@@ -106,7 +106,7 @@ static void	file_items_parsing(t_game *game, char **arr, int *i)
 		ft_free_matrix((void **)split_line);
 		(*i)++;
 	}
-	if (game->map.floor.rgb == game->map.ceiling.rgb)
+	if (game->map->floor.rgb == game->map->ceiling.rgb)
 		item_error(NULL, SAME_COLORS);
 }
 
@@ -137,8 +137,8 @@ static void	file_map_parsing(t_game *game, char **arr, int *i)
 	}
 	if (n_player != 1)
 		(ft_free_matrix((void **)arr), item_error(NULL, PLAYER_MAP));
-	cpy_map(&game->map, arr, *i);
-	if (!valid_map_limits(game->map.map_cpy))
+	game->map->map_cpy = cpy_map(arr, *i);
+	if (!valid_map_limits(game->map))
 		(ft_free_matrix((void **)arr), error(INV_MAP_LIMITS, false, NULL));
 }
 
@@ -159,6 +159,9 @@ void	init_game(t_game *game, int argc, char **argv)
 	int		i;
 
 	ft_memset(game, 0, sizeof(t_game));
+	game->map = (t_map *)ft_calloc(1, sizeof(t_map));
+	if (!game->map)
+		error(NULL, true, "malloc");
 	verify_args(game, argc, argv);
 	file_str = get_file(argv[1]);
 	if (!file_str || is_empty(file_str))

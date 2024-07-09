@@ -6,7 +6,7 @@
 /*   By: mguardia <mguardia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/15 09:10:42 by mguardia          #+#    #+#             */
-/*   Updated: 2024/07/09 10:32:31 by mguardia         ###   ########.fr       */
+/*   Updated: 2024/07/09 14:08:17 by mguardia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -159,8 +159,8 @@ void	manage_colors(t_game *game, char **line)
 		item_error(line[0], TOO_MUCH_COLOR);
 	color_arr = verify_color(line[1]);
 	if (!ft_strcmp(line[0], "F"))
-		manage_floor(&game->map, color_arr);
+		manage_floor(game->map, color_arr);
 	else if (!ft_strcmp(line[0], "C"))
-		manage_ceiling(&game->map, color_arr);
+		manage_ceiling(game->map, color_arr);
 	free(color_arr);
 }

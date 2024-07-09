@@ -6,128 +6,99 @@
 /*   By: mguardia <mguardia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/09 10:16:09 by mguardia          #+#    #+#             */
-/*   Updated: 2024/07/09 10:33:28 by mguardia         ###   ########.fr       */
+/*   Updated: 2024/07/09 15:29:14 by mguardia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../inc/cub3d.h"
 
 /**
- * The function checks if the adjacent items around a given position (space) in
- * a map are either empty spaces or walls.
+ * The function `empty_found` searches for an empty element in a 2D array and
+ * returns its coordinates if found.
  * 
- * @param map an array of string representing a map.
- * @param i an integer that represents the row index.
- * @param j an integer that represents the column index. 
- * @return a boolean value. It returns `true` if all adjacent items around the
- * position `(i, j)` in the `map` are either empty spaces or walls. Otherwise
- * it return `false`.
+ * @param map A 2D array representing a map.
+ * @param x a pointer to an integer that represents the x-coordinate.
+ * @param y a pointer to an integer that represents the y-coordinate.
+ * 
+ * @return a boolean value - `true` if an empty space is found in the map, and
+ * `false` if no empty space is found.
  */
-static bool	check_adjacent_items_space(char **map, int i, int j)
+bool	empty_found(char **map, int *x, int *y)
 {
-	if (map[i - 1] && map[i - 1][j] && map[i - 1][j] != ' ' \
-										&& map[i - 1][j] != WALL)
+	int	i;
+	int	j;
+
+	if (!map)
 		return (false);
-	if (map[i + 1] && map[i + 1][j] && map[i + 1][j] != ' ' \
-										&& map[i + 1][j] != WALL)
-		return (false);
-	if (map[i][j - 1] && map[i][j - 1] != ' ' && map[i][j - 1] != WALL)
-		return (false);
-	if (map[i][j + 1] && map[i][j + 1] != ' ' && map[i][j + 1] != WALL)
-		return (false);
-	return (true);
+	i = -1;
+	while (map[++i])
+	{
+		j = -1;
+		while (map[i][++j])
+		{
+			if (map[i][j] == EMPTY)
+			{
+				if (y)
+					*y = i;
+				if (x)
+					*x = j;
+				return (true);
+			}
+		}
+	}
+	return (false);
 }
 
 /**
- * The function checks if the adjacent items around a given position (empty) in
- * a map are spaces ' '. It only checks up and down the point given.
- * 
- * @param map an array of string representing a map.
- * @param i an integer that represents the row index.
- * @param j an integer that represents the column index. 
- * @return a boolean value.
- */
-static bool	check_adjacent_items_empty(char **map, int i, int j)
-{
-	if (map[i - 1] && map[i - 1][j] && map[i - 1][j] == ' ')
-		return (false);
-	if (map[i + 1] && map[i + 1][j] && map[i + 1][j] == ' ')
-		return (false);
-	// if (map[i][j - 1] && map[i][j - 1] == ' ')
-	// 	return (false);
-	// if (map[i][j + 1] && map[i][j + 1] == ' ')
-	// 	return (false);
-	return (true);
-}
-
-/**
- * The function checks if the characters in the first or last row of a map meet
- * certain conditions.
+ * The function checks if a given position on a map is invalid based on certain
+ * conditions.
  * 
  * @param map A 2D array representing a map where each element is a character.
- * @param i an integer that represents the row index.
- * @param j an integer that represents the column index.
+ * @param x X represents the horizontal position on the map.
+ * @param y Y represents the vertical position or row index on the 2D map array.
  * 
- * @return a boolean value. It returns `true` if the conditions specified in
- * the function are met, and `false` otherwise.
+ * @return a boolean value - `true` if the position at coordinates (x, y) on the
+ * map is considered invalid, and `false` if the position is valid.
  */
-bool	first_last_row_limits(char **map, int i, int j)
+static bool	is_invalid_position(char **map, int x, int y)
 {
-	bool	first_char;
-
-	first_char = true;
-	while (map[i][j])
-	{
-		if (first_char || !map[i][j + 1])
-		{
-			if (map[i][j] != WALL)
-				return (false);
-			first_char = false;
-		}
-		if (map[i][j] != ' ' && map[i][j] != WALL)
-			return (false);
-		if (map[i][j] == ' ' && !check_adjacent_items_space(map, i, j))
-			return (false);
-		j++;
-	}
-	return (true);
+	if (x < 0 \
+		|| y < 0 \
+		|| (size_t)y >= ft_arrsize((void **)map) \
+		|| (size_t)x >= ft_strlen(map[y]))
+		return (true);
+	if (ft_strlen(map[y]) <= (size_t)x)
+		return (true);
+	if (map[y][x] == ' ')
+		return (true);
+	return (false);
 }
 
 /**
- * The function `middle_row_limits` checks the limits and conditions of the
- * middle rows in a map based on certain criteria.
+ * The flood_fill function recursively fills connected areas in a 2D map with
+ * '1' starting from a given position (x, y).
  * 
- * @param map A 2D array representing a map where each element is a character.
- * @param i an integer that represents the row index.
- * @param j an integer that represents the column index.
+ * @param map A 2D array representing the map.
+ * @param x The parameter `x` represents the x-coordinate of the current
+ * position on the map.
+ * @param y The parameter `y` represents the vertical position on the map.
  * 
- * @return a boolean value.
+ * @return a value indicating whether the flood fill operation was successful or
+ * not.
  */
-bool	middle_row_limits(char **map, int i, int j)
+int	flood_fill(char **map, int x, int y)
 {
-	bool	first_char;
-	size_t	t_len;
-	size_t	b_len;
+	int	status;
 
-	first_char = true;
-	t_len = ft_strlen(map[i - 1]);
-	b_len = ft_strlen(map[i + 1]);
-	while (map[i][++j])
-	{
-		if (first_char || !map[i][j + 1])
-		{
-			if (map[i][j] != WALL)
-				return (false);
-			first_char = false;
-		}
-		if (map[i][j] == ' ' && !check_adjacent_items_space(map, i, j))
-			return (false);
-		else if (map[i][j] == EMPTY && !check_adjacent_items_empty(map, i, j))
-			return (false);
-		if (ft_strlen(map[i]) > t_len && j >= (int)t_len && map[i][j] != WALL)
-			return (false);
-		if (ft_strlen(map[i]) > b_len && j >= (int)b_len && map[i][j] != WALL)
-			return (false);
-	}
-	return (true);
+	if (is_invalid_position(map, x, y))
+		return (1);
+	if (map[y][x] == '1')
+		return (0);
+	map[y][x] = '1';
+	status = 0;
+	status += flood_fill(map, x, y - 1);
+	status += flood_fill(map, x + 1, y);
+	status += flood_fill(map, x, y + 1);
+	status += flood_fill(map, x - 1, y);
+	return (status != 0);
 }

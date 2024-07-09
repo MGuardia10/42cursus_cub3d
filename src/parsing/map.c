@@ -6,7 +6,7 @@
 /*   By: mguardia <mguardia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/17 09:29:22 by mguardia          #+#    #+#             */
-/*   Updated: 2024/07/09 10:18:30 by mguardia         ###   ########.fr       */
+/*   Updated: 2024/07/09 15:29:34 by mguardia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,34 +79,39 @@ int	find_player(t_player *player, char *str, int j)
 }
 
 /**
- * The function `cpy_map` copies a portion of a 2D array of strings into a new
- * dynamically allocated array within a given struct.
+ * The function `cpy_map` copies a 2D array of strings starting from a specified
+ * index `i` and returns the copied array.
  * 
- * @param map a pointer to a structure of type `t_map`.
- * @param arr a pointer to a pointer to char, essentially a 2D array of
- * characters.
- * @param i an integer representing the index at which to start copying elements
- *  from the `arr` array.
+ * @param arr represents a 2D array of strings.
+ * @param i The parameter `i` in the `cpy_map` function represents the index at
+ * which to start copying elements from the input `arr` array of strings. The
+ * function will copy the strings starting from index `i` until the end of the
+ * array.
+ * 
+ * @return The function `cpy_map` is returning a pointer to a pointer to a
+ * character (`char **`).
  */
-void	cpy_map(t_map *map, char **arr, int i)
+char	**cpy_map(char **arr, int i)
 {
-	int	j;
+	char	**cpy;
+	int		j;
 
-	map->map_cpy = ft_calloc(ft_arrsize((void **)arr + i) + 1, sizeof(char *));
-	if (!map->map_cpy)
+	cpy = ft_calloc(ft_arrsize((void **)arr + i) + 1, sizeof(char *));
+	if (!cpy)
 		error(NULL, true, "malloc");
 	j = 0;
 	while (arr[i])
 	{
-		map->map_cpy[j] = ft_strdup(arr[i]);
-		if (!map->map_cpy[j])
+		cpy[j] = ft_strdup(arr[i]);
+		if (!cpy[j])
 		{
-			ft_free_matrix((void **)map->map_cpy);
+			ft_free_matrix((void **)cpy);
 			error(NULL, true, "malloc");
 		}
 		j++;
 		i++;
 	}
+	return (cpy);
 }
 
 /**
@@ -117,25 +122,19 @@ void	cpy_map(t_map *map, char **arr, int i)
  * @return a boolean value - `true` if the map limits are valid, and `false` if
  * they are invalid.
  */
-bool	valid_map_limits(char **map)
+bool	valid_map_limits(t_map *map)
 {
-	int		i;
-	int		j;
-	bool	flag;
+	char	**map_cpy;
+	int		x;
+	int		y;
+	bool	err;
 
-	i = 0;
-	while (map[i])
-	{
-		j = 0;
-		while (ft_isspace(map[i][j]))
-			j++;
-		if (i == 0 || !map[i + 1])
-			flag = first_last_row_limits(map, i, j);
-		else
-			flag = middle_row_limits(map, i, j - 1);
-		if (flag == false)
-			return (false);
-		i++;
-	}
-	return (true);
+	map_cpy = cpy_map(map->map_cpy, 0);
+	if (!map_cpy)
+		error(NULL, true, "malloc");
+	err = false;
+	while (!err && empty_found(map_cpy, &x, &y))
+		err = flood_fill(map_cpy, x, y);
+	ft_free_matrix((void **)map_cpy);
+	return (!err);
 }

@@ -6,7 +6,7 @@
 /*   By: mguardia <mguardia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/14 19:06:08 by mguardia          #+#    #+#             */
-/*   Updated: 2024/07/09 10:37:39 by mguardia         ###   ########.fr       */
+/*   Updated: 2024/07/09 14:00:57 by mguardia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,11 +61,11 @@ void	manage_textures(t_game *game, char **line)
 	verify_path(line[1]);
 	(void)game;
 	if (!ft_strcmp(line[0], "NO"))
-		get_texture(&game->map.textures.north, line);
+		get_texture(&game->map->textures.north, line);
 	else if (!ft_strcmp(line[0], "SO"))
-		get_texture(&game->map.textures.south, line);
+		get_texture(&game->map->textures.south, line);
 	else if (!ft_strcmp(line[0], "WE"))
-		get_texture(&game->map.textures.west, line);
+		get_texture(&game->map->textures.west, line);
 	else if (!ft_strcmp(line[0], "EA"))
-		get_texture(&game->map.textures.east, line);
+		get_texture(&game->map->textures.east, line);
 }
