@@ -6,12 +6,23 @@
 /*   By: mguardia <mguardia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/17 09:29:22 by mguardia          #+#    #+#             */
-/*   Updated: 2024/07/08 20:27:43 by mguardia         ###   ########.fr       */
+/*   Updated: 2024/07/09 10:18:30 by mguardia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../inc/cub3d.h"
 
+/**
+ * The function checks if a given string contains any invalid characters.
+ * 
+ * @param str string neccesary to find any characters other than the defined
+ * constants (`EMPTY`, `WALL`, `NORTH`, `SOUTH`, `WEST`, `EAST`) and space
+ * character.
+ * 
+ * @return a boolean value - `true` if the input string contains any character
+ * other than EMPTY, WALL, NORTH, SOUTH, WEST, EAST, or space, and `false`
+ * otherwise.
+ */
 bool	has_invalid_chars(char *str)
 {
 	int	i;
@@ -31,6 +42,21 @@ bool	has_invalid_chars(char *str)
 	return (false);
 }
 
+/**
+ * The function `find_player` searches for a player's orientation in a given
+ * string and assigns his position.
+ * 
+ * @param player The `player` parameter is a pointer to a structure of type
+ * `t_player`.
+ * @param str The `str` parameter is a pointer to a character array that 
+ * represents a map where the player's position and orientation are being
+ * searched for.
+ * @param j The variable `j` in the `find_player` function represents the row
+ * index where the player character is located in a 2D grid.
+ * 
+ * @return The function `find_player` is returning the total number of players
+ * found so far, which is stored in the static variable `n_player`.
+ */
 int	find_player(t_player *player, char *str, int j)
 {
 	int			i;
@@ -52,15 +78,16 @@ int	find_player(t_player *player, char *str, int j)
 	return (n_player);
 }
 
-/* CASOS A TENER EN CUENTA
-	- gestionar caracteres validos
-	- gestionar lineas anteriores al mapa
-	- gestionar lineas de solo espacios
-	- gestionar que los bordes sean paredes
-	- Verificar que sea un mapa donde el player se pueda mover
-
-*/
-
+/**
+ * The function `cpy_map` copies a portion of a 2D array of strings into a new
+ * dynamically allocated array within a given struct.
+ * 
+ * @param map a pointer to a structure of type `t_map`.
+ * @param arr a pointer to a pointer to char, essentially a 2D array of
+ * characters.
+ * @param i an integer representing the index at which to start copying elements
+ *  from the `arr` array.
+ */
 void	cpy_map(t_map *map, char **arr, int i)
 {
 	int	j;
@@ -82,97 +109,14 @@ void	cpy_map(t_map *map, char **arr, int i)
 	}
 }
 
-bool check_adjacent_items_space(char **map, int i, int j)
-{
-	// top
-	if (map[i - 1] && map[i - 1][j] && map[i - 1][j] != ' ' && map[i - 1][j] != WALL)
-		return (false);
-	// bottom
-	if (map[i + 1] && map[i + 1][j] && map[i + 1][j] != ' ' && map[i + 1][j] != WALL)
-		return (false);
-	// left
-	if (map[i][j - 1] && map[i][j - 1] != ' ' && map[i][j - 1] != WALL)
-		return (false);
-	// right
-	if (map[i][j + 1] && map[i][j + 1] != ' ' && map[i][j + 1] != WALL)
-		return (false);
-	return (true);
-}
-
-bool check_adjacent_items_empty(char **map, int i, int j)
-{
-	// top
-	if (map[i - 1] && map[i - 1][j] && map[i - 1][j] == ' ')
-		return (false);
-	// bottom
-	if (map[i + 1] && map[i + 1][j] && map[i + 1][j] == ' ')
-		return (false);
-	// left
-	if (map[i][j - 1] && map[i][j - 1] == ' ')
-		return (false);
-	// right
-	if (map[i][j + 1] && map[i][j + 1] == ' ')
-		return (false);
-	return (true);
-}
-
-bool	first_last_row_limits(char **map, int i, int j)
-{
-	bool	first_char;
-
-	first_char = true;
-	while (map[i][j])
-	{
-		if (first_char || !map[i][j + 1])
-		{
-			if(map[i][j] != WALL)
-				return (false);
-			first_char = false;
-		}
-		if (map[i][j] != ' ' && map[i][j] != WALL)
-			return (false);
-		if (map[i][j] == ' ' && !check_adjacent_items_space(map, i, j))
-			return (false);
-		j++;
-	}
-	return (true);
-}
-
-
-bool	middle_row_limits(char **map, int i, int j)
-{
-	bool	first_char;
-	size_t	t_len;
-	size_t	b_len;
-
-	first_char = true;
-	t_len = ft_strlen(map[i - 1]);
-	b_len = ft_strlen(map[i + 1]);
-
-	// printf("\n\ntop row: %s || lines: %zu\n", map[i - 1], t_len);
-	// printf("curr row: %s || lines: %zu\n", map[i], ft_strlen(map[i]));
-	// printf("bottom row: %s || lines: %zu\n", map[i + 1], b_len);
-	while (map[i][j])
-	{
-		if (first_char || !map[i][j + 1])
-		{
-			if(map[i][j] != WALL)
-				return (false);
-			first_char = false;
-		}
-		if (map[i][j] == ' ' && !check_adjacent_items_space(map, i, j))
-			return (false);
-		else if (map[i][j] == EMPTY && !check_adjacent_items_empty(map, i, j))
-			return (false);
-		if (ft_strlen(map[i]) > t_len && j >= (int)t_len && map[i][j] != WALL)
-			return (false);
-		if (ft_strlen(map[i]) > b_len && j >= (int)b_len && map[i][j] != WALL)
-			return (false);
-		j++;
-	}
-	return (true);
-}
-
+/**
+ * The function checks the limits of a map represented as a 2D array of chars.
+ * 
+ * @param map a 2D array of characters representing a map.
+ * 
+ * @return a boolean value - `true` if the map limits are valid, and `false` if
+ * they are invalid.
+ */
 bool	valid_map_limits(char **map)
 {
 	int		i;
@@ -183,12 +127,12 @@ bool	valid_map_limits(char **map)
 	while (map[i])
 	{
 		j = 0;
-		while(ft_isspace(map[i][j]))
+		while (ft_isspace(map[i][j]))
 			j++;
 		if (i == 0 || !map[i + 1])
 			flag = first_last_row_limits(map, i, j);
 		else
-			flag = middle_row_limits(map, i, j);
+			flag = middle_row_limits(map, i, j - 1);
 		if (flag == false)
 			return (false);
 		i++;

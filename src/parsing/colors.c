@@ -6,7 +6,7 @@
 /*   By: mguardia <mguardia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/15 09:10:42 by mguardia          #+#    #+#             */
-/*   Updated: 2024/04/17 11:36:56 by mguardia         ###   ########.fr       */
+/*   Updated: 2024/07/09 10:32:31 by mguardia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,7 +99,7 @@ static int	*verify_color(char *color)
  * @param color_arr The `color_arr` parameter is an integer array that contains
  * the RGB values for the floor color.
  */
-void	manage_floor(t_map *map, int *color_arr)
+static void	manage_floor(t_map *map, int *color_arr)
 {
 	static int	flag;
 
@@ -123,7 +123,7 @@ void	manage_floor(t_map *map, int *color_arr)
  * @param color_arr The `color_arr` parameter is an integer array that contains
  * the RGB values for the ceiling color.
  */
-void	manage_ceiling(t_map *map, int *color_arr)
+static void	manage_ceiling(t_map *map, int *color_arr)
 {
 	static int	flag;
 

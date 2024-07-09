@@ -6,7 +6,7 @@
 /*   By: mguardia <mguardia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/12 11:45:16 by mguardia          #+#    #+#             */
-/*   Updated: 2024/07/08 19:08:20 by mguardia         ###   ########.fr       */
+/*   Updated: 2024/07/09 10:41:03 by mguardia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,6 +74,16 @@ static char	*get_file(char *path)
 	return (file);
 }
 
+/**
+ * The function parses and manages different types of items in a game based on
+ * the input array.
+ * 
+ * @param game The `game` parameter is a pointer to a `t_game` struct.
+ * @param arr `arr` is a pointer to an array of strings, where each string
+ * represents a line of text that needs to be parsed for game items.
+ * @param i an integer pointer used as a reference to keep track of the current
+ * index while parsing an array of strings (`arr`).
+ */
 static void	file_items_parsing(t_game *game, char **arr, int *i)
 {
 	char	**split_line;
@@ -100,14 +110,18 @@ static void	file_items_parsing(t_game *game, char **arr, int *i)
 		item_error(NULL, SAME_COLORS);
 }
 
+/**
+ * The function parses a file map, checks for errors, finds the player position,
+ * copies the map in struct, and validates map limits.
+ * 
+ * @param game The `game` parameter is a pointer to a `t_game` struct.
+ * @param arr is an array of strings. Each string in the array likely represents
+ * a row of a game map that is being parsed.
+ * @param i an integer pointer used as a reference to keep track of the current
+ * index while parsing an array of strings (`arr`).
+ */
 static void	file_map_parsing(t_game *game, char **arr, int *i)
 {
-	// verificar mapa:
-	//	- como gestionar linea de solo espacios OK
-	//	- verificar limites del mapa 
-	//	- verificar caracteres invalidos: set de caracteres: "01NOEW " OK
-	//  - verificar que el player se pueda mover - NO HAY QUE HACERLO
-	//  - parsear player cuando se encuentre N, O, E, W. OK
 	int	j;
 	int	n_player;
 
@@ -115,7 +129,6 @@ static void	file_map_parsing(t_game *game, char **arr, int *i)
 	n_player = 0;
 	while (arr[++j])
 	{
-		
 		if (is_empty(arr[j]))
 			(ft_free_matrix((void **)arr), item_error(NULL, EMPTY_MAP));
 		if (has_invalid_chars(arr[j]))
@@ -129,6 +142,16 @@ static void	file_map_parsing(t_game *game, char **arr, int *i)
 		(ft_free_matrix((void **)arr), error(INV_MAP_LIMITS, false, NULL));
 }
 
+/**
+ * The function `init_game` initializes a game structure by parsing input
+ * arguments and file contents.
+ * 
+ * @param game a pointer to a structure of type `t_game`.
+ * @param argc The `argc` parameter in the `init_game` function represents the
+ * number of arguments passed to the program when it is executed.
+ * @param argv an array of strings that represent the command-line arguments
+ * passed to the program when it was executed.
+ */
 void	init_game(t_game *game, int argc, char **argv)
 {
 	char	*file_str;
