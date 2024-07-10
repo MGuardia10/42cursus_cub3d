@@ -6,7 +6,7 @@
 /*   By: mguardia <mguardia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/09 17:28:25 by mguardia          #+#    #+#             */
-/*   Updated: 2024/07/10 17:23:52 by mguardia         ###   ########.fr       */
+/*   Updated: 2024/07/10 18:55:31 by mguardia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,5 +43,4 @@ void	clean_game(t_game *game)
 		free_textures(&game->map->textures);
 		free(game->map);
 	}
-	// more stuff to free
 }

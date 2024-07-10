@@ -6,7 +6,7 @@
 /*   By: mguardia <mguardia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/15 09:10:42 by mguardia          #+#    #+#             */
-/*   Updated: 2024/07/10 15:22:48 by mguardia         ###   ########.fr       */
+/*   Updated: 2024/07/10 18:57:06 by mguardia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,10 @@ static int	ft_atoi_mod(t_game *game, char **colors, int i, char *color)
 		if (colors[i][j] == '+')
 			j++;
 		else if (colors[i][j] == '-')
-			(ft_free_matrix((void **)colors), item_error(game, color, NEGATIVE_COLOR));
+		{
+			ft_free_matrix((void **)colors);
+			item_error(game, color, NEGATIVE_COLOR);
+		}
 	}
 	while (ft_isdigit(colors[i][j]))
 	{
@@ -44,9 +47,9 @@ static int	ft_atoi_mod(t_game *game, char **colors, int i, char *color)
 		j++;
 	}
 	if (colors[i][j])
-		(ft_free_matrix((void **)colors), item_error(game, color, INV_CHAR_COLOR));
+		(ft_free_matrix((void**)colors), item_error(game, color, INV_CHAR_CLR));
 	if (result < 0 || result > 255)
-		(ft_free_matrix((void **)colors), item_error(game, color, MAX_NUM_COLOR));
+		(ft_free_matrix((void**)colors), item_error(game, color, MAX_NUM_CLR));
 	return (result);
 }
 
