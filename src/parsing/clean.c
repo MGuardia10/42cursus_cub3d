@@ -34,8 +34,8 @@ void	clean_game(t_game *game)
 			free(game->map->file);
 		if (game->map->file_arr)
 			ft_free_matrix((void **) game->map->file_arr);
-		// if (game->map->item_line)
-		// 	ft_free_matrix((void **) game->map->item_line);
+		if (game->map->item_line)
+			ft_free_matrix((void **) game->map->item_line);
 		if (game->map->map_cpy)
 			ft_free_matrix((void **)game->map->map_cpy);
 		free_textures(&game->map->textures);

@@ -26,11 +26,15 @@ void	ft_free_matrix(void **p)
 
 	if (!p)
 		return ;
+	if (!p[0])
+		return ;
 	i = 0;
 	while (p[i])
 	{
 		free(p[i]);
+		p[i] = NULL;
 		i++;
 	}
 	free(p);
+	p = NULL;
 }

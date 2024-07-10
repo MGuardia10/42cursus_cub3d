@@ -78,8 +78,10 @@ static void	parse_input(t_game *game, int argc, char **argv)
 	if (!game->map->file)
 		error(game, NULL, true, "malloc");
 	file_str = get_file(game, argv[1]);
-	if (!file_str || is_empty(file_str))
+	if (!file_str)
 		error(game, EMPTY_FILE, false, NULL);
+	if (is_empty(file_str))
+		(free(file_str), error(game, EMPTY_FILE, false, NULL));
 	game->map->file_arr = ft_split(file_str, '\n');
 	free(file_str);
 	if (!game->map->file_arr)
