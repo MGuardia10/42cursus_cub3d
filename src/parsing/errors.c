@@ -29,6 +29,7 @@ void	item_error(t_game *game, char *item, char *error)
 		ft_putstr_fd(": ", STDERR_FILENO);
 	}
 	ft_putstr_fd(error, STDERR_FILENO);
+	ft_putstr_fd(RES, STDERR_FILENO);
 	clean_game(game);
 	exit(EXIT_FAILURE);
 }
@@ -50,6 +51,7 @@ void	error(t_game *game, char *error, bool flag, char *pstr)
 		ft_putstr_fd(error, STDERR_FILENO);
 	if (flag == true)
 		perror(pstr);
+	ft_putstr_fd(RES, STDERR_FILENO);
 	clean_game(game);
 	exit(EXIT_FAILURE);
 }
