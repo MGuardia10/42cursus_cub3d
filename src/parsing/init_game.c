@@ -110,7 +110,11 @@ static void	file_items_parsing(t_game *game, char **arr, int *i)
 		if (!game->map->item_line)
 			error(game, NULL, true, "malloc");
 		if (!game->map->item_line[0])
+		{
+			free(game->map->item_line);
+			game->map->item_line = NULL;
 			item_error(game, NULL, EMPTY_ITEM);
+		}
 		else if (is_texture(game->map->item_line[0]))
 			manage_textures(game, game->map->item_line);
 		else if (is_color(game->map->item_line[0]))

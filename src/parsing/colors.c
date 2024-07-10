@@ -24,29 +24,29 @@
  * @return The function `ft_atoi_mod` is returning an integer value, which is
  * the result of converting the input string `str` to an integer.
  */
-static int	ft_atoi_mod(t_game *game, char *str, char *color)
+static int	ft_atoi_mod(t_game *game, char **colors, int i, char *color)
 {
 	long long	result;
-	int			i;
+	int			j;
 
 	result = 0;
-	i = 0;
-	if (!ft_isdigit(str[i]))
+	j = 0;
+	if (!ft_isdigit(colors[i][j]))
 	{
-		if (str[i] == '+')
-			i++;
-		else if (str[i] == '-')
-			(free(str), item_error(game, color, NEGATIVE_COLOR));
+		if (colors[i][j] == '+')
+			j++;
+		else if (colors[i][j] == '-')
+			(ft_free_matrix((void **)colors), item_error(game, color, NEGATIVE_COLOR));
 	}
-	while (ft_isdigit(str[i]))
+	while (ft_isdigit(colors[i][j]))
 	{
-		result = result * 10 + (str[i] - '0');
-		i++;
+		result = result * 10 + (colors[i][j] - '0');
+		j++;
 	}
-	if (str[i])
-		(free(str), item_error(game, color, INV_CHAR_COLOR));
+	if (colors[i][j])
+		(ft_free_matrix((void **)colors), item_error(game, color, INV_CHAR_COLOR));
 	if (result < 0 || result > 255)
-		(free(str), item_error(game, color, MAX_NUM_COLOR));
+		(ft_free_matrix((void **)colors), item_error(game, color, MAX_NUM_COLOR));
 	return (result);
 }
 
@@ -62,25 +62,23 @@ static int	ft_atoi_mod(t_game *game, char *str, char *color)
  * @return An integer pointer to an array of three integers representing the RGB
  * values of the input color.
  */
-static int	*verify_color(t_game *game, char *color)
+static void	verify_color(t_game *game, char *color)
 {
 	char	**colors;
 	int		i;
-	int		*color_arr;
 
 	colors = ft_split(color, ',');
 	if (!colors)
 		error(game, NULL, true, "malloc");
 	if (ft_arrsize((void **)colors) != 3)
 		(ft_free_matrix((void **) colors), item_error(game, color, INV_COLOR));
-	color_arr = ft_calloc(3, sizeof(int));
-	if (!color_arr)
+	game->map->color_arr = ft_calloc(3, sizeof(int));
+	if (!game->map->color_arr)
 		(ft_free_matrix((void **) colors), error(game, NULL, true, "malloc"));
 	i = -1;
 	while (++i < 3)
-		color_arr[i] = ft_atoi_mod(game, colors[i], color);
+		game->map->color_arr[i] = ft_atoi_mod(game, colors, i, color);
 	ft_free_matrix((void **)colors);
-	return (color_arr);
 }
 
 /**
@@ -143,16 +141,15 @@ static void	manage_ceiling(t_game *game, t_map *map, int *color_arr)
  */
 void	manage_colors(t_game *game, char **line)
 {
-	int	*color_arr;
-
 	if (ft_arrsize((void **)line) < 2)
 		item_error(game, line[0], MISSING_COLOR);
 	else if (ft_arrsize((void **)line) > 2)
 		item_error(game, line[0], TOO_MUCH_COLOR);
-	color_arr = verify_color(game, line[1]);
+	verify_color(game, line[1]);
 	if (!ft_strcmp(line[0], "F"))
-		manage_floor(game, game->map, color_arr);
+		manage_floor(game, game->map, game->map->color_arr);
 	else if (!ft_strcmp(line[0], "C"))
-		manage_ceiling(game, game->map, color_arr);
-	free(color_arr);
+		manage_ceiling(game, game->map, game->map->color_arr);
+	free(game->map->color_arr);
+	game->map->color_arr = NULL;
 }

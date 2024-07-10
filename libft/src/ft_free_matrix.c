@@ -24,9 +24,7 @@ void	ft_free_matrix(void **p)
 {
 	int	i;
 
-	if (!p)
-		return ;
-	if (!p[0])
+	if (!p || !p[0])
 		return ;
 	i = 0;
 	while (p[i])

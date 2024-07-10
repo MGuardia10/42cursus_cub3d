@@ -77,6 +77,7 @@ struct s_map
 	/* floor and ceiling colors */
 	t_color			floor;
 	t_color			ceiling;
+	int				*color_arr;
 
 	/* map array */
 	char			**map_cpy;
