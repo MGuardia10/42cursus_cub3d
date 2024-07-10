@@ -6,7 +6,7 @@
 /*   By: mguardia <mguardia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/12 11:45:16 by mguardia          #+#    #+#             */
-/*   Updated: 2024/07/10 15:29:00 by mguardia         ###   ########.fr       */
+/*   Updated: 2024/07/10 15:35:16 by mguardia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -144,19 +144,19 @@ static void	file_map_parsing(t_game *game, char **arr, int *i)
 	while (arr[++j])
 	{
 		if (is_empty(arr[j]))
-			(ft_free_matrix((void **)arr), item_error(game, NULL, EMPTY_MAP));
+			item_error(game, NULL, EMPTY_MAP);
 		if (has_invalid_chars(arr[j]))
-			(ft_free_matrix((void **)arr), item_error(game, NULL, INV_CHAR_MAP));
+			item_error(game, NULL, INV_CHAR_MAP);
 		n_player = find_player(&game->player, arr[j], j - *i);
 		row_len = ft_strlen(arr[j]);
 		if (row_len > game->map->max_x)
 			game->map->max_x = row_len;
 	}
 	if (n_player != 1)
-		(ft_free_matrix((void **)arr), item_error(game, NULL, PLAYER_MAP));
+		item_error(game, NULL, PLAYER_MAP);
 	game->map->map_cpy = cpy_map(arr, *i);
 	if (!valid_map_limits(game, game->map))
-		(ft_free_matrix((void **)arr), error(game, INV_MAP_LIMITS, false, NULL));
+		error(game, INV_MAP_LIMITS, false, NULL);
 	game->map->max_y = j - *i;
 }
 
