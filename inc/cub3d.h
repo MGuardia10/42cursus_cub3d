@@ -6,7 +6,7 @@
 /*   By: mguardia <mguardia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/12 09:54:08 by mguardia          #+#    #+#             */
-/*   Updated: 2024/07/09 17:45:52 by mguardia         ###   ########.fr       */
+/*   Updated: 2024/07/10 14:36:46 by mguardia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,8 +66,10 @@ struct s_texture
 
 struct s_map
 {
-	/* Path to map */
+	/* Map file */
 	char			*file;
+	char			**file_arr;
+	char			**item_line;
 
 	/* Textures of the map */
 	t_texture		textures;
@@ -78,6 +80,8 @@ struct s_map
 
 	/* map array */
 	char			**map_cpy;
+	unsigned int	max_y;
+	unsigned int	max_x;
 };
 
 struct s_player

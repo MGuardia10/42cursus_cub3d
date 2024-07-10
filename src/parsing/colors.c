@@ -6,7 +6,7 @@
 /*   By: mguardia <mguardia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/15 09:10:42 by mguardia          #+#    #+#             */
-/*   Updated: 2024/07/09 17:42:30 by mguardia         ###   ########.fr       */
+/*   Updated: 2024/07/10 15:22:48 by mguardia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,30 +64,22 @@ static int	ft_atoi_mod(t_game *game, char *str, char *color)
  */
 static int	*verify_color(t_game *game, char *color)
 {
-	char	**split_color;
+	char	**colors;
 	int		i;
-	char	*color_trim;
 	int		*color_arr;
 
-	split_color = ft_split(color, ',');
-	if (!split_color)
+	colors = ft_split(color, ',');
+	if (!colors)
 		error(game, NULL, true, "malloc");
-	if (ft_arrsize((void **)split_color) != 3)
-		item_error(game, color, INV_COLOR);
+	if (ft_arrsize((void **)colors) != 3)
+		(ft_free_matrix((void **) colors), item_error(game, color, INV_COLOR));
 	color_arr = ft_calloc(3, sizeof(int));
 	if (!color_arr)
-		error(game, NULL, true, "malloc");
+		(ft_free_matrix((void **) colors), error(game, NULL, true, "malloc"));
 	i = -1;
 	while (++i < 3)
-	{
-		// no hace falta el trim, revisar xd
-		color_trim = ft_strtrim(split_color[i], " ");
-		if (!color_trim)
-			error(game, NULL, true, "malloc");
-		color_arr[i] = ft_atoi_mod(game, color_trim, color);
-		free(color_trim);
-	}
-	ft_free_matrix((void **)split_color);
+		color_arr[i] = ft_atoi_mod(game, colors[i], color);
+	ft_free_matrix((void **)colors);
 	return (color_arr);
 }
 

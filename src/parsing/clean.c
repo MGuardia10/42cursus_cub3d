@@ -6,7 +6,7 @@
 /*   By: mguardia <mguardia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/09 17:28:25 by mguardia          #+#    #+#             */
-/*   Updated: 2024/07/09 17:50:27 by mguardia         ###   ########.fr       */
+/*   Updated: 2024/07/10 15:32:42 by mguardia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,10 @@ void	clean_game(t_game *game)
 	{
 		if (game->map->file)
 			free(game->map->file);
+		if (game->map->file_arr)
+			ft_free_matrix((void **) game->map->file_arr);
+		if (game->map->item_line)
+			ft_free_matrix((void **) game->map->item_line);
 		if (game->map->map_cpy)
 			ft_free_matrix((void **)game->map->map_cpy);
 		free_textures(&game->map->textures);

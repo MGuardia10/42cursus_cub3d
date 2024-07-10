@@ -6,7 +6,7 @@
 /*   By: mguardia <mguardia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/12 09:53:37 by mguardia          #+#    #+#             */
-/*   Updated: 2024/07/09 17:29:01 by mguardia         ###   ########.fr       */
+/*   Updated: 2024/07/10 15:29:44 by mguardia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,8 @@ void	print_parsing(t_game *game)
 	printf("y ---> [%d]\n", game->player.y);
 	printf("\n--> MAP\n");
 	i = 0;
+	printf("max_y --> %d\n", game->map->max_y);
+	printf("max_x --> %d\n", game->map->max_x);
 	while (game->map->map_cpy[i])
 		printf("%s\n", game->map->map_cpy[i++]);
 }

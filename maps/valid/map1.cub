@@ -2,7 +2,7 @@ NO ./textures/greystone.xpm
 SO ./textures/mossy.xpm
 EA ./textures/wood.xpm
 WE ./textures/eagle.xpm
-C 255,255,255
+C    255,255,255  
 F 255,255,250
 
         1111111111111111111111111
