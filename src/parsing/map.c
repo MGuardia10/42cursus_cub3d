@@ -6,7 +6,7 @@
 /*   By: mguardia <mguardia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/17 09:29:22 by mguardia          #+#    #+#             */
-/*   Updated: 2024/07/10 15:28:06 by mguardia         ###   ########.fr       */
+/*   Updated: 2024/07/10 17:23:44 by mguardia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,7 +98,7 @@ char	**cpy_map(char **arr, int i)
 
 	cpy = ft_calloc(ft_arrsize((void **)arr + i) + 1, sizeof(char *));
 	if (!cpy)
-		return NULL;
+		return (NULL);
 	j = 0;
 	while (arr[i])
 	{
@@ -106,7 +106,7 @@ char	**cpy_map(char **arr, int i)
 		if (!cpy[j])
 		{
 			ft_free_matrix((void **)cpy);
-			return NULL;
+			return (NULL);
 		}
 		j++;
 		i++;

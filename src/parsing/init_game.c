@@ -6,7 +6,7 @@
 /*   By: mguardia <mguardia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/12 11:45:16 by mguardia          #+#    #+#             */
-/*   Updated: 2024/07/10 16:23:11 by mguardia         ###   ########.fr       */
+/*   Updated: 2024/07/10 17:19:41 by mguardia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -120,6 +120,7 @@ static void	file_items_parsing(t_game *game, char **arr, int *i)
 		ft_free_matrix((void **)game->map->item_line);
 		(*i)++;
 	}
+	game->map->item_line = NULL;
 	if (game->map->floor.rgb == game->map->ceiling.rgb)
 		item_error(game, NULL, SAME_COLORS);
 }
