@@ -6,7 +6,7 @@
 /*   By: mguardia <mguardia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/06 12:52:12 by mguardia          #+#    #+#             */
-/*   Updated: 2024/02/01 15:22:39 by mguardia         ###   ########.fr       */
+/*   Updated: 2024/07/10 15:51:10 by mguardia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,8 @@ void	ft_free_matrix(void **p)
 {
 	int	i;
 
+	if (!p)
+		return ;
 	i = 0;
 	while (p[i])
 	{
