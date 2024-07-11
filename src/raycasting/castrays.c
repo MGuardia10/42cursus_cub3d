@@ -6,7 +6,7 @@
 /*   By: raalonso <raalonso@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/06 19:26:04 by raalonso          #+#    #+#             */
-/*   Updated: 2024/07/11 19:15:28 by raalonso         ###   ########.fr       */
+/*   Updated: 2024/07/11 19:30:32 by raalonso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,9 +36,9 @@ bool	check_hit(t_game *game, double x, double y)
 		return (true);
 	x_m = floor(x / TILESIZE);
 	y_m = floor(y / TILESIZE);
-	if ((y_m >= 14 || x_m >= 38))
+	if ((y_m >= game->map->max_y || x_m >= game->map->max_x))
 		return (true);
-	if (game->map.map_cpy[(int)y_m][(int)x_m] == '1')
+	if (game->map->map_cpy[(int)y_m][(int)x_m] == '1')
 		return (true);
 	return (false);
 }

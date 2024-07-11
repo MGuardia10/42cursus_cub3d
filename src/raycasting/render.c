@@ -6,7 +6,7 @@
 /*   By: raalonso <raalonso@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/08 19:00:48 by raalonso          #+#    #+#             */
-/*   Updated: 2024/07/10 19:48:50 by raalonso         ###   ########.fr       */
+/*   Updated: 2024/07/11 19:26:22 by raalonso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,8 +18,8 @@ void	put_floor_sky(t_game *game, int ray, int top_p, int bottom_p)
 	int	s_color;
 	int	i;
 
-	f_color = game->map.floor.rgb;
-	s_color = game->map.ceiling.rgb;
+	f_color = game->map->floor.rgb;
+	s_color = game->map->ceiling.rgb;
 	i = 0;
 	while (bottom_p < SHEIGHT)
 	{

@@ -6,7 +6,7 @@
 /*   By: raalonso <raalonso@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/14 19:06:08 by mguardia          #+#    #+#             */
-/*   Updated: 2024/07/11 19:22:34 by raalonso         ###   ########.fr       */
+/*   Updated: 2024/07/11 19:25:44 by raalonso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@
 static void	verify_path(t_game *game, char *path)
 {
 	if (!ft_is_format(path, ".xpm42"))
-		item_error(path, WRONG_EXT_XPM);
+		item_error(game, path, WRONG_EXT_XPM);
 	if (!ft_is_readable(path))
 		error(game, NULL, true, path);
 }

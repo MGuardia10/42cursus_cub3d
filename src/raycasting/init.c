@@ -6,7 +6,7 @@
 /*   By: raalonso <raalonso@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/09 17:22:45 by raalonso          #+#    #+#             */
-/*   Updated: 2024/07/10 19:49:56 by raalonso         ###   ########.fr       */
+/*   Updated: 2024/07/11 19:34:50 by raalonso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,15 +19,15 @@ void	draw_square(t_game *game, int map_x, int map_y, int color)
 	uint32_t	i;
 	uint32_t	j;
 
-	s_x = map_x * (game->map.map_img->height / 14);
-	s_y = map_y * (game->map.map_img->height / 14);
+	s_x = map_x * (game->map->map_img->height / game->map->max_y);
+	s_y = map_y * (game->map->map_img->height / game->map->max_y);
 	i = 0;
-	while (i < game->map.map_img->height / 14)
+	while (i < game->map->map_img->height / game->map->max_y)
 	{
 		j = 0;
-		while (j < game->map.map_img->height / 14)
+		while (j < game->map->map_img->height / game->map->max_y)
 		{
-			mlx_put_pixel(game->map.map_img, s_x + j, s_y + i, color);
+			mlx_put_pixel(game->map->map_img, s_x + j, s_y + i, color);
 			j++;
 		}
 		i++;
@@ -42,17 +42,17 @@ void	draw_player(t_game *game)
 	uint32_t	j;
 	int		color = 0xCAE8FF;
 
-	p_x = floor((game->player.x / TILESIZE) * (game->map.map_img->height / 14));
-	p_y = floor((game->player.y / TILESIZE) * (game->map.map_img->height / 14));
-	p_x -= (game->map.map_img->height / 14) / 2;
-	p_y -= (game->map.map_img->height / 14) / 2;
+	p_x = floor((game->player.x / TILESIZE) * (game->map->map_img->height / game->map->max_y));
+	p_y = floor((game->player.y / TILESIZE) * (game->map->map_img->height / game->map->max_y));
+	p_x -= (game->map->map_img->height / game->map->max_y) / 2;
+	p_y -= (game->map->map_img->height / game->map->max_y) / 2;
 	i = 0;
-	while (i < game->map.map_img->height / 14)
+	while (i < game->map->map_img->height / game->map->max_y)
 	{
 		j = 0;
-		while (j < game->map.map_img->height / 14)
+		while (j < game->map->map_img->height / game->map->max_y)
 		{
-			mlx_put_pixel(game->map.map_img, p_x + j, p_y + i, color);
+			mlx_put_pixel(game->map->map_img, p_x + j, p_y + i, color);
 			j++;
 		}
 		i++;
@@ -66,14 +66,14 @@ void	render_minimap(t_game *game)
 	int color;
 
 	map_y = 0;
-	while (game->map.map_cpy[map_y])
+	while (game->map->map_cpy[map_y])
 	{
 		map_x = 0;
-		while (game->map.map_cpy[map_y][map_x])
+		while (game->map->map_cpy[map_y][map_x])
 		{
-			if (game->map.map_cpy[map_y][map_x] == '1')
-				color = game->map.ceiling.rgb + 1500;
-			else if (game->map.map_cpy[map_y][map_x] == ' ')
+			if (game->map->map_cpy[map_y][map_x] == '1')
+				color = game->map->ceiling.rgb + 1500;
+			else if (game->map->map_cpy[map_y][map_x] == ' ')
 				color = 0x00000000;
 			else
 				color = 0xFFFFFFFF;
@@ -124,11 +124,10 @@ void	init_minimap(t_game *game)
 	int	m_w;
 	int	m_h;
 	
-	m_w = floor(38 * (SWIDTH / 100));
-	m_h = floor(14 * (SHEIGHT / 100));
-	printf("\nm_w: %d, m_h: %d\n", m_w, m_h);
-	game->map.map_img = mlx_new_image(game->mlx, m_w, m_h);
-	mlx_image_to_window(game->mlx, game->map.map_img, SWIDTH / 20, SHEIGHT / 20);
+	m_w = floor(game->map->max_x * (SWIDTH / 100));
+	m_h = floor(game->map->max_y * (SHEIGHT / 100));
+	game->map->map_img = mlx_new_image(game->mlx, m_w, m_h);
+	mlx_image_to_window(game->mlx, game->map->map_img, SWIDTH / 20, SHEIGHT / 20);
 }
 
 void	init_window(t_game *game)

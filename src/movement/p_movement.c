@@ -6,7 +6,7 @@
 /*   By: raalonso <raalonso@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/08 19:28:36 by raalonso          #+#    #+#             */
-/*   Updated: 2024/07/09 20:37:21 by raalonso         ###   ########.fr       */
+/*   Updated: 2024/07/11 20:07:10 by raalonso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,13 +24,16 @@ double	angle_reset(double angle)
 
 void	check_move(double new_x, double new_y, t_game *game)
 {
-	int	map_x;
-	int	map_y;
+	long	map_x;
+	long	map_y;
 
 	map_x = ((game->player.x + new_x) / TILESIZE);
 	map_y = ((game->player.y + new_y) / TILESIZE);
-
-	if (game->map.map_cpy[map_y][map_x] != '1')
+	if (map_y < 0 || map_x < 0)
+		return ;
+	if (map_y > game->map->max_y || map_x > game->map->max_x)
+		return ;
+	if (game->map->map_cpy[map_y][map_x] != '1')
 	{
 		game->player.x += new_x;
 		game->player.y += new_y;

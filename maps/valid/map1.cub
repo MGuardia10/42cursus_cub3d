@@ -1,12 +1,11 @@
-<<<<<<< HEAD
-<<<<<<<< HEAD:maps/valid/map1.cub
-SO ./textures/mossy.xpm 
-NO ./textures/greystone.xpm
-WE ./textures/eagle.xpm
-EA ./textures/wood.xpm
+
+SO ./textures/mossy.xpm42
+NO ./textures/greystone.xpm42
+WE ./textures/eagle.xpm42
+EA ./textures/wood.xpm42
 
 C 255,255,255
-F 255,255,250
+F 255,255,0
 
 111        1111111111111111111111111
 111        1000000000110000000000001
