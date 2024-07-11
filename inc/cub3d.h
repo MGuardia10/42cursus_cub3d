@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mguardia <mguardia@student.42.fr>          +#+  +:+       +#+        */
+/*   By: raalonso <raalonso@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/12 09:54:08 by mguardia          #+#    #+#             */
-/*   Updated: 2024/07/10 14:36:46 by mguardia         ###   ########.fr       */
+/*   Updated: 2024/07/11 19:20:14 by raalonso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,21 +14,34 @@
 # define CUB3D_H
 
 # include "../libft/inc/libft.h"
+#include "../mlx/include/MLX42/MLX42.h"
 # include <math.h>
 # include <errno.h>
+
+/******************************************************************************
+*	Defines
+******************************************************************************/
+
+# define SHEIGHT 800
+# define SWIDTH 1400
+# define TILESIZE 40
+# define FOV 60
+# define ROTSPEED 20
+# define MOVESPEED 1
 
 /******************************************************************************
 *	Typedefs
 ******************************************************************************/
 
+typedef struct s_ray			t_ray;
 typedef struct s_color			t_color;
 typedef struct s_texture		t_texture;
 typedef struct s_map			t_map;
 typedef struct s_player			t_player;
 typedef struct s_game			t_game;
-typedef struct s_mlx			t_mlx;
 
 typedef enum e_valid_chars		t_valid_chars;
+typedef enum e_orientation		t_orientation;
 
 /******************************************************************************
 *	Enums
@@ -44,9 +57,22 @@ enum	e_valid_chars
 	EAST = 'E'
 };
 
+enum	e_orientation
+{
+	HORIZONTAL,
+	VERTICAL
+};
+
 /******************************************************************************
 *	Structs
 ******************************************************************************/
+
+struct s_ray
+{
+	double	angle;
+	double	distance;
+	int		type;
+};
 
 struct s_color
 {
@@ -83,24 +109,21 @@ struct s_map
 	char			**map_cpy;
 	unsigned int	max_y;
 	unsigned int	max_x;
+
+	/* minimapmap rendering */
+	mlx_image_t		*map_img;
 };
 
 struct s_player
 {
 	t_valid_chars	orientation;
-	int				x;
-	int				y;
-};
-
-struct s_mlx
-{
-	void			*mlx_ptr;
-	void			*mlx_win;
-	void			*img;
-	char			*addr;
-	int				bits_per_pixel;
-	int				line_length;
-	int				endian;
+	double			angle;
+	double			rd_fov; // en radianes
+	double				x;
+	double				y;
+	int					ws; // para mover jugador
+	int					ad; // para mover jugador
+	int					rotate; // rotar jugador
 };
 
 struct	s_game
@@ -112,7 +135,11 @@ struct	s_game
 	t_player		player;
 
 	/* MLX */
-	t_mlx			mlx;
+	mlx_t			*mlx;
+	mlx_image_t		*pixel;
+	
+	/* RAYCASTING */
+	t_ray			ray;
 };
 
 /******************************************************************************
@@ -135,7 +162,28 @@ bool	is_empty(char *str);
 bool	is_texture(char *str);
 bool	is_color(char *str);
 int		get_color(t_color item);
-
 void	clean_game(t_game *game);
+
+/* RAYCASTING */
+void	init_window(t_game *game);
+void	init_player(t_game *game);
+double	get_p_angle(t_game *game);
+void	game_loop(void *gameptr);
+void	castrays(t_game *game);
+double	get_v_inter(t_game *game);
+double	get_h_inter(t_game *game);
+int		check_inter(t_game *game, double *step, double *inter, t_orientation o);
+bool	check_hit(t_game *game, double x, double y);
+void	render_line(t_game *game, int ray);
+void	put_line(int t_pixel, int b_pixel, int ray, t_game *game);
+void	put_floor_sky(t_game *game, int ray, int top_p, int bottom_p);
+
+/* MOVEMENT */
+void	keypress(mlx_key_data_t keydata, void *gameptr);
+void	keyrelease(mlx_key_data_t keydata, t_game *game);
+void	player_controller(t_game *game);
+double	angle_reset(double angle);
+void	check_move(double new_x, double new_y, t_game *game);
+void	move_player(t_game *game);
 
 #endif

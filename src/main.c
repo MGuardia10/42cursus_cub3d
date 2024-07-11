@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mguardia <mguardia@student.42.fr>          +#+  +:+       +#+        */
+/*   By: raalonso <raalonso@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/12 09:53:37 by mguardia          #+#    #+#             */
-/*   Updated: 2024/07/10 15:29:44 by mguardia         ###   ########.fr       */
+/*   Updated: 2024/07/11 19:23:14 by raalonso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,8 +30,8 @@ void	print_parsing(t_game *game)
 			game->map->ceiling.g, game->map->ceiling.b, game->map->ceiling.rgb);
 	printf("\n--> PLAYER\n");
 	printf("pos ---> [%c]\n", game->player.orientation);
-	printf("x ---> [%d]\n", game->player.x);
-	printf("y ---> [%d]\n", game->player.y);
+	printf("x ---> [%f]\n", game->player.x);
+	printf("y ---> [%f]\n", game->player.y);
 	printf("\n--> MAP\n");
 	i = 0;
 	printf("max_y --> %d\n", game->map->max_y);
@@ -43,9 +43,10 @@ void	print_parsing(t_game *game)
 int	main(int argc, char **argv)
 {
 	t_game	game;
-
+	
 	init_game(&game, argc, argv);
 	print_parsing(&game);
+	init_window(&game);
 	clean_game(&game);
 	return (EXIT_SUCCESS);
 }

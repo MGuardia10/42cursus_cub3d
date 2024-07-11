@@ -4,7 +4,9 @@
 
 NAME		=	cub3D
 CC			=	gcc
-CFLAGS		=	-Wall -Wextra -Werror -g3
+CFLAGS		=	-Wall -Wextra #-Werror -g3
+MLXFLAGS	=	$(MLX) -Iinclude -ldl -lglfw -pthread -lm # LINUX
+#MLXFLAGS	=	$(MLX) -lglfw -L ~/.brew/Cellar/glfw/3.4/lib # MACOS
 INCLUDES	=	-I libft/inc -I inc
 RM			=	rm -rf
 
@@ -25,8 +27,13 @@ CLEAR	=		\033[0m
 # LIBFT
 LIBFT		=	libft/libft.a
 
+# MLX
+MLX			=	mlx/build/libmlx42.a
+
 # VPATH
-VPATH		=	src:src/parsing
+VPATH		=	src:src/parsing \
+				src:src/raycasting \
+				src:src/movement
 
 # SOURCE
 SRC			=	main.c
@@ -41,10 +48,20 @@ PARSING		=	init_game.c \
 				clean.c \
 				utils.c
 
+# RAYCASTING
+RAYCASTING 	=	castrays.c \
+				render.c \
+				init.c
+
+MOVEMENT	=	p_movement.c \
+				key_managment.c
+
 # OBJECTS
 OBJ_DIR		=	objs/
 OBJ_FILES	=	$(SRC:%.c=$(OBJ_DIR)%.o) \
-				$(PARSING:%.c=$(OBJ_DIR)%.o)
+				$(PARSING:%.c=$(OBJ_DIR)%.o) \
+				$(RAYCASTING:%.c=$(OBJ_DIR)%.o) \
+				$(MOVEMENT:%.c=$(OBJ_DIR)%.o)
 
 ################################################################################
 # MAKEFILE RULES
@@ -57,7 +74,7 @@ $(NAME): $(OBJ_FILES)
 	@make -sC libft
 	@echo "$(GREEN)[libft --> OK]$(CLEAR)"
 	@echo "$(BLUE)Compiling cub3D program.$(CLEAR)"
-	$(CC) $(OBJ_FILES) $(LIBFT) -o $(NAME)
+	$(CC) $(OBJ_FILES) $(LIBFT) $(MLXFLAGS) -o $(NAME)
 	@echo "$(GREEN)[cub3D --> OK]\n$(CLEAR)$(GREEN)Success!$(CLEAR)"
 
 $(OBJ_DIR)%.o: %.c
