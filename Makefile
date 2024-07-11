@@ -49,8 +49,10 @@ PARSING		=	init_game.c \
 # RAYCASTING
 RAYCASTING 	=	castrays.c \
 				render.c \
-				p_movement.c \
 				init.c
+
+MOVEMENT	=	p_movement.c \
+				key_managment.c
 
 # OBJECTS
 OBJ_DIR		=	objs/

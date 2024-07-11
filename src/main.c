@@ -6,7 +6,7 @@
 /*   By: raalonso <raalonso@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/12 09:53:37 by mguardia          #+#    #+#             */
-/*   Updated: 2024/07/09 17:23:18 by raalonso         ###   ########.fr       */
+/*   Updated: 2024/07/09 20:50:55 by raalonso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,32 +36,6 @@ void	print_parsing(t_game *game)
 	i = 0;
 	while (game->map.map_cpy[i])
 		printf("%s\n", game->map.map_cpy[i++]);
-}
-
-void	print_map(t_game *game)
-{
-	int tile = TILESIZE / 3;
-	int	i;
-	int	j;
-
-	i = 0;
-	mlx_image_t *img = mlx_new_image(game->mlx, tile, tile);
-	ft_memset(img->pixels, 255, img->width * img->height * sizeof(int32_t));
-	mlx_image_t *img2 = mlx_new_image(game->mlx, tile, tile);
-	ft_memset(img2->pixels, 200, img->width * img->height * sizeof(int32_t));
-	while (game->map.map_cpy[i])
-	{
-		j = 0;
-		while (game->map.map_cpy[i][j])
-		{
-			if (game->map.map_cpy[i][j] == '1')
-				mlx_image_to_window(game->mlx, img, j * tile, i * tile);
-			else if (game->map.map_cpy[i][j] == 'S')
-				mlx_image_to_window(game->mlx, img2, j * tile, i * tile);
-			j++;
-		}
-		i++;
-	}
 }
 
 int	main(int argc, char **argv)

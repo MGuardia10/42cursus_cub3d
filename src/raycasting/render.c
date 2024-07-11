@@ -6,7 +6,7 @@
 /*   By: raalonso <raalonso@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/08 19:00:48 by raalonso          #+#    #+#             */
-/*   Updated: 2024/07/08 21:36:56 by raalonso         ###   ########.fr       */
+/*   Updated: 2024/07/10 19:48:50 by raalonso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,5 +68,6 @@ void	render_line(t_game *game, int ray)
 		bottom_p = SHEIGHT;
 	if (top_p < 0)
 		top_p = 0;
+
 	put_line(top_p, bottom_p, ray, game);
 }
