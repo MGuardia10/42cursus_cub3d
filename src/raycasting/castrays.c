@@ -6,7 +6,7 @@
 /*   By: raalonso <raalonso@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/06 19:26:04 by raalonso          #+#    #+#             */
-/*   Updated: 2024/07/09 20:57:27 by raalonso         ###   ########.fr       */
+/*   Updated: 2024/07/11 19:15:28 by raalonso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,8 +29,8 @@ int unit_circle(float angle, char c) // check the unit circle
 
 bool	check_hit(t_game *game, double x, double y)
 {
-	int	x_m;
-	int	y_m;
+	double	x_m;
+	double	y_m;
 
 	if (x < 0 || y < 0)
 		return (true);
@@ -38,7 +38,7 @@ bool	check_hit(t_game *game, double x, double y)
 	y_m = floor(y / TILESIZE);
 	if ((y_m >= 14 || x_m >= 38))
 		return (true);
-	if (game->map.map_cpy[y_m][x_m] == '1')
+	if (game->map.map_cpy[(int)y_m][(int)x_m] == '1')
 		return (true);
 	return (false);
 }

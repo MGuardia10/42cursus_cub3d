@@ -5,8 +5,8 @@
 NAME		=	cub3D
 CC			=	gcc
 CFLAGS		=	-Wall -Wextra #-Werror -g3
-#MLXFLAGS	=	$(MLX) -Iinclude -ldl -lglfw -pthread -lm # LINUX
-MLXFLAGS	=	$(MLX) -lglfw -L ~/.brew/Cellar/glfw/3.4/lib # MACOS
+MLXFLAGS	=	$(MLX) -Iinclude -ldl -lglfw -pthread -lm # LINUX
+#MLXFLAGS	=	$(MLX) -lglfw -L ~/.brew/Cellar/glfw/3.4/lib # MACOS
 INCLUDES	=	-I libft/inc -I inc
 RM			=	rm -rf
 
