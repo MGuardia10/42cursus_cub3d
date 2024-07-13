@@ -2,44 +2,43 @@
 # COMPILER OPTIONS
 ################################################################################
 
-NAME		=	cub3D
-CC			=	gcc
-CFLAGS		=	-Wall -Wextra #-Werror -g3
+NAME		:=	cub3D
+CC			:=	gcc
+CFLAGS		:=	-Wall -Wextra -Werror -g3
+INCLUDES	:=	-I libft/inc -I inc
+RM			:=	rm -rf
 MLXFLAGS	=	$(MLX) -Iinclude -ldl -lglfw -pthread -lm # LINUX
 #MLXFLAGS	=	$(MLX) -lglfw -L ~/.brew/Cellar/glfw/3.4/lib # MACOS
-INCLUDES	=	-I libft/inc -I inc
-RM			=	rm -rf
-
-# incluir mlx
 
 # COLORS
-RED		=		\033[91;1m
-GREEN	=		\033[92;1m
-YELLOW	=		\033[93;1m
-BLUE	=		\033[94;1m
-PINK	=		\033[95;1m
-CLEAR	=		\033[0m
+RED		:=		\033[91;1m
+GREEN	:=		\033[92;1m
+YELLOW	:=		\033[93;1m
+BLUE	:=		\033[94;1m
+PINK	:=		\033[95;1m
+CLEAR	:=		\033[0m
 
 ################################################################################
 # SOURCE FILES
 ################################################################################
 
 # LIBFT
-LIBFT		=	libft/libft.a
+LIBFT		:=	libft/libft.a
 
 # MLX
-MLX			=	mlx/build/libmlx42.a
+MLX_BUILD	:= mlx/build
+MLX			:=	mlx/build/libmlx42.a
 
 # VPATH
-VPATH		=	src:src/parsing \
+VPATH		:=	src:src/parsing \
 				src:src/raycasting \
 				src:src/movement
 
 # SOURCE
-SRC			=	main.c
+SRC			:=	main.c
 
 # PARSING
-PARSING		=	init_game.c \
+PARSING		:=	init_game.c \
 				errors.c \
 				colors.c \
 				textures.c \
@@ -49,15 +48,15 @@ PARSING		=	init_game.c \
 				utils.c
 
 # RAYCASTING
-RAYCASTING 	=	castrays.c \
+RAYCASTING 	:=	castrays.c \
 				render.c \
 				init.c
 
-MOVEMENT	=	p_movement.c \
+MOVEMENT	:=	p_movement.c \
 				key_managment.c
 
 # OBJECTS
-OBJ_DIR		=	objs/
+OBJ_DIR		:=	objs/
 OBJ_FILES	=	$(SRC:%.c=$(OBJ_DIR)%.o) \
 				$(PARSING:%.c=$(OBJ_DIR)%.o) \
 				$(RAYCASTING:%.c=$(OBJ_DIR)%.o) \
@@ -67,7 +66,19 @@ OBJ_FILES	=	$(SRC:%.c=$(OBJ_DIR)%.o) \
 # MAKEFILE RULES
 ################################################################################
 
-all:	$(NAME)
+
+all: libmlx $(NAME)
+
+libmlx:
+	@if [ ! -e $(MLX_BUILD) ]; then \
+		echo "$(BLUE)Compiling mlx.$(CLEAR)"; \
+		cmake ./mlx -B ./mlx/build && make -C ./mlx/build -j4; \
+		echo "$(GREEN)[mlx --> OK]$(CLEAR)"; \
+    fi
+
+$(OBJ_DIR)%.o: %.c
+	@mkdir -p $(OBJ_DIR)
+	$(CC) $(CFLAGS) -c $< $(INCLUDES) -o $@
 
 $(NAME): $(OBJ_FILES)
 	@echo "\n$(BLUE)Compiling libft.$(CLEAR)"
@@ -77,14 +88,11 @@ $(NAME): $(OBJ_FILES)
 	$(CC) $(OBJ_FILES) $(LIBFT) $(MLXFLAGS) -o $(NAME)
 	@echo "$(GREEN)[cub3D --> OK]\n$(CLEAR)$(GREEN)Success!$(CLEAR)"
 
-$(OBJ_DIR)%.o: %.c
-	@mkdir -p $(OBJ_DIR)
-	$(CC) $(CFLAGS) -c $< $(INCLUDES) -o $@
-
 clean:
 	@echo "$(BLUE)Removing compiled files.$(CLEAR)"
 	@make clean -sC libft
 	$(RM) $(OBJ_DIR)
+	$(RM) $(MLX_BUILD)
 	@echo "$(GREEN)Object files removed correctly$(CLEAR)"
 
 fclean: clean
