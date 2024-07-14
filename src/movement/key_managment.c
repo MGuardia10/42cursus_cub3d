@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   key_managment.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: raalonso <raalonso@student.42madrid.com    +#+  +:+       +#+        */
+/*   By: mguardia <mguardia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/09 20:36:28 by raalonso          #+#    #+#             */
-/*   Updated: 2024/07/09 20:36:51 by raalonso         ###   ########.fr       */
+/*   Updated: 2024/07/13 10:50:09 by mguardia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../inc/cub3d.h"
+#include "../../inc/cub3d.h"
 
 void	keyrelease(mlx_key_data_t keydata, t_game *game)
 {
@@ -32,8 +32,8 @@ void	keypress(mlx_key_data_t keydata, void *gameptr)
 {
 	t_game *game = (t_game *)gameptr;
 	
-	// if (keydata.key == MLX_KEY_ESCAPE)
-		// salir
+	if (keydata.key == MLX_KEY_ESCAPE)
+		terminate_game(game);
 	if (keydata.key == MLX_KEY_W && keydata.action == MLX_PRESS)
 		game->player.ws = 1;
 	else if (keydata.key == MLX_KEY_S && keydata.action == MLX_PRESS)

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: raalonso <raalonso@student.42madrid.com    +#+  +:+       +#+        */
+/*   By: mguardia <mguardia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/12 09:54:08 by mguardia          #+#    #+#             */
-/*   Updated: 2024/07/11 20:10:13 by raalonso         ###   ########.fr       */
+/*   Updated: 2024/07/13 10:52:13 by mguardia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,8 +22,8 @@
 *	Defines
 ******************************************************************************/
 
-# define SHEIGHT 1500
-# define SWIDTH 1800
+# define SHEIGHT 800
+# define SWIDTH 1200
 # define TILESIZE 40
 # define FOV 60
 # define ROTSPEED 25
@@ -163,6 +163,7 @@ bool	is_texture(char *str);
 bool	is_color(char *str);
 int		get_color(t_color item);
 void	clean_game(t_game *game);
+void    terminate_game(void *gameptr);
 
 /* RAYCASTING */
 void	init_window(t_game *game);

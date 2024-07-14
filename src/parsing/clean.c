@@ -44,3 +44,15 @@ void	clean_game(t_game *game)
 		free(game->map);
 	}
 }
+
+void    terminate_game(void *gameptr)
+{
+    t_game *game;
+    
+    game = (t_game *)gameptr;
+    if (game->mlx->window)
+        	mlx_close_window(game->mlx);
+	mlx_terminate(game->mlx);
+	clean_game(game);
+	exit(EXIT_SUCCESS);
+}
