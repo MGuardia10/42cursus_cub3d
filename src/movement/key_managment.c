@@ -6,7 +6,7 @@
 /*   By: mguardia <mguardia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/09 20:36:28 by raalonso          #+#    #+#             */
-/*   Updated: 2024/07/13 10:50:09 by mguardia         ###   ########.fr       */
+/*   Updated: 2024/07/14 10:00:51 by mguardia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,8 +30,9 @@ void	keyrelease(mlx_key_data_t keydata, t_game *game)
 
 void	keypress(mlx_key_data_t keydata, void *gameptr)
 {
-	t_game *game = (t_game *)gameptr;
-	
+	t_game	*game;
+
+	game = (t_game *)gameptr;
 	if (keydata.key == MLX_KEY_ESCAPE)
 		terminate_game(game);
 	if (keydata.key == MLX_KEY_W && keydata.action == MLX_PRESS)

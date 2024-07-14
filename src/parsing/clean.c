@@ -6,7 +6,7 @@
 /*   By: mguardia <mguardia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/09 17:28:25 by mguardia          #+#    #+#             */
-/*   Updated: 2024/07/10 18:55:31 by mguardia         ###   ########.fr       */
+/*   Updated: 2024/07/14 09:58:30 by mguardia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,13 +45,13 @@ void	clean_game(t_game *game)
 	}
 }
 
-void    terminate_game(void *gameptr)
+void	terminate_game(void *gameptr)
 {
-    t_game *game;
-    
-    game = (t_game *)gameptr;
-    if (game->mlx->window)
-        	mlx_close_window(game->mlx);
+	t_game	*game;
+
+	game = (t_game *)gameptr;
+	if (game->mlx->window)
+		mlx_close_window(game->mlx);
 	mlx_terminate(game->mlx);
 	clean_game(game);
 	exit(EXIT_SUCCESS);

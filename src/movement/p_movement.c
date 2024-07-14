@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   p_movement.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: raalonso <raalonso@student.42madrid.com    +#+  +:+       +#+        */
+/*   By: mguardia <mguardia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/08 19:28:36 by raalonso          #+#    #+#             */
-/*   Updated: 2024/07/11 20:07:10 by raalonso         ###   ########.fr       */
+/*   Updated: 2024/07/14 09:59:22 by mguardia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ double	angle_reset(double angle)
 	if (angle > M_PI * 2)
 		return (angle -= M_PI * 2);
 	if (angle < 0)
-		return angle += M_PI * 2;
+		return (angle += M_PI * 2);
 	else
 		return (angle);
 }
