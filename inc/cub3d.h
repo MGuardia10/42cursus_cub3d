@@ -14,7 +14,7 @@
 # define CUB3D_H
 
 # include "../libft/inc/libft.h"
-#include "../mlx/include/MLX42/MLX42.h"
+# include "../mlx/include/MLX42/MLX42.h"
 # include <math.h>
 # include <errno.h>
 
@@ -116,9 +116,9 @@ struct s_map
 
 struct s_player
 {
-	t_valid_chars	orientation;
-	double			angle;
-	double			rd_fov; // en radianes
+	t_valid_chars		orientation;
+	double				angle;
+	double				rd_fov; // en radianes
 	double				x;
 	double				y;
 	int					ws; // para mover jugador
@@ -137,9 +137,12 @@ struct	s_game
 	/* MLX */
 	mlx_t			*mlx;
 	mlx_image_t		*pixel;
-	
+
 	/* RAYCASTING */
 	t_ray			ray;
+
+	/* MOUSE EVENT */
+	bool			mouse_rotation;
 };
 
 /******************************************************************************
@@ -163,7 +166,7 @@ bool	is_texture(char *str);
 bool	is_color(char *str);
 int		get_color(t_color item);
 void	clean_game(t_game *game);
-void    terminate_game(void *gameptr);
+void	terminate_game(void *gameptr);
 
 /* RAYCASTING */
 void	init_window(t_game *game);

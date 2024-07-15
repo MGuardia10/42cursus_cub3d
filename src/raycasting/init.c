@@ -130,6 +130,53 @@ void	init_minimap(t_game *game)
 	mlx_image_to_window(game->mlx, game->map->map_img, SWIDTH / 20, SHEIGHT / 20);
 }
 
+void mousepress(mouse_key_t button, action_t action, modifier_key_t mods, void* gameptr)
+{
+	t_game	*game;
+
+	(void)mods;
+	game = (t_game *)gameptr;
+	if (button == MLX_MOUSE_BUTTON_RIGHT && action == MLX_PRESS)
+	{
+		game->mouse_rotation = !game->mouse_rotation;
+		if (game->mouse_rotation)
+			mlx_set_cursor_mode(game->mlx, MLX_MOUSE_HIDDEN);
+		else {
+			game->player.rotate = 0;
+			mlx_set_cursor_mode(game->mlx, MLX_MOUSE_NORMAL);
+		}
+	}
+}
+
+void cursor_move(double xpos, double ypos, void *gameptr)
+{
+	static int	delta_x;
+	t_game		*game;
+	
+	game = (t_game *)gameptr;
+
+	(void)ypos;
+
+	printf("xpos: %d || delta_x; %d\n", (int)xpos, delta_x);
+
+	if (game->mouse_rotation) {
+		delta_x = (int)xpos - (SWIDTH / 2);
+		if (delta_x > 10) {
+			//rotate right
+			game->player.rotate = 1;
+		}
+		else if (delta_x < -10) {
+			// rotate left
+			game->player.rotate = -1;
+		} else
+			game->player.rotate = 0;
+		mlx_set_mouse_pos(game->mlx, SWIDTH / 2, SHEIGHT / 2);
+		delta_x = SWIDTH / 2;
+	}
+	//delta_x = (int)xpos;
+
+}
+
 void	init_window(t_game *game)
 {
 	game->mlx = mlx_init(SWIDTH, SHEIGHT, "cub3d", false);
@@ -149,6 +196,8 @@ void	init_window(t_game *game)
 		init_minimap(game);
 	mlx_loop_hook(game->mlx, &game_loop, game);
 	mlx_key_hook(game->mlx, &keypress, game);
+	mlx_mouse_hook(game->mlx, &mousepress, game);
+	mlx_cursor_hook(game->mlx, &cursor_move, game);
 	mlx_close_hook(game->mlx, &terminate_game, game);
 	mlx_loop(game->mlx);
 }

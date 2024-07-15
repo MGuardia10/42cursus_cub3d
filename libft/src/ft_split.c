@@ -84,7 +84,6 @@ static char	**split_words(char const *s, char c, char **split, int words)
 		w_len = 0;
 		num_words++;
 	}
-	split[num_words] = NULL;
 	return (split);
 }
 

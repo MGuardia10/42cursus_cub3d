@@ -43,7 +43,7 @@ void	print_parsing(t_game *game)
 int	main(int argc, char **argv)
 {
 	t_game	game;
-	
+
 	init_game(&game, argc, argv);
 	print_parsing(&game);
 	init_window(&game);
