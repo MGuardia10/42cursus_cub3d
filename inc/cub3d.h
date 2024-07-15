@@ -6,7 +6,7 @@
 /*   By: raalonso <raalonso@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/12 09:54:08 by mguardia          #+#    #+#             */
-/*   Updated: 2024/07/15 14:25:11 by raalonso         ###   ########.fr       */
+/*   Updated: 2024/07/15 14:29:35 by raalonso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,14 +16,14 @@
 # include "../libft/inc/libft.h"
 #include "../mlx/include/MLX42/MLX42.h"
 # include <math.h>
-# include <errno.h> 
+# include <errno.h>
 
 /******************************************************************************
 *	Defines
 ******************************************************************************/
 
-# define SHEIGHT 1500
-# define SWIDTH 1800
+# define SHEIGHT 500
+# define SWIDTH 800
 # define TILESIZE 40
 # define FOV 60
 # define ROTSPEED 25
