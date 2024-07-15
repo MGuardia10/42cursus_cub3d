@@ -6,7 +6,7 @@
 /*   By: raalonso <raalonso@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/12 09:54:08 by mguardia          #+#    #+#             */
-/*   Updated: 2024/07/11 20:10:13 by raalonso         ###   ########.fr       */
+/*   Updated: 2024/07/15 14:25:11 by raalonso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 # include "../libft/inc/libft.h"
 #include "../mlx/include/MLX42/MLX42.h"
 # include <math.h>
-# include <errno.h>
+# include <errno.h> 
 
 /******************************************************************************
 *	Defines
