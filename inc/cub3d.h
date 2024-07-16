@@ -6,7 +6,7 @@
 /*   By: mguardia <mguardia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/12 09:54:08 by mguardia          #+#    #+#             */
-/*   Updated: 2024/07/13 10:52:13 by mguardia         ###   ########.fr       */
+/*   Updated: 2024/07/16 17:36:48 by mguardia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,6 +109,7 @@ struct s_map
 	char			**map_cpy;
 	unsigned int	max_y;
 	unsigned int	max_x;
+	int				*x_row;
 
 	/* minimapmap rendering */
 	mlx_image_t		*map_img;
@@ -155,7 +156,7 @@ void	manage_textures(t_game *game, char **line);
 void	manage_colors(t_game *game, char **line);
 bool	has_invalid_chars(char *str);
 int		find_player(t_player *player, char *str, int j);
-char	**cpy_map(char **arr, int i);
+char	**cpy_map(t_game *game, char **arr, int i,  bool flag);
 bool	valid_map_limits(t_game *game, t_map *map);
 bool	empty_found(char **map, int *x, int *y);
 int		flood_fill(char **map, int x, int y);

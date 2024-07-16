@@ -6,7 +6,7 @@
 /*   By: mguardia <mguardia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/17 09:29:22 by mguardia          #+#    #+#             */
-/*   Updated: 2024/07/10 17:23:44 by mguardia         ###   ########.fr       */
+/*   Updated: 2024/07/16 17:36:04 by mguardia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,7 +91,7 @@ int	find_player(t_player *player, char *str, int j)
  * @return The function `cpy_map` is returning a pointer to a pointer to a
  * character (`char **`).
  */
-char	**cpy_map(char **arr, int i)
+char	**cpy_map(t_game *game, char **arr, int i,  bool flag)
 {
 	char	**cpy;
 	int		j;
@@ -99,15 +99,20 @@ char	**cpy_map(char **arr, int i)
 	cpy = ft_calloc(ft_arrsize((void **)arr + i) + 1, sizeof(char *));
 	if (!cpy)
 		return (NULL);
+	if (flag)
+	{
+		game->map->x_row = ft_calloc(ft_arrsize((void **)arr + i), sizeof(int));
+		if (!game->map->x_row)
+			return (ft_free_matrix((void **)cpy), NULL);
+	}
 	j = 0;
 	while (arr[i])
 	{
+		if (flag)
+			game->map->x_row[j] = ft_strlen(arr[i]);
 		cpy[j] = ft_strdup(arr[i]);
 		if (!cpy[j])
-		{
-			ft_free_matrix((void **)cpy);
-			return (NULL);
-		}
+			return (ft_free_matrix((void **)cpy), NULL);
 		j++;
 		i++;
 	}
@@ -129,7 +134,7 @@ bool	valid_map_limits(t_game *game, t_map *map)
 	int		y;
 	bool	err;
 
-	map_cpy = cpy_map(map->map_cpy, 0);
+	map_cpy = cpy_map(game, map->map_cpy, 0, false);
 	if (!map_cpy)
 		error(game, NULL, true, "malloc");
 	err = false;

@@ -6,7 +6,7 @@
 /*   By: mguardia <mguardia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/09 17:28:25 by mguardia          #+#    #+#             */
-/*   Updated: 2024/07/14 09:58:30 by mguardia         ###   ########.fr       */
+/*   Updated: 2024/07/16 17:37:31 by mguardia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,8 @@ void	clean_game(t_game *game)
 			free(game->map->color_arr);
 		if (game->map->map_cpy)
 			ft_free_matrix((void **)game->map->map_cpy);
+		if (game->map->x_row)
+			free(game->map->x_row);
 		free_textures(&game->map->textures);
 		free(game->map);
 	}

@@ -6,7 +6,7 @@
 /*   By: mguardia <mguardia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/12 11:45:16 by mguardia          #+#    #+#             */
-/*   Updated: 2024/07/10 17:19:41 by mguardia         ###   ########.fr       */
+/*   Updated: 2024/07/16 17:38:04 by mguardia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -161,7 +161,7 @@ static void	file_map_parsing(t_game *game, char **arr, int *i)
 	}
 	if (n_player != 1)
 		item_error(game, NULL, PLAYER_MAP);
-	game->map->map_cpy = cpy_map(arr, *i);
+	game->map->map_cpy = cpy_map(game, arr, *i, true);
 	if (!valid_map_limits(game, game->map))
 		error(game, INV_MAP_LIMITS, false, NULL);
 	game->map->max_y = j - *i;
