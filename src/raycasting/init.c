@@ -6,7 +6,7 @@
 /*   By: mguardia <mguardia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/09 17:22:45 by raalonso          #+#    #+#             */
-/*   Updated: 2024/07/13 10:49:58 by mguardia         ###   ########.fr       */
+/*   Updated: 2024/07/16 15:51:13 by mguardia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -157,7 +157,7 @@ void cursor_move(double xpos, double ypos, void *gameptr)
 
 	(void)ypos;
 
-	printf("xpos: %d || delta_x; %d\n", (int)xpos, delta_x);
+	//printf("xpos: %d || delta_x; %d\n", (int)xpos, delta_x);
 
 	if (game->mouse_rotation) {
 		delta_x = (int)xpos - (SWIDTH / 2);

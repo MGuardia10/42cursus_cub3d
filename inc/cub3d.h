@@ -6,7 +6,7 @@
 /*   By: mguardia <mguardia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/12 09:54:08 by mguardia          #+#    #+#             */
-/*   Updated: 2024/07/16 17:36:48 by mguardia         ###   ########.fr       */
+/*   Updated: 2024/07/16 15:46:47 by mguardia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,7 +109,7 @@ struct s_map
 	char			**map_cpy;
 	unsigned int	max_y;
 	unsigned int	max_x;
-	int				*x_row;
+	unsigned int	*x_row;
 
 	/* minimapmap rendering */
 	mlx_image_t		*map_img;
