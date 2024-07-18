@@ -141,9 +141,6 @@ struct	s_game
 
 	/* RAYCASTING */
 	t_ray			ray;
-
-	/* MOUSE EVENT */
-	bool			mouse_rotation;
 };
 
 /******************************************************************************
