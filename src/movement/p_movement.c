@@ -6,7 +6,7 @@
 /*   By: raalonso <raalonso@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/08 19:28:36 by raalonso          #+#    #+#             */
-/*   Updated: 2024/07/15 15:44:00 by raalonso         ###   ########.fr       */
+/*   Updated: 2024/07/19 20:53:41 by raalonso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ double	angle_reset(double angle)
 	if (angle > M_PI * 2)
 		return (angle -= M_PI * 2);
 	if (angle < 0)
-		return angle += M_PI * 2;
+		return (angle += M_PI * 2);
 	else
 		return (angle);
 }

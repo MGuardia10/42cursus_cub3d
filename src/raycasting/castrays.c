@@ -6,7 +6,7 @@
 /*   By: raalonso <raalonso@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/06 19:26:04 by raalonso          #+#    #+#             */
-/*   Updated: 2024/07/11 19:30:32 by raalonso         ###   ########.fr       */
+/*   Updated: 2024/07/20 14:28:15 by raalonso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,8 +38,14 @@ bool	check_hit(t_game *game, double x, double y)
 	y_m = floor(y / TILESIZE);
 	if ((y_m >= game->map->max_y || x_m >= game->map->max_x))
 		return (true);
-	if (game->map->map_cpy[(int)y_m][(int)x_m] == '1')
-		return (true);
+	if (game->map->map_cpy[(int)y_m])
+	{
+		if (game->map->map_cpy[(int)y_m][(int)x_m])
+		{
+			if (game->map->map_cpy[(int)y_m][(int)x_m] == '1')
+				return (true);
+		}
+	}
 	return (false);
 }
 
@@ -90,6 +96,8 @@ double	get_h_inter(t_game *game)
 		h_x += x_step;
 		h_y += y_step;
 	}
+	game->ray.x_h = h_x;
+	game->ray.y_h = h_y;
 	return (sqrt(pow(h_x - game->player.x, 2) + pow(h_y - game->player.y, 2)));
 }
 
@@ -115,6 +123,8 @@ double	get_v_inter(t_game *game)
 		v_x += x_step;
 		v_y += y_step;
 	}
+	game->ray.x_v = v_x;
+	game->ray.y_v = v_y;
 	return (sqrt(pow(v_x - game->player.x, 2) + pow(v_y - game->player.y, 2)));
 }
 
@@ -134,12 +144,12 @@ void	castrays(t_game *game)
 		if (v_inter <= h_inter)
 		{
 			game->ray.distance = v_inter;
-			game->ray.type = 1;
+			game->ray.type = VERTICAL;
 		}
 		else
 		{
 			game->ray.distance = h_inter;
-			game->ray.type = 2;
+			game->ray.type = HORIZONTAL;
 		}
 		render_line(game, ray);
 		ray++;

@@ -6,7 +6,7 @@
 /*   By: raalonso <raalonso@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/12 09:54:08 by mguardia          #+#    #+#             */
-/*   Updated: 2024/07/15 14:29:35 by raalonso         ###   ########.fr       */
+/*   Updated: 2024/07/20 15:05:26 by raalonso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,11 +22,11 @@
 *	Defines
 ******************************************************************************/
 
-# define SHEIGHT 500
-# define SWIDTH 800
+# define SHEIGHT 800
+# define SWIDTH 1100
 # define TILESIZE 40
 # define FOV 60
-# define ROTSPEED 25
+# define ROTSPEED 15
 # define MOVESPEED 3
 
 /******************************************************************************
@@ -69,9 +69,14 @@ enum	e_orientation
 
 struct s_ray
 {
-	double	angle;
-	double	distance;
-	int		type;
+	double			angle;
+	double			distance;
+	double			wall_l;
+	double			x_h;
+	double			y_h;
+	double			x_v;
+	double			y_v;
+	t_orientation	type;
 };
 
 struct s_color
@@ -85,9 +90,13 @@ struct s_color
 struct s_texture
 {
 	char			*north;
+	mlx_texture_t	*north_tx;
 	char			*south;
+	mlx_texture_t	*south_tx;
 	char			*west;
+	mlx_texture_t	*west_tx;
 	char			*east;
+	mlx_texture_t	*east_tx;
 };
 
 struct s_map
@@ -177,6 +186,7 @@ bool	check_hit(t_game *game, double x, double y);
 void	render_line(t_game *game, int ray);
 void	put_line(int t_pixel, int b_pixel, int ray, t_game *game);
 void	put_floor_sky(t_game *game, int ray, int top_p, int bottom_p);
+mlx_texture_t	*get_ray_texture(t_game *game);
 
 /* MOVEMENT */
 void	keypress(mlx_key_data_t keydata, void *gameptr);

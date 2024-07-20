@@ -6,7 +6,7 @@
 /*   By: raalonso <raalonso@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/09 17:22:45 by raalonso          #+#    #+#             */
-/*   Updated: 2024/07/11 19:34:50 by raalonso         ###   ########.fr       */
+/*   Updated: 2024/07/20 14:26:27 by raalonso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -130,6 +130,14 @@ void	init_minimap(t_game *game)
 	mlx_image_to_window(game->mlx, game->map->map_img, SWIDTH / 20, SHEIGHT / 20);
 }
 
+void	init_textures(t_game *game)
+{
+	game->map->textures.east_tx = mlx_load_png(game->map->textures.east);
+	game->map->textures.north_tx = mlx_load_png(game->map->textures.north);
+	game->map->textures.south_tx = mlx_load_png(game->map->textures.south);
+	game->map->textures.west_tx = mlx_load_png(game->map->textures.west);
+}
+
 void	init_window(t_game *game)
 {
 	game->mlx = mlx_init(SWIDTH, SHEIGHT, "cub3d", false);
@@ -138,6 +146,7 @@ void	init_window(t_game *game)
 	init_player(game);
 	if (SWIDTH >= 100 && SHEIGHT >= 100)
 		init_minimap(game);
+	init_textures(game);
 	mlx_loop_hook(game->mlx, &game_loop, game);
 	mlx_key_hook(game->mlx, &keypress, game);
 	mlx_loop(game->mlx);
