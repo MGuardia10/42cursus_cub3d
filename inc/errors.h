@@ -6,7 +6,7 @@
 /*   By: raalonso <raalonso@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/14 17:11:05 by mguardia          #+#    #+#             */
-/*   Updated: 2024/07/11 19:27:49 by raalonso         ###   ########.fr       */
+/*   Updated: 2024/07/20 15:49:01 by raalonso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 
 # define WRONG_N_ARGS	"Invalid number of arguments\n"
 # define WRONG_EXT_CUB	"file with .cub extension is required\n"
-# define WRONG_EXT_XPM	"file with .xpm42 extension is required\n"
+# define WRONG_EXT_XPM	"file with .png extension is required\n"
 # define EMPTY_FILE		"file is empty\n"
 # define INV_FILE		"file is not valid\n"
 # define INV_TYPE_ID	"not a valid type identifier\n"

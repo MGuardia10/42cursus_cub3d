@@ -6,26 +6,11 @@
 /*   By: raalonso <raalonso@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/06 19:26:04 by raalonso          #+#    #+#             */
-/*   Updated: 2024/07/20 14:28:15 by raalonso         ###   ########.fr       */
+/*   Updated: 2024/07/20 16:04:29 by raalonso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/cub3d.h"
-
-int unit_circle(float angle, char c) // check the unit circle
-{
-	if (c == 'x')
-	{
-		if (angle > 0 && angle < M_PI)
-		return (1);
-	}
-	else if (c == 'y')
-	{
-		if (angle > (M_PI / 2) && angle < (3 * M_PI) / 2)
-		return (1);
-	}
-	return (0);
-}
 
 bool	check_hit(t_game *game, double x, double y)
 {

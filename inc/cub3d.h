@@ -6,7 +6,7 @@
 /*   By: raalonso <raalonso@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/12 09:54:08 by mguardia          #+#    #+#             */
-/*   Updated: 2024/07/20 15:05:26 by raalonso         ###   ########.fr       */
+/*   Updated: 2024/07/20 16:10:49 by raalonso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -174,19 +174,24 @@ int		get_color(t_color item);
 void	clean_game(t_game *game);
 
 /* RAYCASTING */
-void	init_window(t_game *game);
-void	init_player(t_game *game);
-double	get_p_angle(t_game *game);
-void	game_loop(void *gameptr);
-void	castrays(t_game *game);
-double	get_v_inter(t_game *game);
-double	get_h_inter(t_game *game);
-int		check_inter(t_game *game, double *step, double *inter, t_orientation o);
-bool	check_hit(t_game *game, double x, double y);
-void	render_line(t_game *game, int ray);
-void	put_line(int t_pixel, int b_pixel, int ray, t_game *game);
-void	put_floor_sky(t_game *game, int ray, int top_p, int bottom_p);
+void			init_window(t_game *game);
+void			init_player(t_game *game);
+double			get_p_angle(t_game *game);
+void			game_loop(void *gameptr);
+void			castrays(t_game *game);
+double			get_v_inter(t_game *game);
+double			get_h_inter(t_game *game);
+int				check_inter(t_game *game, double *step, double *inter, t_orientation o);
+bool			check_hit(t_game *game, double x, double y);
+void			render_line(t_game *game, int ray);
+void			put_line(int t_pixel, int b_pixel, int ray, t_game *game);
+void			put_floor_sky(t_game *game, int ray, int top_p, int bottom_p);
 mlx_texture_t	*get_ray_texture(t_game *game);
+int				reverse_bytes(int c);
+double			get_x_o(t_game *game, int t_width);
+void			render_minimap(t_game *game);
+void			draw_player(t_game *game);
+void			draw_square(t_game *game, int map_x, int map_y, int color);
 
 /* MOVEMENT */
 void	keypress(mlx_key_data_t keydata, void *gameptr);
@@ -194,6 +199,6 @@ void	keyrelease(mlx_key_data_t keydata, t_game *game);
 void	player_controller(t_game *game);
 double	angle_reset(double angle);
 void	check_move(double new_x, double new_y, t_game *game);
-void	move_player(t_game *game);
+void	move_player(t_game *game, double new_x, double new_y);
 
 #endif

@@ -50,7 +50,9 @@ PARSING		:=	init_game.c \
 # RAYCASTING
 RAYCASTING 	:=	castrays.c \
 				render.c \
-				init.c
+				init.c \
+				texture.c \
+				minimap.c
 
 MOVEMENT	:=	p_movement.c \
 				key_managment.c

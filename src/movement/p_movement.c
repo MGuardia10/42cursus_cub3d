@@ -6,7 +6,7 @@
 /*   By: raalonso <raalonso@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/08 19:28:36 by raalonso          #+#    #+#             */
-/*   Updated: 2024/07/19 20:53:41 by raalonso         ###   ########.fr       */
+/*   Updated: 2024/07/20 16:09:39 by raalonso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,13 +41,8 @@ void	check_move(double new_x, double new_y, t_game *game)
 	}
 }
 
-void	move_player(t_game *game)
+void	move_player(t_game *game, double new_x, double new_y)
 {
-	double	new_x;
-	double	new_y;
-
-	new_x = 0;
-	new_y = 0;
 	if (game->player.ws == 1)
 	{
 		new_x = cos(game->player.angle) * MOVESPEED;
@@ -78,6 +73,6 @@ void	player_controller(t_game *game)
 	else if (game->player.rotate == -1)
 		game->player.angle -= 0.001 * ROTSPEED;
 	if (game->player.ws != 0 || game->player.ad != 0)
-		move_player(game);
+		move_player(game, 0, 0);
 	game->player.angle = angle_reset(game->player.angle);
 }

@@ -6,7 +6,7 @@
 /*   By: raalonso <raalonso@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/09 20:36:28 by raalonso          #+#    #+#             */
-/*   Updated: 2024/07/19 20:54:21 by raalonso         ###   ########.fr       */
+/*   Updated: 2024/07/20 16:06:05 by raalonso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,8 +30,9 @@ void	keyrelease(mlx_key_data_t keydata, t_game *game)
 
 void	keypress(mlx_key_data_t keydata, void *gameptr)
 {
-	t_game *game = (t_game *)gameptr;
-	
+	t_game	*game;
+
+	game = (t_game *)gameptr;
 	if (keydata.key == MLX_KEY_W && keydata.action == MLX_PRESS)
 		game->player.ws = 1;
 	else if (keydata.key == MLX_KEY_S && keydata.action == MLX_PRESS)
