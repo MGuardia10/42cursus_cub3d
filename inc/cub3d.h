@@ -6,7 +6,7 @@
 /*   By: raalonso <raalonso@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/12 09:54:08 by mguardia          #+#    #+#             */
-/*   Updated: 2024/07/20 16:17:59 by raalonso         ###   ########.fr       */
+/*   Updated: 2024/07/20 17:37:54 by raalonso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 # define CUB3D_H
 
 # include "../libft/inc/libft.h"
-#include "../mlx/include/MLX42/MLX42.h"
+# include "../mlx/include/MLX42/MLX42.h"
 # include <math.h>
 # include <errno.h>
 
@@ -109,17 +109,17 @@ struct s_map
 	/* Textures of the map */
 	t_texture		textures;
 
-	/* floor and ceiling colors */
+	/* Floor and ceiling colors */
 	t_color			floor;
 	t_color			ceiling;
 	int				*color_arr;
 
-	/* map array */
+	/* Map array */
 	char			**map_cpy;
 	unsigned int	max_y;
 	unsigned int	max_x;
 
-	/* minimapmap rendering */
+	/* Minimapmap rendering */
 	mlx_image_t		*map_img;
 };
 
@@ -127,12 +127,12 @@ struct s_player
 {
 	t_valid_chars	orientation;
 	double			angle;
-	double			rd_fov; // en radianes
-	double				x;
-	double				y;
-	int					ws; // para mover jugador
-	int					ad; // para mover jugador
-	int					rotate; // rotar jugador
+	double			rd_fov;
+	double			x;
+	double			y;
+	int				ws;
+	int				ad;
+	int				rotate;
 };
 
 struct	s_game
@@ -146,7 +146,7 @@ struct	s_game
 	/* MLX */
 	mlx_t			*mlx;
 	mlx_image_t		*pixel;
-	
+
 	/* RAYCASTING */
 	t_ray			ray;
 };
@@ -156,22 +156,22 @@ struct	s_game
 ******************************************************************************/
 
 /* PARSING */
-void	init_game(t_game *game, int argc, char **argv);
-void	manage_textures(t_game *game, char **line);
-void	manage_colors(t_game *game, char **line);
-bool	has_invalid_chars(char *str);
-int		find_player(t_player *player, char *str, int j);
-char	**cpy_map(char **arr, int i);
-bool	valid_map_limits(t_game *game, t_map *map);
-bool	empty_found(char **map, int *x, int *y);
-int		flood_fill(char **map, int x, int y);
-void	error(t_game *game, char *error, bool flag, char *pstr);
-void	item_error(t_game *game, char *item, char *error);
-bool	is_empty(char *str);
-bool	is_texture(char *str);
-bool	is_color(char *str);
-int		get_color(t_color item);
-void	clean_game(t_game *game);
+void			init_game(t_game *game, int argc, char **argv);
+void			manage_textures(t_game *game, char **line);
+void			manage_colors(t_game *game, char **line);
+bool			has_invalid_chars(char *str);
+int				find_player(t_player *player, char *str, int j);
+char			**cpy_map(char **arr, int i);
+bool			valid_map_limits(t_game *game, t_map *map);
+bool			empty_found(char **map, int *x, int *y);
+int				flood_fill(char **map, int x, int y);
+void			error(t_game *game, char *error, bool flag, char *pstr);
+void			item_error(t_game *game, char *item, char *error);
+bool			is_empty(char *str);
+bool			is_texture(char *str);
+bool			is_color(char *str);
+int				get_color(t_color item);
+void			clean_game(t_game *game);
 
 /* RAYCASTING */
 void			init_window(t_game *game);
@@ -181,7 +181,8 @@ void			game_loop(void *gameptr);
 void			castrays(t_game *game);
 double			get_v_inter(t_game *game);
 double			get_h_inter(t_game *game);
-int				check_inter(t_game *game, double *step, double *inter, t_orientation o);
+int				check_inter(
+					t_game *game, double *step, double *inter, t_orientation o);
 bool			check_hit(t_game *game, double x, double y);
 void			render_line(t_game *game, int ray);
 void			put_line(int t_pixel, int b_pixel, int ray, t_game *game);
@@ -194,11 +195,11 @@ void			draw_player(t_game *game);
 void			draw_square(t_game *game, int map_x, int map_y, int color);
 
 /* MOVEMENT */
-void	keypress(mlx_key_data_t keydata, void *gameptr);
-void	keyrelease(mlx_key_data_t keydata, t_game *game);
-void	player_controller(t_game *game);
-double	angle_reset(double angle);
-void	check_move(double new_x, double new_y, t_game *game);
-void	move_player(t_game *game, double new_x, double new_y);
+void			keypress(mlx_key_data_t keydata, void *gameptr);
+void			keyrelease(mlx_key_data_t keydata, t_game *game);
+void			player_controller(t_game *game);
+double			angle_reset(double angle);
+void			check_move(double new_x, double new_y, t_game *game);
+void			move_player(t_game *game, double new_x, double new_y);
 
 #endif
