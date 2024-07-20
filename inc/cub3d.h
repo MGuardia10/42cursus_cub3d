@@ -6,7 +6,7 @@
 /*   By: raalonso <raalonso@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/12 09:54:08 by mguardia          #+#    #+#             */
-/*   Updated: 2024/07/20 16:10:49 by raalonso         ###   ########.fr       */
+/*   Updated: 2024/07/20 16:17:59 by raalonso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@
 # define SWIDTH 1100
 # define TILESIZE 40
 # define FOV 60
-# define ROTSPEED 15
+# define ROTSPEED 20
 # define MOVESPEED 3
 
 /******************************************************************************

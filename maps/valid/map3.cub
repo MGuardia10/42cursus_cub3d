@@ -1,19 +1,19 @@
-EA ./textures/wood.xpm42
+EA ./textures/wood.png
 
 
 
 F 220,100,0
 
-SO ./textures/mossy.xpm42
+SO ./textures/mossy.png
 
 C 225,30,0
 
 
-WE ./textures/eagle.xpm42
+WE ./textures/eagle.png
 
 
 
-NO ./textures/greystone.xpm42
+NO ./textures/greystone.png
 111     1111111111111111111111111
 101     1000000000110000000000001
 111     1011000001110000000000001

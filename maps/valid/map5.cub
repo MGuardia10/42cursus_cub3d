@@ -1,9 +1,9 @@
-NO ./textures/greystone.xpm42
-SO ./textures/mossy.xpm42
-EA ./textures/wood.xpm42
-WE ./textures/eagle.xpm42
-F 220,100,0
-C 225,30,0
+NO ./textures/greystone.png
+SO ./textures/mossy.png
+EA ./textures/wood.png
+WE ./textures/eagle.png
+C 255,255,255
+F 255,255,0
 
 1111111111111111111111111111111111111111111111111111111111111111111111111
 1000100000000000000010000000000000001000000000001000000000000000000010001
