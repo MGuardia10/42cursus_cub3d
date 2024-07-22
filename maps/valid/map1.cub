@@ -4,8 +4,8 @@ SO ./textures/mossy.png
 EA ./textures/wood.png
 WE ./textures/eagle.png
 
-C 255,255,255
-F 255,255,0
+C 0,0,0
+F 0,255,0
 
 111        1111111111111111111111111
 111        1000000000110000000000001

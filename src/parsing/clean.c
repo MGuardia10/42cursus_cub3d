@@ -12,6 +12,18 @@
 
 #include "../../inc/cub3d.h"
 
+void	clean_mlx(t_game *game)
+{
+	if (game->pixel)
+		mlx_delete_image(game->mlx, game->pixel);
+	if (game->map && game->map->map_img)
+		mlx_delete_image(game->mlx, game->map->map_img);
+	if (game->mlx && game->mlx->window)
+		mlx_close_window(game->mlx);
+	if (game->mlx)
+		mlx_terminate(game->mlx);
+}
+
 static void	free_textures(t_texture *textures)
 {
 	if (textures->north_tx)
@@ -60,9 +72,7 @@ void	terminate_game(void *gameptr)
 	t_game	*game;
 
 	game = (t_game *)gameptr;
-	if (game->mlx->window)
-		mlx_close_window(game->mlx);
-	mlx_terminate(game->mlx);
+	clean_mlx(game);
 	clean_game(game);
 	exit(EXIT_SUCCESS);
 }

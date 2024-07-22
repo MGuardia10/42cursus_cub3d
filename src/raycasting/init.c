@@ -39,12 +39,17 @@ void	init_minimap(t_game *game)
 {
 	int	m_w;
 	int	m_h;
+	int	flag;
 
 	m_w = floor(game->map->max_x * (SWIDTH / 100));
 	m_h = floor(game->map->max_y * (SHEIGHT / 100));
 	game->map->map_img = mlx_new_image(game->mlx, m_w, m_h);
-	mlx_image_to_window(game->mlx, game->map->map_img, SWIDTH / 20,
-		SHEIGHT / 20);
+	if (!game->map->map_img)
+		error(game, NULL, true, "malloc");
+	flag = mlx_image_to_window(game->mlx, game->map->map_img, SWIDTH / 20,
+			SHEIGHT / 20);
+	if (flag < 0)
+		error(game, NULL, true, "malloc");
 }
 
 void	init_textures(t_game *game)
@@ -70,15 +75,9 @@ void	init_window(t_game *game)
 		error(game, NULL, true, "malloc");
 	game->pixel = mlx_new_image(game->mlx, SWIDTH, SHEIGHT);
 	if (!game->pixel)
-	{
-		mlx_close_window(game->mlx);
 		error(game, NULL, true, "malloc");
-	}
 	if (mlx_image_to_window(game->mlx, game->pixel, 0, 0) < 0)
-	{
-		mlx_close_window(game->mlx);
 		error(game, NULL, true, "malloc");
-	}
 	init_player(game);
 	if (SWIDTH >= 100 && SHEIGHT >= 100)
 		init_minimap(game);
