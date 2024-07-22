@@ -6,12 +6,17 @@
 /*   By: mguardia <mguardia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/08 19:28:36 by raalonso          #+#    #+#             */
-/*   Updated: 2024/07/20 16:09:39 by raalonso         ###   ########.fr       */
+/*   Updated: 2024/07/22 18:54:10 by mguardia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../inc/cub3d.h"
 
+/**
+ * The function `angle_reset` updates the angle value.
+ * 
+ * @param angle the current value of the angle in a double data type.
+ */
 double	angle_reset(double angle)
 {
 	if (angle > M_PI * 2)
@@ -22,6 +27,15 @@ double	angle_reset(double angle)
 		return (angle);
 }
 
+/**
+ * The function `check_move` updates the player's position in a game based on
+ * specified new coordinates, while ensuring the player stays within the game
+ * map boundaries and only moves to valid positions on the map.
+ * 
+ * @param new_x the new x-coordinate where the player will move to.
+ * @param new_y the new y-coordinate to which the player will move.
+ * @param game a pointer to a structure of type `t_game`.
+ */
 void	check_move(double new_x, double new_y, t_game *game)
 {
 	long	map_x;
@@ -41,6 +55,14 @@ void	check_move(double new_x, double new_y, t_game *game)
 	}
 }
 
+/**
+ * The function `move_player` updates the player's position based on movement
+ * input and angle in a game.
+ * 
+ * @param game a pointer to a structure of type `t_game`.
+ * @param new_x the new x-coordinate where the player will move to.
+ * @param new_y the new y-coordinate to which the player will move.
+ */
 void	move_player(t_game *game, double new_x, double new_y)
 {
 	if (game->player.ws == 1)
@@ -66,6 +88,14 @@ void	move_player(t_game *game, double new_x, double new_y)
 	check_move(new_x, new_y, game);
 }
 
+/**
+ * The player_controller function updates the player's angle and movement based
+ * on input.
+ * 
+ * @param game a pointer to a structure of type `t_game`, which contains
+ * information about the game state, including the player's position, rotation
+ * status, movement status, and other relevant data.
+ */
 void	player_controller(t_game *game)
 {
 	if (game->player.rotate == 1)

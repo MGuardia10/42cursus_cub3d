@@ -6,24 +6,17 @@
 /*   By: mguardia <mguardia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/09 17:28:25 by mguardia          #+#    #+#             */
-/*   Updated: 2024/07/16 17:37:31 by mguardia         ###   ########.fr       */
+/*   Updated: 2024/07/22 18:42:26 by mguardia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../inc/cub3d.h"
 
-void	clean_mlx(t_game *game)
-{
-	if (game->pixel)
-		mlx_delete_image(game->mlx, game->pixel);
-	if (game->map && game->map->map_img)
-		mlx_delete_image(game->mlx, game->map->map_img);
-	if (game->mlx && game->mlx->window)
-		mlx_close_window(game->mlx);
-	if (game->mlx)
-		mlx_terminate(game->mlx);
-}
-
+/**
+ * The function `free_textures` is responsible for freeing the textures used.
+ * 
+ * @param textures a pointer to a structure of type `t_texture`.
+ */
 static void	free_textures(t_texture *textures)
 {
 	if (textures->north_tx)
@@ -44,6 +37,13 @@ static void	free_textures(t_texture *textures)
 		free(textures->east);
 }
 
+/**
+ * The function `clean_game` is responsible for freeing memory allocated for
+ * various elements within a game structure.
+ * 
+ * @param game a pointer to a t_game struct.
+ * 
+ */
 void	clean_game(t_game *game)
 {
 	if (!game)
@@ -67,12 +67,20 @@ void	clean_game(t_game *game)
 	}
 }
 
+/**
+ * The function `terminate_game` closes the game window, terminates the game,
+ * cleans up resources, and exits the program.
+ * 
+ * @param gameptr a void pointer that points to a game structure.
+ */
 void	terminate_game(void *gameptr)
 {
 	t_game	*game;
 
 	game = (t_game *)gameptr;
-	clean_mlx(game);
+	if (game->mlx->window)
+		mlx_close_window(game->mlx);
+	mlx_terminate(game->mlx);
 	clean_game(game);
 	exit(EXIT_SUCCESS);
 }

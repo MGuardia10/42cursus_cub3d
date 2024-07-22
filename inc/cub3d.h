@@ -172,7 +172,6 @@ bool			is_empty(char *str);
 bool			is_texture(char *str);
 bool			is_color(char *str);
 int				get_color(t_color item);
-void			clean_mlx(t_game *game);
 void			clean_game(t_game *game);
 void			terminate_game(void *gameptr);
 
