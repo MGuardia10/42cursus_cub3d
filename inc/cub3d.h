@@ -6,11 +6,7 @@
 /*   By: mguardia <mguardia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/12 09:54:08 by mguardia          #+#    #+#             */
-<<<<<<< HEAD
 /*   Updated: 2024/07/20 21:59:12 by raalonso         ###   ########.fr       */
-=======
-/*   Updated: 2024/07/16 15:46:47 by mguardia         ###   ########.fr       */
->>>>>>> mlx_fix
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,11 +23,7 @@
 ******************************************************************************/
 
 # define SHEIGHT 800
-<<<<<<< HEAD
-# define SWIDTH 1300
-=======
 # define SWIDTH 1200
->>>>>>> mlx_fix
 # define TILESIZE 40
 # define FOV 60
 # define ROTSPEED 20
