@@ -1,7 +1,7 @@
-NO ./textures/greystone.xpm
-SO ./textures/mossy.xpm
-WE ./textures/eagle.xpm
-EA ./textures/wood.xpm
+NO ./textures/greystone.png
+SO ./textures/mossy.png
+WE ./textures/eagle.png
+EA ./textures/wood.png
 F 255,255,250
 C 255,255,255
         1111111111111111111111111
