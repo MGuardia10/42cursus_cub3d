@@ -3,7 +3,7 @@
 /*                                                        :::      ::::::::   */
 /*   castrays.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: raalonso <raalonso@student.42madrid.com    +#+  +:+       +#+        */
+/*   By: mguardia <mguardia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/06 19:26:04 by raalonso          #+#    #+#             */
 /*   Updated: 2024/07/20 16:04:29 by raalonso         ###   ########.fr       */
@@ -14,14 +14,15 @@
 
 bool	check_hit(t_game *game, double x, double y)
 {
-	double	x_m;
-	double	y_m;
+	unsigned int	x_m;
+	unsigned int	y_m;
 
 	if (x < 0 || y < 0)
 		return (true);
-	x_m = floor(x / TILESIZE);
-	y_m = floor(y / TILESIZE);
-	if ((y_m >= game->map->max_y || x_m >= game->map->max_x))
+	x_m = (unsigned int)floor(x / TILESIZE);
+	y_m = (unsigned int)floor(y / TILESIZE);
+	//printf("x_row[%d] = %d\n", y_m, game->map->x_row[y_m]);
+	if ((y_m >= game->map->max_y || x_m >= game->map->x_row[y_m]))
 		return (true);
 	if (game->map->map_cpy[(int)y_m])
 	{

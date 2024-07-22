@@ -32,7 +32,7 @@ char	*ft_strdup(char *s1)
 	i = 0;
 	while (s1[len])
 		len++;
-	dst = (char *)malloc(sizeof(char) * (len + 1));
+	dst = (char *)ft_calloc(len + 1, sizeof(char));
 	if (!dst)
 		return (0);
 	while (i < len)
@@ -40,6 +40,5 @@ char	*ft_strdup(char *s1)
 		dst[i] = s1[i];
 		i++;
 	}
-	dst[i] = '\0';
 	return (dst);
 }

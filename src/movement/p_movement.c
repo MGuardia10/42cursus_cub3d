@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   p_movement.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: raalonso <raalonso@student.42madrid.com    +#+  +:+       +#+        */
+/*   By: mguardia <mguardia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/08 19:28:36 by raalonso          #+#    #+#             */
 /*   Updated: 2024/07/20 16:09:39 by raalonso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../inc/cub3d.h"
+#include "../../inc/cub3d.h"
 
 double	angle_reset(double angle)
 {

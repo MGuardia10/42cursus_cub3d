@@ -3,7 +3,7 @@
 /*                                                        :::      ::::::::   */
 /*   init.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: raalonso <raalonso@student.42madrid.com    +#+  +:+       +#+        */
+/*   By: mguardia <mguardia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/09 17:22:45 by raalonso          #+#    #+#             */
 /*   Updated: 2024/07/20 16:00:25 by raalonso         ###   ########.fr       */
@@ -58,13 +58,23 @@ void	init_textures(t_game *game)
 void	init_window(t_game *game)
 {
 	game->mlx = mlx_init(SWIDTH, SHEIGHT, "cub3d", false);
+	if (!game->mlx)
+		error(game, NULL, true, "malloc");
 	game->pixel = mlx_new_image(game->mlx, SWIDTH, SHEIGHT);
-	mlx_image_to_window(game->mlx, game->pixel, 0, 0);
+	if (!game->pixel) {
+		mlx_close_window(game->mlx);
+		error(game, NULL, true, "malloc");
+	}
+	if (mlx_image_to_window(game->mlx, game->pixel, 0, 0) < 0) {
+		mlx_close_window(game->mlx);
+		error(game, NULL, true, "malloc");
+	}
 	init_player(game);
 	if (SWIDTH >= 100 && SHEIGHT >= 100)
 		init_minimap(game);
 	init_textures(game);
 	mlx_loop_hook(game->mlx, &game_loop, game);
 	mlx_key_hook(game->mlx, &keypress, game);
+	mlx_close_hook(game->mlx, &terminate_game, game);
 	mlx_loop(game->mlx);
 }

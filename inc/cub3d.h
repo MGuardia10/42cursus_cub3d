@@ -3,10 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: raalonso <raalonso@student.42madrid.com    +#+  +:+       +#+        */
+/*   By: mguardia <mguardia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/12 09:54:08 by mguardia          #+#    #+#             */
+<<<<<<< HEAD
 /*   Updated: 2024/07/20 21:59:12 by raalonso         ###   ########.fr       */
+=======
+/*   Updated: 2024/07/16 15:46:47 by mguardia         ###   ########.fr       */
+>>>>>>> mlx_fix
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +27,11 @@
 ******************************************************************************/
 
 # define SHEIGHT 800
+<<<<<<< HEAD
 # define SWIDTH 1300
+=======
+# define SWIDTH 1200
+>>>>>>> mlx_fix
 # define TILESIZE 40
 # define FOV 60
 # define ROTSPEED 20
@@ -118,6 +126,7 @@ struct s_map
 	char			**map_cpy;
 	unsigned int	max_y;
 	unsigned int	max_x;
+	unsigned int	*x_row;
 
 	/* Minimapmap rendering */
 	mlx_image_t		*map_img;
@@ -156,22 +165,23 @@ struct	s_game
 ******************************************************************************/
 
 /* PARSING */
-void			init_game(t_game *game, int argc, char **argv);
-void			manage_textures(t_game *game, char **line);
-void			manage_colors(t_game *game, char **line);
-bool			has_invalid_chars(char *str);
-int				find_player(t_player *player, char *str, int j);
-char			**cpy_map(char **arr, int i);
-bool			valid_map_limits(t_game *game, t_map *map);
-bool			empty_found(char **map, int *x, int *y);
-int				flood_fill(char **map, int x, int y);
-void			error(t_game *game, char *error, bool flag, char *pstr);
-void			item_error(t_game *game, char *item, char *error);
-bool			is_empty(char *str);
-bool			is_texture(char *str);
-bool			is_color(char *str);
-int				get_color(t_color item);
-void			clean_game(t_game *game);
+void	init_game(t_game *game, int argc, char **argv);
+void	manage_textures(t_game *game, char **line);
+void	manage_colors(t_game *game, char **line);
+bool	has_invalid_chars(char *str);
+int		find_player(t_player *player, char *str, int j);
+char	**cpy_map(t_game *game, char **arr, int i,  bool flag);
+bool	valid_map_limits(t_game *game, t_map *map);
+bool	empty_found(char **map, int *x, int *y);
+int		flood_fill(char **map, int x, int y);
+void	error(t_game *game, char *error, bool flag, char *pstr);
+void	item_error(t_game *game, char *item, char *error);
+bool	is_empty(char *str);
+bool	is_texture(char *str);
+bool	is_color(char *str);
+int		get_color(t_color item);
+void	clean_game(t_game *game);
+void	terminate_game(void *gameptr);
 
 /* RAYCASTING */
 void			init_window(t_game *game);
