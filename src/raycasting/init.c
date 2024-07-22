@@ -50,9 +50,17 @@ void	init_minimap(t_game *game)
 void	init_textures(t_game *game)
 {
 	game->map->textures.east_tx = mlx_load_png(game->map->textures.east);
+	if (!game->map->textures.east_tx)
+		error(game, NULL, true, "malloc");
 	game->map->textures.north_tx = mlx_load_png(game->map->textures.north);
+	if (!game->map->textures.east_tx)
+		error(game, NULL, true, "malloc");
 	game->map->textures.south_tx = mlx_load_png(game->map->textures.south);
+	if (!game->map->textures.east_tx)
+		error(game, NULL, true, "malloc");
 	game->map->textures.west_tx = mlx_load_png(game->map->textures.west);
+	if (!game->map->textures.east_tx)
+		error(game, NULL, true, "malloc");
 }
 
 void	init_window(t_game *game)

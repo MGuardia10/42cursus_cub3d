@@ -14,6 +14,14 @@
 
 static void	free_textures(t_texture *textures)
 {
+	if (textures->north_tx)
+		mlx_delete_texture(textures->north_tx);
+	if (textures->south_tx)
+		mlx_delete_texture(textures->south_tx);
+	if (textures->west_tx)
+		mlx_delete_texture(textures->west_tx);
+	if (textures->east_tx)
+		mlx_delete_texture(textures->east_tx);
 	if (textures->north)
 		free(textures->north);
 	if (textures->south)
