@@ -157,23 +157,23 @@ struct	s_game
 ******************************************************************************/
 
 /* PARSING */
-void	init_game(t_game *game, int argc, char **argv);
-void	manage_textures(t_game *game, char **line);
-void	manage_colors(t_game *game, char **line);
-bool	has_invalid_chars(char *str);
-int		find_player(t_player *player, char *str, int j);
-char	**cpy_map(t_game *game, char **arr, int i,  bool flag);
-bool	valid_map_limits(t_game *game, t_map *map);
-bool	empty_found(char **map, int *x, int *y);
-int		flood_fill(char **map, int x, int y);
-void	error(t_game *game, char *error, bool flag, char *pstr);
-void	item_error(t_game *game, char *item, char *error);
-bool	is_empty(char *str);
-bool	is_texture(char *str);
-bool	is_color(char *str);
-int		get_color(t_color item);
-void	clean_game(t_game *game);
-void	terminate_game(void *gameptr);
+void			init_game(t_game *game, int argc, char **argv);
+void			manage_textures(t_game *game, char **line);
+void			manage_colors(t_game *game, char **line);
+bool			has_invalid_chars(char *str);
+int				find_player(t_player *player, char *str, int j);
+char			**cpy_map(t_game *game, char **arr, int i, bool flag);
+bool			valid_map_limits(t_game *game, t_map *map);
+bool			empty_found(char **map, int *x, int *y);
+int				flood_fill(char **map, int x, int y);
+void			error(t_game *game, char *error, bool flag, char *pstr);
+void			item_error(t_game *game, char *item, char *error);
+bool			is_empty(char *str);
+bool			is_texture(char *str);
+bool			is_color(char *str);
+int				get_color(t_color item);
+void			clean_game(t_game *game);
+void			terminate_game(void *gameptr);
 
 /* RAYCASTING */
 void			init_window(t_game *game);

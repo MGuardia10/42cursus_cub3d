@@ -91,7 +91,7 @@ int	find_player(t_player *player, char *str, int j)
  * @return The function `cpy_map` is returning a pointer to a pointer to a
  * character (`char **`).
  */
-char	**cpy_map(t_game *game, char **arr, int i,  bool flag)
+char	**cpy_map(t_game *game, char **arr, int i, bool flag)
 {
 	char	**cpy;
 	int		j;

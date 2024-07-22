@@ -61,11 +61,13 @@ void	init_window(t_game *game)
 	if (!game->mlx)
 		error(game, NULL, true, "malloc");
 	game->pixel = mlx_new_image(game->mlx, SWIDTH, SHEIGHT);
-	if (!game->pixel) {
+	if (!game->pixel)
+	{
 		mlx_close_window(game->mlx);
 		error(game, NULL, true, "malloc");
 	}
-	if (mlx_image_to_window(game->mlx, game->pixel, 0, 0) < 0) {
+	if (mlx_image_to_window(game->mlx, game->pixel, 0, 0) < 0)
+	{
 		mlx_close_window(game->mlx);
 		error(game, NULL, true, "malloc");
 	}

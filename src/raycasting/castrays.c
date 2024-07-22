@@ -21,7 +21,6 @@ bool	check_hit(t_game *game, double x, double y)
 		return (true);
 	x_m = (unsigned int)floor(x / TILESIZE);
 	y_m = (unsigned int)floor(y / TILESIZE);
-	//printf("x_row[%d] = %d\n", y_m, game->map->x_row[y_m]);
 	if ((y_m >= game->map->max_y || x_m >= game->map->x_row[y_m]))
 		return (true);
 	if (game->map->map_cpy[(int)y_m])
