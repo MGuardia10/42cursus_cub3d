@@ -6,7 +6,7 @@
 /*   By: raalonso <raalonso@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/12 09:54:08 by mguardia          #+#    #+#             */
-/*   Updated: 2024/07/20 17:37:54 by raalonso         ###   ########.fr       */
+/*   Updated: 2024/07/20 21:59:12 by raalonso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@
 ******************************************************************************/
 
 # define SHEIGHT 800
-# define SWIDTH 1100
+# define SWIDTH 1300
 # define TILESIZE 40
 # define FOV 60
 # define ROTSPEED 20
