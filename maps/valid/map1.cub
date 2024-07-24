@@ -1,11 +1,11 @@
 
-NO ./textures/greystone.png
-SO ./textures/mossy.png
-EA ./textures/wood.png
-WE ./textures/eagle.png
+NO ./textures/cobblestone/bright.png
+SO ./textures/cobblestone/dark.png
+EA ./textures/cobblestone/mediumbright.png
+WE ./textures/cobblestone/mediumdark.png
 
-C 255,255,255
-F 255,255,0
+C 14,108,196
+F 0,152,31
 
 111        1111111111111111111111111
 111        1000000000110000000000001

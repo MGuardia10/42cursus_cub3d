@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mguardia <mguardia@student.42.fr>          +#+  +:+       +#+        */
+/*   By: raalonso <raalonso@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/14 19:58:25 by mguardia          #+#    #+#             */
-/*   Updated: 2024/07/09 15:21:02 by mguardia         ###   ########.fr       */
+/*   Updated: 2024/07/24 22:00:02 by raalonso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,5 +77,5 @@ bool	is_color(char *str)
  */
 int	get_color(t_color item)
 {
-	return ((item.r << 16) | (item.g << 8) | item.b);
+	return ((item.r << 24) | (item.g << 16) | (item.b << 8) | 0xFF);
 }
