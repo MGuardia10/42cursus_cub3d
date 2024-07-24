@@ -6,12 +6,20 @@
 /*   By: raalonso <raalonso@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/20 15:52:58 by raalonso          #+#    #+#             */
-/*   Updated: 2024/07/20 16:03:38 by raalonso         ###   ########.fr       */
+/*   Updated: 2024/07/24 22:50:10 by raalonso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/cub3d.h"
 
+/**
+ * Draws a square on the minimap.
+ *
+ * @param game   The game struct.
+ * @param map_x  The x-coordinate of the square on the map.
+ * @param map_y  The y-coordinate of the square on the map.
+ * @param color  The color of the square.
+ */
 void	draw_square(t_game *game, int map_x, int map_y, int color)
 {
 	int			s_x;
@@ -34,6 +42,11 @@ void	draw_square(t_game *game, int map_x, int map_y, int color)
 	}
 }
 
+/**
+ * Draws the player on the minimap.
+ * 
+ * @param game The game struct.
+ */
 void	draw_player(t_game *game)
 {
 	int			p_x;
@@ -42,7 +55,7 @@ void	draw_player(t_game *game)
 	uint32_t	i;
 	uint32_t	j;
 
-	color = 0xCAE8FF;
+	color = MMAP_PLAYER;
 	p_x = floor((game->player.x / TILESIZE) * (
 				game->map->map_img->height / game->map->max_y));
 	p_y = floor((game->player.y / TILESIZE) * (
@@ -62,6 +75,11 @@ void	draw_player(t_game *game)
 	}
 }
 
+/**
+ * Renders the minimap based on the game's map data.
+ * 
+ * @param game The game instance.
+ */
 void	render_minimap(t_game *game)
 {
 	int	map_x;
@@ -75,11 +93,11 @@ void	render_minimap(t_game *game)
 		while (game->map->map_cpy[map_y][map_x])
 		{
 			if (game->map->map_cpy[map_y][map_x] == '1')
-				color = 0x000000FF;
+				color = MMAP_WALL;
 			else if (game->map->map_cpy[map_y][map_x] == ' ')
-				color = 0x00000000; 
+				color = TRANSPARENT;
 			else
-				color = 0xFFFFFFFF;
+				color = MMAP_SPACE;
 			draw_square(game, map_x, map_y, color);
 			map_x++;
 		}

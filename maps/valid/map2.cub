@@ -1,12 +1,13 @@
-NO ./textures/greystone.png
-SO ./textures/mossy.png
-EA ./textures/wood.png
-WE ./textures/eagle.png
-C 0,0,255
-F 255,0,0
+NO ./textures/colors/color1.png
+SO ./textures/colors/color2.png
+EA ./textures/colors/color3.png
+WE ./textures/colors/color4.png
+C 255,0,255
+F 255,255,0
 
    11111111111111111111111
-1110000000011000001100000011
+1110000000000000001100000011
 100100S00111000001 101000001
  100100000011111001100000001
-  111111111    111111111111
+  111111111    110000111111
+                111111

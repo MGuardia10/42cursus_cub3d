@@ -3,15 +3,23 @@
 /*                                                        :::      ::::::::   */
 /*   castrays.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mguardia <mguardia@student.42.fr>          +#+  +:+       +#+        */
+/*   By: raalonso <raalonso@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/06 19:26:04 by raalonso          #+#    #+#             */
-/*   Updated: 2024/07/20 16:04:29 by raalonso         ###   ########.fr       */
+/*   Updated: 2024/07/24 21:55:14 by raalonso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/cub3d.h"
 
+/**
+ * Checks if a ray hits a wall in the game map.
+ *
+ * @param game The game struct.
+ * @param x The x-coordinate of the ray.
+ * @param y The y-coordinate of the ray.
+ * @return Returns true if the ray hits a wall, false otherwise.
+ */
 bool	check_hit(t_game *game, double x, double y)
 {
 	unsigned int	x_m;
@@ -34,6 +42,15 @@ bool	check_hit(t_game *game, double x, double y)
 	return (false);
 }
 
+/**
+ * Checks for intersection with walls in the game world.
+ * 
+ * @param game The game struct containing game data.
+ * @param step Pointer to the step size for raycasting.
+ * @param inter Pointer to the intersection coordinate.
+ * @param o The orientation of the ray (horizontal or vertical).
+ * @return -1 if there is an intersection, 1 otherwise.
+ */
 int	check_inter(t_game *game, double *step, double *inter, t_orientation o)
 {
 	if (o == HORIZONTAL)
@@ -57,6 +74,13 @@ int	check_inter(t_game *game, double *step, double *inter, t_orientation o)
 	return (1);
 }
 
+/**
+ * Calculates the horizontal intersection point of a ray with the walls of the
+ * game map.
+ * 
+ * @param game The game struct containing the player and ray information.
+ * @return The distance between the player and the vertical intersection point.
+ */
 double	get_h_inter(t_game *game)
 {
 	double	h_x;
@@ -86,6 +110,13 @@ double	get_h_inter(t_game *game)
 	return (sqrt(pow(h_x - game->player.x, 2) + pow(h_y - game->player.y, 2)));
 }
 
+/**
+ * Calculates the vertical intersection point of a ray with the walls of the
+ * game map.
+ * 
+ * @param game The game struct containing the player and ray information.
+ * @return The distance between the player and the vertical intersection point.
+ */
 double	get_v_inter(t_game *game)
 {
 	double	v_x;
@@ -113,6 +144,16 @@ double	get_v_inter(t_game *game)
 	return (sqrt(pow(v_x - game->player.x, 2) + pow(v_y - game->player.y, 2)));
 }
 
+/**
+ * Casts rays to render the game scene.
+ *
+ * This function casts rays from the player's perspective to render the game
+ * scene. It calculates the intersection points with walls and determines the
+ * distance to each intersection. The function then calls the render_line
+ * function to draw the corresponding line on the screen.
+ *
+ * @param game A pointer to the game structure.
+ */
 void	castrays(t_game *game)
 {
 	int		ray;

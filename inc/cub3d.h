@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mguardia <mguardia@student.42.fr>          +#+  +:+       +#+        */
+/*   By: raalonso <raalonso@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/12 09:54:08 by mguardia          #+#    #+#             */
-/*   Updated: 2024/07/20 21:59:12 by raalonso         ###   ########.fr       */
+/*   Updated: 2024/07/24 19:29:59 by raalonso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,10 @@
 # define FOV 60
 # define ROTSPEED 20
 # define MOVESPEED 3
+# define MMAP_WALL 0x000000FF
+# define MMAP_SPACE 0xFFFFFFFF
+# define TRANSPARENT 0x00000000
+# define MMAP_PLAYER 0xFF0000FF
 
 /******************************************************************************
 *	Typedefs

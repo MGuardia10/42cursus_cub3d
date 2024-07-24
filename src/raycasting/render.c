@@ -6,12 +6,20 @@
 /*   By: raalonso <raalonso@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/08 19:00:48 by raalonso          #+#    #+#             */
-/*   Updated: 2024/07/20 16:17:41 by raalonso         ###   ########.fr       */
+/*   Updated: 2024/07/24 22:22:40 by raalonso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/cub3d.h"
 
+/**
+ * Renders the floor and sky for a given ray in the game.
+ *
+ * @param game The game structure.
+ * @param ray The ray index.
+ * @param top_p The top pixel position.
+ * @param bottom_p The bottom pixel position.
+ */
 void	put_floor_sky(t_game *game, int ray, int top_p, int bottom_p)
 {
 	int	f_color;
@@ -33,6 +41,14 @@ void	put_floor_sky(t_game *game, int ray, int top_p, int bottom_p)
 	}
 }
 
+/**
+ * Renders a line on the screen using the given parameters.
+ *
+ * @param top_p The top position of the line.
+ * @param bottom_p The bottom position of the line.
+ * @param ray The ray index.
+ * @param game The game structure.
+ */
 void	put_line(int top_p, int bottom_p, int ray, t_game *game)
 {
 	double			y_o;
@@ -51,13 +67,19 @@ void	put_line(int top_p, int bottom_p, int ray, t_game *game)
 	put_floor_sky(game, ray, top_p, bottom_p);
 	while (top_p < bottom_p)
 	{
-		mlx_put_pixel(game->pixel, ray, top_p, reverse_bytes
-			(pixels[(int)y_o * texture->width + (int)x_o]));
+		mlx_put_pixel(game->pixel, ray, top_p, reverse_bytes(
+				pixels[(int)y_o * texture->width + (int)x_o]));
 		y_o += step;
 		top_p++;
 	}
 }
 
+/**
+ * Renders a line on the screen based on the given ray.
+ * 
+ * @param game The game structure.
+ * @param ray The index of the ray.
+ */
 void	render_line(t_game *game, int ray)
 {
 	double	line_l;
