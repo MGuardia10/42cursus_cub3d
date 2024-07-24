@@ -3,15 +3,21 @@
 /*                                                        :::      ::::::::   */
 /*   init.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mguardia <mguardia@student.42.fr>          +#+  +:+       +#+        */
+/*   By: raalonso <raalonso@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/09 17:22:45 by raalonso          #+#    #+#             */
-/*   Updated: 2024/07/20 16:00:25 by raalonso         ###   ########.fr       */
+/*   Updated: 2024/07/24 20:00:41 by raalonso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/cub3d.h"
 
+/**
+ * Calculates the player's initial angle based on their orientation.
+ * 
+ * @param game The game structure containing player information.
+ * @return The initial angle in radians.
+ */
 double	get_p_angle(t_game *game)
 {
 	if (game->player.orientation == NORTH)
@@ -25,6 +31,11 @@ double	get_p_angle(t_game *game)
 	return (0);
 }
 
+/**
+ * Initializes the player's position and attributes.
+ * 
+ * @param game The game structure.
+ */
 void	init_player(t_game *game)
 {
 	game->player.x = game->player.x * TILESIZE + TILESIZE / 2;
@@ -35,6 +46,11 @@ void	init_player(t_game *game)
 	game->player.ad = 0;
 }
 
+/**
+ * Initializes the minimap for the game.
+ * 
+ * @param game The game structure.
+ */
 void	init_minimap(t_game *game)
 {
 	int	m_w;
@@ -47,6 +63,13 @@ void	init_minimap(t_game *game)
 		SHEIGHT / 20);
 }
 
+/**
+ * Initializes the textures for the game.
+ * Loads the texture images using mlx_load_png function and assigns them to the corresponding variables.
+ * If any texture fails to load, it raises an error.
+ *
+ * @param game The game structure.
+ */
 void	init_textures(t_game *game)
 {
 	game->map->textures.east_tx = mlx_load_png(game->map->textures.east);
@@ -63,6 +86,11 @@ void	init_textures(t_game *game)
 		error(game, NULL, true, "malloc");
 }
 
+/**
+ * Initializes the game window and sets up necessary components.
+ * 
+ * @param game The game structure.
+ */
 void	init_window(t_game *game)
 {
 	game->mlx = mlx_init(SWIDTH, SHEIGHT, "cub3d", false);
