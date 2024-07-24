@@ -6,7 +6,7 @@
 /*   By: raalonso <raalonso@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/14 19:58:25 by mguardia          #+#    #+#             */
-/*   Updated: 2024/07/24 22:49:53 by raalonso         ###   ########.fr       */
+/*   Updated: 2024/07/24 22:56:11 by raalonso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,5 +77,5 @@ bool	is_color(char *str)
  */
 int	get_color(t_color item)
 {
-	return ((item.r << 24) | (item.g << 16) | (item.b << 8) | (0xFF) );
+	return ((item.r << 24) | (item.g << 16) | (item.b << 8) | (0xFF));
 }
