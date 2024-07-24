@@ -77,5 +77,5 @@ bool	is_color(char *str)
  */
 int	get_color(t_color item)
 {
-	return ((item.r << 16) | (item.g << 8) | item.b);
+	return ((item.r << 24) | (item.g << 16) | (item.b << 8) | (0xFF) );
 }

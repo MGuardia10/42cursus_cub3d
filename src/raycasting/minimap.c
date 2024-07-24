@@ -75,9 +75,9 @@ void	render_minimap(t_game *game)
 		while (game->map->map_cpy[map_y][map_x])
 		{
 			if (game->map->map_cpy[map_y][map_x] == '1')
-				color = game->map->ceiling.rgb + 1500;
+				color = 0x000000FF;
 			else if (game->map->map_cpy[map_y][map_x] == ' ')
-				color = 0x00000000;
+				color = 0x00000000; 
 			else
 				color = 0xFFFFFFFF;
 			draw_square(game, map_x, map_y, color);
