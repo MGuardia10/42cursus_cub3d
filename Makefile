@@ -105,4 +105,7 @@ fclean: clean
 
 re: fclean all
 
+test: all
+	@bash ./tools/test_error.sh
+
 .PHONY:	all clean fclean re
