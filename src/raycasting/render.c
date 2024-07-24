@@ -6,7 +6,7 @@
 /*   By: raalonso <raalonso@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/08 19:00:48 by raalonso          #+#    #+#             */
-/*   Updated: 2024/07/24 20:09:35 by raalonso         ###   ########.fr       */
+/*   Updated: 2024/07/24 21:56:53 by raalonso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,13 +49,13 @@ void	put_floor_sky(t_game *game, int ray, int top_p, int bottom_p)
  * @param ray The ray index.
  * @param game The game structure.
  */
-void put_line(int top_p, int bottom_p, int ray, t_game *game)
+void	put_line(int top_p, int bottom_p, int ray, t_game *game)
 {
-	double y_o;
-	double x_o;
-	double step;
-	mlx_texture_t *texture;
-	uint32_t *pixels;
+	double			y_o;
+	double			x_o;
+	double			step;
+	mlx_texture_t	*texture;
+	uint32_t		*pixels;
 
 	texture = get_ray_texture(game);
 	pixels = (uint32_t *)texture->pixels;
@@ -67,7 +67,8 @@ void put_line(int top_p, int bottom_p, int ray, t_game *game)
 	put_floor_sky(game, ray, top_p, bottom_p);
 	while (top_p < bottom_p)
 	{
-		mlx_put_pixel(game->pixel, ray, top_p, reverse_bytes(pixels[(int)y_o * texture->width + (int)x_o]));
+		mlx_put_pixel(game->pixel, ray, top_p, reverse_bytes(
+				pixels[(int)y_o * texture->width + (int)x_o]));
 		y_o += step;
 		top_p++;
 	}

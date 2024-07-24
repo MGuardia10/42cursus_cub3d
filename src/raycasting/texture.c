@@ -6,7 +6,7 @@
 /*   By: raalonso <raalonso@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/20 15:48:22 by raalonso          #+#    #+#             */
-/*   Updated: 2024/07/24 20:32:42 by raalonso         ###   ########.fr       */
+/*   Updated: 2024/07/24 21:55:55 by raalonso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,9 +15,10 @@
 /**
  * Reverses the byte order of an integer.
  *
- * This function takes an integer as input and reverses the byte order of the integer.
- * It performs bitwise operations to extract the individual bytes of the integer and
- * reassembles them in reverse order.
+ * This function takes an integer as input and reverses the byte order of the 
+ * integer.
+ * It performs bitwise operations to extract the individual bytes of the integer
+ * and reassembles them in reverse order.
  *
  * @param c The integer to reverse the byte order of.
  * @return The integer with the byte order reversed.
@@ -35,7 +36,8 @@ int	reverse_bytes(int c)
 }
 
 /**
- * Calculates the x-coordinate of the texture pixel to be rendered on the screen.
+ * Calculates the x-coordinate of the texture pixel to be rendered on
+ * the screen.
  * 
  * @param game The game struct containing the ray and tile information.
  * @param t_width The width of the texture.

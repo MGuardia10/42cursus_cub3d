@@ -6,7 +6,7 @@
 /*   By: raalonso <raalonso@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/06 19:26:04 by raalonso          #+#    #+#             */
-/*   Updated: 2024/07/24 21:16:35 by raalonso         ###   ########.fr       */
+/*   Updated: 2024/07/24 21:55:14 by raalonso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,15 @@ bool	check_hit(t_game *game, double x, double y)
 	return (false);
 }
 
-//falta
+/**
+ * Checks for intersection with walls in the game world.
+ * 
+ * @param game The game struct containing game data.
+ * @param step Pointer to the step size for raycasting.
+ * @param inter Pointer to the intersection coordinate.
+ * @param o The orientation of the ray (horizontal or vertical).
+ * @return -1 if there is an intersection, 1 otherwise.
+ */
 int	check_inter(t_game *game, double *step, double *inter, t_orientation o)
 {
 	if (o == HORIZONTAL)
@@ -67,7 +75,8 @@ int	check_inter(t_game *game, double *step, double *inter, t_orientation o)
 }
 
 /**
- * Calculates the horizontal intersection point of a ray with the walls of the game map.
+ * Calculates the horizontal intersection point of a ray with the walls of the
+ * game map.
  * 
  * @param game The game struct containing the player and ray information.
  * @return The distance between the player and the vertical intersection point.
@@ -102,7 +111,8 @@ double	get_h_inter(t_game *game)
 }
 
 /**
- * Calculates the vertical intersection point of a ray with the walls of the game map.
+ * Calculates the vertical intersection point of a ray with the walls of the
+ * game map.
  * 
  * @param game The game struct containing the player and ray information.
  * @return The distance between the player and the vertical intersection point.
@@ -137,9 +147,10 @@ double	get_v_inter(t_game *game)
 /**
  * Casts rays to render the game scene.
  *
- * This function casts rays from the player's perspective to render the game scene.
- * It calculates the intersection points with walls and determines the distance to each intersection.
- * The function then calls the render_line function to draw the corresponding line on the screen.
+ * This function casts rays from the player's perspective to render the game
+ * scene. It calculates the intersection points with walls and determines the
+ * distance to each intersection. The function then calls the render_line
+ * function to draw the corresponding line on the screen.
  *
  * @param game A pointer to the game structure.
  */

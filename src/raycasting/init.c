@@ -6,7 +6,7 @@
 /*   By: raalonso <raalonso@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/09 17:22:45 by raalonso          #+#    #+#             */
-/*   Updated: 2024/07/24 20:00:41 by raalonso         ###   ########.fr       */
+/*   Updated: 2024/07/24 21:55:31 by raalonso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,8 @@ void	init_minimap(t_game *game)
 
 /**
  * Initializes the textures for the game.
- * Loads the texture images using mlx_load_png function and assigns them to the corresponding variables.
+ * Loads the texture images using mlx_load_png function and assigns them to 
+ * the corresponding variables.
  * If any texture fails to load, it raises an error.
  *
  * @param game The game structure.
