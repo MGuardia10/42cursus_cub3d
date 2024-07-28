@@ -8,6 +8,7 @@ A recreation of the world-famous Wolfenstein 3D game, widely recognized as one o
   
 
 ![C](https://img.shields.io/badge/C-a?style=for-the-badge&logo=C&color=grey)
+![Makefile](https://img.shields.io/badge/Makefile-a?style=for-the-badge&logo=monster&logoColor=orange&color=grey)
 
 You can see the subject [**HERE.**](https://github.com/MGuardia10/42cursus/blob/main/subjects/en/cub3d_subject_en.pdf)
 
